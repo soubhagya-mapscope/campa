@@ -215,7 +215,7 @@ iframe {
 }
 
 .wrap-login100 {
-    width: 670px;
+    width: 500px;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
@@ -237,12 +237,14 @@ iframe {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    padding: 70px 15px 74px
+    /* padding: 70px 15px 74px */
+    padding: 35px 15px 21px;
 }
 
 .login100-form-title-1 {
     font-family: Poppins-Bold;
-    font-size: 30px;
+    margin-top: 7px;
+    font-size: 20px;
     color: #fff;
     text-transform: uppercase;
     line-height: 1.6;
@@ -261,6 +263,11 @@ iframe {
     background-color: rgba(54, 84, 99, .7)
 }
 
+.flex-logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 .login100-form {
     width: 100%;
     display: -webkit-box;
@@ -408,7 +415,7 @@ input.input100 {
     justify-content: center;
     align-items: center;
     padding: 0 20px;
-    /* min-width: 160px; */
+    min-width: 210px;
     height: 50px;
     background-color: #57b846;
     border-radius: 25px;
@@ -420,7 +427,7 @@ input.input100 {
     -o-transition: all .4s;
     -moz-transition: all .4s;
     transition: all .4s;
-    min-width: 380px;
+
 }
 
 .login100-form-btn:hover {
@@ -513,6 +520,46 @@ input.input100 {
     position: absolute;
     height: 40px;
     width: 100vw;
-    background-color: #57b846;
+    /* background-color: #57b846; */
     bottom: 0;
+    display: flex;
+    color: #fff;
+    right: 0;
+    padding-right: 20px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.w-100{
+    width: 100px;
+}
+
+.border-left{
+    border-left: 1px solid #fff;
+    height: 50px;
+}
+
+.image-org{
+    width: 70px;
+    margin-left: 6px;
+}
+
+
+.header-img{
+    position: absolute;
+    height: 40px;
+    width: 100vw;
+    /* background-color: #57b846; */
+    display: flex;
+    color: #fff;
+    left: 0px;
+    padding-left: 20px;
+    padding-top: 30px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.image-org-top{
+    width: 50px;
+    margin-right: 10px;
 }
