@@ -58,11 +58,14 @@ class PlantationService {
     }
 
     public function getDroneDataByPlantationId($plantation_id) {
+        $droneData = array();
         $query = "SELECT * FROM drone_monitoring_data WHERE plantation_id = :plantation_id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':plantation_id', $plantation_id);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->execute(); 
+        $droneData['prePlantationData']=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        $droneData['postPlantationData']=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $droneData;
     }
 
     public function getUniqueCircles() {
