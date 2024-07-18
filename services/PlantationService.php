@@ -55,18 +55,7 @@ class PlantationService {
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
-    public function getDroneDataByPlantationId($plantation_id) {
-        $droneData = array();
-        $query = "SELECT * FROM drone_monitoring_data WHERE plantation_id = :plantation_id";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':plantation_id', $plantation_id);
-        $stmt->execute(); 
-        $droneData['prePlantationData']=$stmt->fetchAll(PDO::FETCH_ASSOC);
-        $droneData['postPlantationData']=$stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $droneData;
-    }
+    } 
 
     public function getUniqueCircles() {
         $query = "SELECT DISTINCT circle_name FROM plantation_data";
@@ -90,5 +79,28 @@ class PlantationService {
         $query = "SELECT DISTINCT scheme FROM plantation_data";
         $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    
+    public function getDroneDataByPlantationId($plantation_id) {
+        $droneData = array();
+        $queryPrePlantationData = "SELECT * FROM drone_monitoring_data WHERE plantation_id = :plantation_id and stage_id = 1 limit 1";
+        $stmtPrePlantationData = $this->conn->prepare($queryPrePlantationData);
+        $stmtPrePlantationData->bindParam(':plantation_id', $plantation_id);
+        $stmtPrePlantationData->execute();
+
+
+        $queryPostPlantationData = "SELECT * FROM drone_monitoring_data WHERE plantation_id = :plantation_id and stage_id = 2";
+        $stmtPostPlantationData = $this->conn->prepare($queryPostPlantationData);
+        $stmtPostPlantationData->bindParam(':plantation_id', $plantation_id);
+        $stmtPostPlantationData->execute(); 
+
+
+
+        $droneData['prePlantationData']=$stmtPrePlantationData->fetch(PDO::FETCH_ASSOC);
+        
+        $droneData['postPlantationData']=$stmtPostPlantationData->fetchAll(PDO::FETCH_ASSOC);
+        // print_r($droneData['postPlantationData']);exit;
+        return $droneData;
     }
 }
