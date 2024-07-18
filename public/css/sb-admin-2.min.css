@@ -12733,9 +12733,29 @@ body.sidebar-toggled footer.sticky-footer {
     font-size: 14px;
 }
 
+.tag-header-list{
+    background-color: #888988;
+    color: #fff;
+    padding: 1%;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
 .pre-plantation-fieldset {
     border: 1px solid #ccc; /* Add border */
     padding: 15px; /* Add padding inside the fieldset */
     margin-bottom: 20px; /* Add space below the fieldset */
     border-radius: 5px; /* Rounded corners */
+}
+
+.logo-text{
+    font-size: 18px;
+    color: #000;
+    font-weight: 600;
+}
+
+.logo-ico{
+    width: 45px;
+    padding-left: 5px;
+    padding-right: 5px;
 }

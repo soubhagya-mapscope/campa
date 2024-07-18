@@ -41,7 +41,8 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <img src="../../public/images/LOGO-FPPS.svg" width="100">
+                    <img src="../../public/images/LOGO-FPPS.svg" class="logo-ico">
+                    <div class="logo-text">Forest Plantation Planning and Monitoring System</div>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
