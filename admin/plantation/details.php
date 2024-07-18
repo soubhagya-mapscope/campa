@@ -100,24 +100,53 @@ if (isset($_GET['id'])) {
                                 premium bootstrap themes</a>
                                 <style>#my-map-canvas .text-marker{}.map-generator{max-width: 100%; max-height: 100%; background: none;}</style>
                                 </div>
-
-
-                        
                     </div>
                 </div>
                 <div class="row mt-4">
             <div class="col-md-12">
-                <h5>Drone Data Analysis</h5>
+               
+
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Drone Data Analysis</h5>
+                    </div>
+                </div>
+                <div class="card-body">
                 <div class="row">
                     <!-- Pre-plantation data -->
                     <div class="col-md-6">
+                       
                         <h6>Pre-Plantation Data</h6> 
-                        <p><strong>Drone Fly Date:</strong> <?php echo $droneData['prePlantationData'][0]['drone_fly_date'] ?? "NA"; ?></p>
-                        <p><strong>No. of Pits Identified:</strong> <?php echo $droneData['prePlantationData'][0]['no_of_pits'] ?? "NA"; ?></p>
-                        <p><strong>Area Identified from Ortho:</strong> <?php echo $droneData['prePlantationData'][0]['area_identified'] ?? "NA"; ?></p>
-                        <p><strong>No. of Pits as per Target:</strong> <?php echo $droneData['prePlantationData'][0]['no_of_pits_as_per_target'] ?? "NA" ; ?></p>
-                        <p><strong>Target Area:</strong> <?php echo $droneData['prePlantationData'][0]['target_area'] ?? "NA"; ?></p>
-                        <p><strong>Survival Rate:</strong> <?php echo $droneData['prePlantationData'][0]['survival_rate'] ?? "NA"; ?></p> 
+
+                        <div class="row mb-2">
+                            <div class="col-sm-6 row-label">Drone Fly Date:</div>
+                            <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData'][0]['drone_fly_date'] ?? "NA"; ?></span></div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-sm-6 row-label">No. of Pits Identified:</div>
+                            <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData'][0]['no_of_pits'] ?? "NA"; ?></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-6 row-label">Area Identified from Ortho</div>
+                            <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData'][0]['area_identified'] ?? "NA"; ?></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-6 row-label">No. of Pits as per Target:</div>
+                            <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData'][0]['no_of_pits_as_per_target'] ?? "NA" ; ?></div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-sm-6 row-label">Target Area:</div>
+                            <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData'][0]['target_area'] ?? "NA"; ?></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-6 row-label">Survival Rate:</div>
+                            <div class="col-sm-6 badge-box-back"><span class="badge-box">  <?php echo $droneData['prePlantationData'][0]['survival_rate'] ?? "NA"; ?></div>
+                        </div>
+                      
+                 
                     </div>
                     <!-- Post-plantation data -->
                     <div class="col-md-6">
@@ -141,6 +170,12 @@ if (isset($_GET['id'])) {
                         ?>
                     </div>
                 </div>
+                </div>
+
+
+
+
+               
             </div>
         </div>
             </div>
