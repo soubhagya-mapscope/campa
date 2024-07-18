@@ -3,15 +3,18 @@ require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../models/PlantationData.php';
 require_once __DIR__ . '/../models/DroneMonitoringData.php';
 
-class PlantationService {
+class PlantationService
+{
     private $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         $database = new Database();
         $this->conn = $database->getConnection();
     }
 
-    public function getFilteredPlantations($filters) {
+    public function getFilteredPlantations($filters)
+    {
         $query = "SELECT * FROM plantation_data WHERE 1=1";
         $params = [];
 
@@ -49,41 +52,48 @@ class PlantationService {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getPlantationById($id) {
+    public function getPlantationById($id)
+    {
         $query = "SELECT * FROM plantation_data WHERE id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
-    } 
+    }
 
-    public function getUniqueCircles() {
+    public function getUniqueCircles()
+    {
         $query = "SELECT DISTINCT circle_name FROM plantation_data";
         $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    public function getUniqueDivisions() {
+    public function getUniqueDivisions()
+    {
         $query = "SELECT DISTINCT division_name FROM plantation_data";
         $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    public function getUniqueRanges() {
+    public function getUniqueRanges()
+    {
         $query = "SELECT DISTINCT range_name FROM plantation_data";
         $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    public function getUniqueSchemes() {
+    public function getUniqueSchemes()
+    {
         $query = "SELECT DISTINCT scheme FROM plantation_data";
         $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    
-    public function getDroneDataByPlantationId($plantation_id) {
+
+    public function getDroneDataByPlantationId($plantation_id)
+    {
         $droneData = array();
+
         $queryPrePlantationData = "SELECT * FROM drone_monitoring_data WHERE plantation_id = :plantation_id and stage_id = 1 limit 1";
         $stmtPrePlantationData = $this->conn->prepare($queryPrePlantationData);
         $stmtPrePlantationData->bindParam(':plantation_id', $plantation_id);
@@ -93,13 +103,13 @@ class PlantationService {
         $queryPostPlantationData = "SELECT * FROM drone_monitoring_data WHERE plantation_id = :plantation_id and stage_id = 2";
         $stmtPostPlantationData = $this->conn->prepare($queryPostPlantationData);
         $stmtPostPlantationData->bindParam(':plantation_id', $plantation_id);
-        $stmtPostPlantationData->execute(); 
+        $stmtPostPlantationData->execute();
 
 
 
-        $droneData['prePlantationData']=$stmtPrePlantationData->fetch(PDO::FETCH_ASSOC);
-        
-        $droneData['postPlantationData']=$stmtPostPlantationData->fetchAll(PDO::FETCH_ASSOC);
+        $droneData['prePlantationData'] = $stmtPrePlantationData->fetch(PDO::FETCH_ASSOC);
+
+        $droneData['postPlantationData'] = $stmtPostPlantationData->fetchAll(PDO::FETCH_ASSOC);
         // print_r($droneData['postPlantationData']);exit;
         return $droneData;
     }
