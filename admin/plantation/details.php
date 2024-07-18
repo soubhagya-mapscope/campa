@@ -77,11 +77,11 @@ if (isset($_GET['id'])) {
                         </div>
                         <!-- <div class="row mb-2">
                             <div class="col-sm-6 row-label">Last Monitoring Date:</div>
-                            <div class="col-sm-6"><span class="badge-box"><?php echo $plantation['last_monitoring_date']; ?></span></div>
+                            <div class="col-sm-6"><span class="badge-box"><?php echo $plantation['last_monitoring_date']?? "NA";  ?></span></div>
                         </div>
                         <div class="row mb-2">
                             <div class="col-sm-6 row-label">Next Monitoring Date:</div>
-                            <div class="col-sm-6"><span class="badge-box"><?php echo $plantation['next_monitoring_date']; ?></span></div>
+                            <div class="col-sm-6"><span class="badge-box"><?php echo $plantation['next_monitoring_date']?? "NA"; ?></span></div>
                         </div> -->
                     </div>
                   
@@ -106,40 +106,43 @@ if (isset($_GET['id'])) {
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-12">
-                        <h5>Drone Data Analysis</h5>
-                        <div class="row">
-                            <!-- Pre-plantation data -->
-                            <div class="col-md-6">
-                                <h6>Pre-Plantation Data</h6>
-                                <?php foreach ($droneData as $data): ?>
-                                    <?php if ($data['type'] == 'pre'): ?>
-                                        <p><strong>Drone Fly Date:</strong> <?php echo $data['drone_fly_date']; ?></p>
-                                        <p><strong>No. of Pits Identified:</strong> <?php echo $data['no_of_pits_identified']; ?></p>
-                                        <p><strong>Area Identified from Ortho:</strong> <?php echo $data['area_identified_from_ortho']; ?></p>
-                                        <p><strong>No. of Pits as per Target:</strong> <?php echo $data['no_of_pits_as_per_target']; ?></p>
-                                        <p><strong>Target Area:</strong> <?php echo $data['target_area']; ?></p>
-                                        <p><strong>Survival Rate:</strong> <?php echo $data['survival_rate']; ?></p>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            </div>
-                            <!-- Post-plantation data -->
-                            <div class="col-md-6">
-                                <h6>Post-Plantation Data</h6>
-                                <?php foreach ($droneData as $data): ?>
-                                    <?php if ($data['type'] == 'post'): ?>
-                                        <p><strong>Drone Fly Date:</strong> <?php echo $data['drone_fly_date']; ?></p>
-                                        <p><strong>No. of Pits Identified:</strong> <?php echo $data['no_of_pits_identified']; ?></p>
-                                        <p><strong>Area Identified from Ortho:</strong> <?php echo $data['area_identified_from_ortho']; ?></p>
-                                        <p><strong>No. of Pits as per Target:</strong> <?php echo $data['no_of_pits_as_per_target']; ?></p>
-                                        <p><strong>Target Area:</strong> <?php echo $data['target_area']; ?></p>
-                                        <p><strong>Survival Rate:</strong> <?php echo $data['survival_rate']; ?></p>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
+            <div class="col-md-12">
+                <h5>Drone Data Analysis</h5>
+                <div class="row">
+                    <!-- Pre-plantation data -->
+                    <div class="col-md-6">
+                        <h6>Pre-Plantation Data</h6> 
+                        <p><strong>Drone Fly Date:</strong> <?php echo $droneData['prePlantationData'][0]['drone_fly_date'] ?? "NA"; ?></p>
+                        <p><strong>No. of Pits Identified:</strong> <?php echo $droneData['prePlantationData'][0]['no_of_pits'] ?? "NA"; ?></p>
+                        <p><strong>Area Identified from Ortho:</strong> <?php echo $droneData['prePlantationData'][0]['area_identified'] ?? "NA"; ?></p>
+                        <p><strong>No. of Pits as per Target:</strong> <?php echo $droneData['prePlantationData'][0]['no_of_pits_as_per_target'] ?? "NA" ; ?></p>
+                        <p><strong>Target Area:</strong> <?php echo $droneData['prePlantationData'][0]['target_area'] ?? "NA"; ?></p>
+                        <p><strong>Survival Rate:</strong> <?php echo $droneData['prePlantationData'][0]['survival_rate'] ?? "NA"; ?></p> 
+                    </div>
+                    <!-- Post-plantation data -->
+                    <div class="col-md-6">
+                        <h6>Post-Plantation Data</h6>
+                        <?php 
+                            if (count($droneData['postPlantationData']) > 0){
+                                foreach ($droneData['postPlantationData'] as $data) : ?> 
+                                    <p><strong>Drone Fly Date:</strong> <?php echo $data['drone_fly_date'] ?? "NA"; ?></p>
+                                    <p><strong>No. of Pits Identified:</strong> <?php echo $data['no_of_pits'] ?? "NA"; ?></p>
+                                    <p><strong>Area Identified from Ortho:</strong> <?php echo $data['area_identified'] ?? "NA"; ?></p>
+                                    <p><strong>No. of Pits as per Target:</strong> <?php echo $data['no_of_pits_as_per_target'] ?? "NA"; ?></p>
+                                    <p><strong>Target Area:</strong> <?php echo $data['target_area'] ?? "NA"; ?></p>
+                                    <p><strong>Survival Rate:</strong> <?php echo $data['survival_rate'] ?? "NA"; ?></p> 
+                            <?php 
+                        
+                        endforeach;
+                    }
+                    else {
+                        echo "<p>No post-plantation data available.</p>";
+                    }
+                        ?>
                     </div>
                 </div>
+            </div>
+        </div>
             </div>
  
 
