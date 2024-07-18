@@ -18,7 +18,7 @@ $plantations = $plantationService->getFilteredPlantations($filters);
 $uniqueCircles = $plantationService->getUniqueCircles();
 $uniqueDivisions = $plantationService->getUniqueDivisions();
 $uniqueRanges = $plantationService->getUniqueRanges();
-$uniqueScheme = $plantationService->getUniqueSchemes();
+$uniqueSchemes = $plantationService->getUniqueSchemes();
 ?>
 <?php include '../templates/header.php'; ?>
 
@@ -58,12 +58,11 @@ $uniqueScheme = $plantationService->getUniqueSchemes();
             <div class="col-md-2">
                 <select name="scheme" class="form-control">
                     <option value="">Select Scheme</option>
-                    <?php foreach ($uniqueScheme as $scheme): ?>
+                    <?php foreach ($uniqueSchemes as $scheme): ?>
                         <option value="<?php echo $scheme; ?>" <?php echo $filters['scheme'] == $scheme ? 'selected' : ''; ?>><?php echo $scheme; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
-             
             <div class="col-md-2">
                 <input type="date" name="date" class="form-control" value="<?php echo $filters['date']; ?>">
             </div>

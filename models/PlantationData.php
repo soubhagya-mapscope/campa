@@ -4,9 +4,13 @@ class PlantationData {
     private $table_name = "plantation_data";
 
     public $id;
+    public $name;
     public $circle_name;
     public $division_name;
     public $range_name;
+    public $section_name;
+    public $beat_name;
+    public $plantation_date;
     public $area_gps;
     public $area_target;
     public $area_achievement;
