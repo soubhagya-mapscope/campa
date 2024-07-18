@@ -64,35 +64,28 @@ class PlantationService {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public function getUniqueCircles() {
         $query = "SELECT DISTINCT circle_name FROM plantation_data";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
+        $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
-    
+
     public function getUniqueDivisions() {
         $query = "SELECT DISTINCT division_name FROM plantation_data";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
+        $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
-    
+
     public function getUniqueRanges() {
         $query = "SELECT DISTINCT range_name FROM plantation_data";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
+        $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
     public function getUniqueSchemes() {
         $query = "SELECT DISTINCT scheme FROM plantation_data";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
+        $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
-
-    
-    
 }
-?>
