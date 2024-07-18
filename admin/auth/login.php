@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     if ($authService->login($username, $password)) {
-        header('Location: /campa/admin/plantation/listing.php');
+        header('Location: /campa/admin/plantation');
         exit();
     } else {
         $error = "Invalid username or password";

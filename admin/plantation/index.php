@@ -29,7 +29,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
     <h1 class="h3 mb-2 text-gray-800">Plantation</h1> 
 
     <!-- Filters -->
-    <form method="GET" action="listing.php">
+    <form method="GET" action="">
         <div class="row mb-4">
             <div class="col-md-2">
                 <select name="circle" class="form-control">
