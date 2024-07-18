@@ -30,10 +30,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
 
+	<div class="header-img">
+		
+		<img src="../../public/images/Seal_of_Odisha.svg" class="image-org-top">
+		<h6>Government Of Odisha</h6>
+	</div>
+
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
+			
 				<div class="login100-form-title" style="background-image: url(../../public/images/bg-01.jpg);">
+					<div class="flex-logo">
+						<img src="../../public/images/odisha-forest.png" class="w-100">
+						<!-- <div class="border-left"></div> -->
+					</div>
+
 					<span class="login100-form-title-1">
 						Forest Plantation Planning and Monitoring System
 					</span>
@@ -80,7 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
 	</div>
 	<div class="footer-img">
-		
+		<h6>Designed By : </h6>
+		<img src="../../public/images/sparc_white.png" class="image-org">
 	</div>
 
 </body>
