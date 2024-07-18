@@ -26,8 +26,10 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Plantation</h1>
-
+    
+    <fieldset class="pre-plantation-fieldset">
+    <!-- <h1 class="h3 mb-2 text-gray-800">Plantation</h1> -->
+        <legend class="tag-header-list">Plantation</legend>
     <!-- Filters -->
     <form method="GET" action="">
         <div class="row mb-4 align-items-md-end">
@@ -82,11 +84,11 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
            
         </div>
     </form>
-
+    </fieldset>
     <!-- DataTable -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-white">Plantation Management</h6>
+            <h6 class="m-0 font-weight-bold text-white">Plantation Monitoring</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -112,7 +114,8 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                                 <td><?php echo $plantation['name']; ?></td>
                                 <td><?php echo $plantation['area_gps']; ?></td>
                                 <td><?php echo $plantation['scheme']; ?></td>
-                                <td><?php echo $plantation['plantation_date']; ?></td>
+                                <td><?php $date = new DateTime($plantation['plantation_date']);
+    echo $date->format('d-m-Y'); ?></td>
                                 <!-- <td>
                                 <button class="btn btn-info" data-toggle="modal" data-target="#detailsModal" data-id="<?php echo $plantation['id']; ?>">
                                     <i class="fas fa-info-circle"></i> View Details

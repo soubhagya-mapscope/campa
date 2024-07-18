@@ -107,51 +107,117 @@ if (isset($_GET['id'])) {
                         }
                     </style>
                 </div>
-
-
-
             </div>
         </div>
         <div class="row mt-4">
             <div class="col-md-12">
-                <h5>Drone Data Analysis</h5>
-                <div class="row">
-                    <!-- Pre-plantation data -->
-                    <div class="col-md-6">
-                        <h6>Pre-Plantation Data</h6>
-                        <div class="card" style="width: 18rem;">
-                            <p><strong>Drone Fly Date:</strong> <?php echo $droneData['prePlantationData']['drone_fly_date'] ?? "NA"; ?></p>
-                            <p><strong>No. of Pits Identified:</strong> <?php echo $droneData['prePlantationData']['no_of_pits'] ?? "NA"; ?></p>
-                            <p><strong>Area Identified from Ortho:</strong> <?php echo $droneData['prePlantationData']['area_identified'] ?? "NA"; ?></p>
-                            <p><strong>No. of Pits as per Target:</strong> <?php echo $droneData['prePlantationData']['no_of_pits_as_per_target'] ?? "NA"; ?></p>
-                            <p><strong>Target Area:</strong> <?php echo $droneData['prePlantationData']['target_area'] ?? "NA"; ?></p>
-                            <p><strong>Survival Rate:</strong> <?php echo $droneData['prePlantationData']['survival_rate'] ?? "NA"; ?></p>
 
-                        </div>
-                    </div>
-                    <!-- Post-plantation data -->
-                    <div class="col-md-6">
-                        <h6>Post-Plantation Data</h6>
-                        <?php
-                        if (count($droneData['postPlantationData']) > 0) {
-                            foreach ($droneData['postPlantationData'] as $data) : ?>
-                                <div class="card" style="width: 18rem;">
-                                    <p><strong>Drone Fly Date:</strong> <?php echo $data['drone_fly_date'] ?? "NA"; ?></p>
-                                    <p><strong>No. of Pits Identified:</strong> <?php echo $data['no_of_pits'] ?? "NA"; ?></p>
-                                    <p><strong>Area Identified from Ortho:</strong> <?php echo $data['area_identified'] ?? "NA"; ?></p>
-                                    <p><strong>No. of Pits as per Target:</strong> <?php echo $data['no_of_pits_as_per_target'] ?? "NA"; ?></p>
-                                    <p><strong>Target Area:</strong> <?php echo $data['target_area'] ?? "NA"; ?></p>
-                                    <p><strong>Survival Rate:</strong> <?php echo $data['survival_rate'] ?? "NA"; ?></p>
-                                </div>
-                        <?php
 
-                            endforeach;
-                        } else {
-                            echo "<p>No post-plantation data available.</p>";
-                        }
-                        ?>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Drone Data Analysis</h5>
                     </div>
                 </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Pre-plantation data -->
+                        <div class="col-md-12">
+
+                            <fieldset class="pre-plantation-fieldset">
+                                <legend class="tag-header">Pre-Plantation Data</legend>
+                                <!-- <h6 class="tag-header"><b>Pre-Plantation Data</b></h6> -->
+                                <!-- <div class="card" style="width: 18rem;"> -->
+
+                                <div class="row mb-2">
+                                    <div class="col-sm-6 row-label">Drone Fly Date:</div>
+                                    <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData']['drone_fly_date'] ?? "NA"; ?></span></div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-sm-6 row-label">No. of Pits Identified:</div>
+                                    <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['no_of_pits'] ?? "NA"; ?></div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-6 row-label">Area Identified from Ortho</div>
+                                    <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData']['area_identified'] ?? "NA"; ?></div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-6 row-label">No. of Pits as per Target:</div>
+                                    <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['no_of_pits_as_per_target'] ?? "NA"; ?></div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-sm-6 row-label">Target Area:</div>
+                                    <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['target_area'] ?? "NA"; ?></div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-6 row-label">Survival Rate:</div>
+                                    <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['survival_rate'] ?? "NA"; ?></div>
+                                </div>
+
+
+
+                            </fieldset> <!-- </div> -->
+                        </div>
+                        <!-- Post-plantation data -->
+                        <div class="col-md-12 mt-4">
+                            <fieldset class="pre-plantation-fieldset">
+                                <legend class="tag-header">Post-Plantation Data</legend>
+
+                                <div class="row">
+                                    <?php
+                                    if (count($droneData['postPlantationData']) > 0) {
+                                        foreach ($droneData['postPlantationData'] as $data) : ?>
+
+                                            <div class="col-lg-6">
+                                                <div class="card mt-2 mb-4 px-4 py-4">
+
+                                                    <div class="row mb-2">
+                                                        <div class="col-sm-6 row-label">Drone Fly Date:</div>
+                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $data['drone_fly_date'] ?? "NA"; ?></span></div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-sm-6 row-label">No. of Pits Identified:</div>
+                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $data['no_of_pits'] ?? "NA"; ?></span></div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-sm-6 row-label">Area Identified from Ortho:</div>
+                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $data['area_identified'] ?? "NA"; ?></span></div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-sm-6 row-label">No. of Pits as per Target:</div>
+                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $data['no_of_pits_as_per_target'] ?? "NA"; ?></span></div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-sm-6 row-label">Target Area:</div>
+                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $data['target_area'] ?? "NA"; ?></div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-sm-6 row-label">Survival Rate:</div>
+                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $data['survival_rate'] ?? "NA"; ?></span></div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                    <?php
+
+                                        endforeach;
+                                    } else {
+                                        echo "<p>No post-plantation data available.</p>";
+                                    }
+                                    ?>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
             </div>
         </div>
     </div>
