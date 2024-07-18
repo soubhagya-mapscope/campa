@@ -5,7 +5,13 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [L]
 
-# Redirect non-existent routes to index.php
+# Redirect non-existent routes in admin folder to 404 page
+RewriteCond %{REQUEST_URI} ^/campa/admin/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ /campa/404.php [L]
+
+# Redirect other non-existent routes to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^.*$ /campa/index.php [L]

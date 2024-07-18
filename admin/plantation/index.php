@@ -101,7 +101,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                             <td><?php echo $plantation['name']; ?></td>
                             <td><?php echo $plantation['area_gps']; ?></td>
                             <td><?php echo $plantation['scheme']; ?></td>
-                            <td><?php echo $plantation['created_on']; ?></td>
+                            <td><?php echo $plantation['plantation_date']; ?></td>
                             <td>
                                 <button class="btn btn-info" data-toggle="modal" data-target="#detailsModal" data-id="<?php echo $plantation['id']; ?>">View Details</button>
                                 <button class="btn btn-primary" onclick="window.location.href='map.php?id=<?php echo $plantation['id']; ?>'">View on Map</button>

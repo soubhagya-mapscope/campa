@@ -28,4 +28,10 @@ if (SessionManager::isLoggedIn()) {
 if ($requestedPath !== $plantationListingRoute && $requestedPath !== $loginRoute && file_exists(__DIR__ . '/../' . $requestedPath)) {
     return false; // Let Apache serve the requested file
 }
+
+// Redirect non-existent routes to a 404 page if within the admin folder
+if (strpos($requestedPath, '/campa/admin/') === 0 && !file_exists(__DIR__ . '/../' . $requestedPath)) {
+    header("Location: /campa/404.php");
+    exit();
+}
 ?>
