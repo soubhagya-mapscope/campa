@@ -11,17 +11,17 @@ class AuthService {
     }
 
     public function login($username, $password) {
-        $query = "SELECT * FROM user_m WHERE username = :username ";
+        $query = "SELECT * FROM user_m WHERE username = :username";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':username', $username); 
+        $stmt->bindParam(':username', $username);
         $stmt->execute();
-   
+
         if ($stmt->rowCount() == 1) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            // print_r($user);exit;
-
-            SessionManager::login($user['id']);
-            return true;
+            if (password_verify($password, $user['password'])) {
+                SessionManager::login($user['id']);
+                return true;
+            }
         }
 
         return false;
@@ -29,6 +29,8 @@ class AuthService {
 
     public function logout() {
         SessionManager::logout();
+        header('Location: /campa/admin/auth/login');
+        exit();
     }
 }
 ?>

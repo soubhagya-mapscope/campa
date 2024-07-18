@@ -1,17 +1,24 @@
 <?php
-session_start();
-
 class SessionManager {
-    public static function isLoggedIn() {
-        return isset($_SESSION['user_id']);
+    public static function start() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
     }
 
-    public static function login($user_id) {
-        $_SESSION['user_id'] = $user_id;
+    public static function login($userId) {
+        self::start();
+        $_SESSION['user_id'] = $userId;
     }
 
     public static function logout() {
+        self::start();
         session_destroy();
+    }
+
+    public static function isLoggedIn() {
+        self::start();
+        return isset($_SESSION['user_id']);
     }
 }
 ?>
