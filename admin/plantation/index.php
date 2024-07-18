@@ -114,7 +114,8 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                                 <td><?php echo $plantation['name']; ?></td>
                                 <td><?php echo $plantation['area_gps']; ?></td>
                                 <td><?php echo $plantation['scheme']; ?></td>
-                                <td><?php echo $plantation['plantation_date']; ?></td>
+                                <td><?php $date = new DateTime($plantation['plantation_date']);
+    echo $date->format('d-m-Y'); ?></td>
                                 <!-- <td>
                                 <button class="btn btn-info" data-toggle="modal" data-target="#detailsModal" data-id="<?php echo $plantation['id']; ?>">
                                     <i class="fas fa-info-circle"></i> View Details
