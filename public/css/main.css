@@ -215,7 +215,7 @@ iframe {
 }
 
 .wrap-login100 {
-    width: 500px;
+    width: 440px;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
@@ -238,7 +238,7 @@ iframe {
     background-size: cover;
     background-position: center;
     /* padding: 70px 15px 74px */
-    padding: 35px 15px 21px;
+    padding: 15px 0px 21px;
 }
 
 .login100-form-title-1 {
@@ -277,22 +277,25 @@ iframe {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 28px 30px 49px 152px;
+    /* padding: 30px 30px 49px 130px; */
+
+    padding: 27px 43px 58px 40px;
 }
 
 .wrap-input100 {
     width: 100%;
     position: relative;
-    border-bottom: 1px solid #b2b2b2
+    border-bottom: 1px solid #b2b2b2;
+    border-radius: 8px;
 }
 
 .label-input100 {
     font-family: Poppins-Regular;
-    font-size: 15px;
+    font-size: 12px;
     color: gray;
     line-height: 1.2;
     text-align: right;
-    position: absolute;
+    /* position: absolute; */
     top: 14px;
     left: -105px;
     width: 80px
@@ -403,7 +406,7 @@ input.input100 {
     /* position: relative; */
     /* left: 122px; */
 
-        /* justify-content: center; */
+        justify-content: center;
 }
 
 .login100-form-btn {
@@ -559,7 +562,23 @@ input.input100 {
     align-items: center;
 }
 
+.header-img h6{
+    font-size: 12px;
+    font-weight: 300;
+}
 .image-org-top{
     width: 50px;
     margin-right: 10px;
+}
+
+
+.login-fieldset {
+    border: 1px solid #e7e5e5; 
+    padding: 4px; 
+    /* margin-bottom: 20px;  */
+    border-radius: 5px;
+}
+.tag-header-login{
+    font-size: 12px;
+    margin-left: 8px;
 }
