@@ -5308,8 +5308,8 @@ input[type=submit].btn-block {
 .page-item.active .page-link {
     z-index: 3;
     color: #fff;
-    background-color: #4e73df;
-    border-color: #4e73df
+    background-color: #598433;
+    border-color: #598433
 }
 
 .page-item.disabled .page-link {
@@ -12725,3 +12725,37 @@ body.sidebar-toggled footer.sticky-footer {
     margin-left: 0.2rem;
 } */
 
+.tag-header{
+    background-color: #13855c;
+    color: #fff;
+    padding: 2%;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.tag-header-list{
+    background-color: #888988;
+    color: #fff;
+    padding: 1%;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.pre-plantation-fieldset {
+    border: 1px solid #ccc; /* Add border */
+    padding: 15px; /* Add padding inside the fieldset */
+    margin-bottom: 20px; /* Add space below the fieldset */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.logo-text{
+    font-size: 18px;
+    color: #000;
+    font-weight: 600;
+}
+
+.logo-ico{
+    width: 45px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
