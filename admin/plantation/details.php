@@ -8,6 +8,14 @@ if (isset($_GET['id'])) {
     $plantationService = new PlantationService();
     $plantation = $plantationService->getPlantationById($_GET['id']);
     $droneData = $plantationService->getDroneDataByPlantationId($_GET['id']);
+
+    // Calculate deviations
+    $area_deviation = $plantation['area_gps'] - $plantation['area_target'];
+    $pit_deviation = $plantation['pit_achievement'] - $plantation['pit_target'];
+    $seedling_deviation = $plantation['seedling_achievement'] - $plantation['seedling_target'];
+    // Calculate last and next monitoring dates
+    $lastMonitoringDate = !empty($droneData['max_drone_fly_date']) ? $droneData['max_drone_fly_date'] : "NA";
+    $nextMonitoringDate = $lastMonitoringDate !== "NA" ? date('Y-m-d', strtotime($lastMonitoringDate . ' +6 months')) : "NA";
 ?>
 
     <div class="modal-body">
@@ -19,6 +27,12 @@ if (isset($_GET['id'])) {
                         <h5 class="mb-0">Plantation Details</h5>
                     </div>
                     <div class="card-body">
+                        <?php
+                        $area_deviation = $plantation['area_gps'] - $plantation['area_target'];
+                        $pit_deviation = $plantation['pit_achievement'] - $plantation['pit_target'];
+                        $seedling_deviation = $plantation['seedling_achievement'] - $plantation['seedling_target'];
+                        ?>
+
                         <div class="row mb-2">
                             <div class="col-sm-6 row-label">Circle Name:</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['circle_name']; ?></span></div>
@@ -44,45 +58,52 @@ if (isset($_GET['id'])) {
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['name']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Plantation Area (GPS Area):</div>
+                            <div class="col-sm-6 row-label">Plantation Area (Ha):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['area_gps']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Target Area:</div>
+                            <div class="col-sm-6 row-label">Target Area (Ha):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['area_target']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Seedling (Target):</div>
-                            <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['seedling_target']; ?></span></div>
+                            <div class="col-sm-6 row-label">Area Deviation (Ha):</div>
+                            <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $area_deviation; ?></span></div>
                         </div>
+
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Seedling (Achieved):</div>
-                            <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['seedling_achievement']; ?></span></div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Pit (Target):</div>
+                            <div class="col-sm-6 row-label">Pit (Target) (Ha):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['pit_target']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Pit (Achieved):</div>
+                            <div class="col-sm-6 row-label">Pit (Achievement) (Ha):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['pit_achievement']; ?></span></div>
                         </div>
                         <div class="row mb-2">
+                            <div class="col-sm-6 row-label">Pit Deviation (Ha):</div>
+                            <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $pit_deviation; ?></span></div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-sm-6 row-label">Seedling (Target) (Ha) :</div>
+                            <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['seedling_target']; ?></span></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-6 row-label">Seedling (Achievement) (Ha):</div>
+                            <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['seedling_achievement']; ?></span></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-6 row-label">Seedling Deviation (Ha):</div>
+                            <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $seedling_deviation; ?></span></div>
+                        </div>
+
+                        <div class="row mb-2">
                             <div class="col-sm-6 row-label">Last Monitoring Date:</div>
-                            <div class="col-sm-6 badge-box-back"><span class="badge-box">NA</span></div>
+                            <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $lastMonitoringDate; ?></span></div>
                         </div>
                         <div class="row mb-2">
                             <div class="col-sm-6 row-label">Next Monitoring Date:</div>
-                            <div class="col-sm-6 badge-box-back"><span class="badge-box">NA</span></div>
+                            <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $nextMonitoringDate; ?></span></div>
                         </div>
-                        <!-- <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Last Monitoring Date:</div>
-                            <div class="col-sm-6"><span class="badge-box"><?php echo $plantation['last_monitoring_date'] ?? "NA";  ?></span></div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Next Monitoring Date:</div>
-                            <div class="col-sm-6"><span class="badge-box"><?php echo $plantation['next_monitoring_date'] ?? "NA"; ?></span></div>
-                        </div> -->
                     </div>
 
                 </div>

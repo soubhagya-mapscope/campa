@@ -3,15 +3,18 @@ require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../models/PlantationData.php';
 require_once __DIR__ . '/../models/DroneMonitoringData.php';
 
-class PlantationService {
+class PlantationService
+{
     private $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         $database = new Database();
         $this->conn = $database->getConnection();
     }
 
-    public function getFilteredPlantations($filters) {
+    public function getFilteredPlantations($filters)
+    {
         $query = "SELECT * FROM plantation_data WHERE 1=1";
         $params = [];
 
@@ -39,6 +42,7 @@ class PlantationService {
             $query .= " AND DATE(created_on) = :date";
             $params[':date'] = $filters['date'];
         }
+        $query .= " order by id ASC";
 
         $stmt = $this->conn->prepare($query);
         foreach ($params as $key => &$val) {
@@ -49,58 +53,71 @@ class PlantationService {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getPlantationById($id) {
+    public function getPlantationById($id)
+    {
         $query = "SELECT * FROM plantation_data WHERE id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
-    } 
+    }
 
-    public function getUniqueCircles() {
+    public function getUniqueCircles()
+    {
         $query = "SELECT DISTINCT circle_name FROM plantation_data";
         $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    public function getUniqueDivisions() {
+    public function getUniqueDivisions()
+    {
         $query = "SELECT DISTINCT division_name FROM plantation_data";
         $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    public function getUniqueRanges() {
+    public function getUniqueRanges()
+    {
         $query = "SELECT DISTINCT range_name FROM plantation_data";
         $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    public function getUniqueSchemes() {
+    public function getUniqueSchemes()
+    {
         $query = "SELECT DISTINCT scheme FROM plantation_data";
         $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    
-    public function getDroneDataByPlantationId($plantation_id) {
-        $droneData = array();
-        $queryPrePlantationData = "SELECT * FROM drone_monitoring_data WHERE plantation_id = :plantation_id and stage_id = 1 limit 1";
-        $stmtPrePlantationData = $this->conn->prepare($queryPrePlantationData);
-        $stmtPrePlantationData->bindParam(':plantation_id', $plantation_id);
-        $stmtPrePlantationData->execute();
 
+    public function getDroneDataByPlantationId($plantation_id)
+{
+    $droneData = array(); 
 
-        $queryPostPlantationData = "SELECT * FROM drone_monitoring_data WHERE plantation_id = :plantation_id and stage_id = 2";
-        $stmtPostPlantationData = $this->conn->prepare($queryPostPlantationData);
-        $stmtPostPlantationData->bindParam(':plantation_id', $plantation_id);
-        $stmtPostPlantationData->execute(); 
+    // Fetch pre-plantation data
+    $queryPrePlantationData = "SELECT * FROM drone_monitoring_data WHERE plantation_id = :plantation_id and stage_id = 1 limit 1";
+    $stmtPrePlantationData = $this->conn->prepare($queryPrePlantationData);
+    $stmtPrePlantationData->bindParam(':plantation_id', $plantation_id);
+    $stmtPrePlantationData->execute();
 
+    // Fetch post-plantation data
+    $queryPostPlantationData = "SELECT * FROM drone_monitoring_data WHERE plantation_id = :plantation_id and stage_id = 2";
+    $stmtPostPlantationData = $this->conn->prepare($queryPostPlantationData);
+    $stmtPostPlantationData->bindParam(':plantation_id', $plantation_id);
+    $stmtPostPlantationData->execute();
 
+    // Fetch the maximum drone_fly_date
+    $queryMaxDroneFlyDate = "SELECT MAX(drone_fly_date) as max_drone_fly_date FROM drone_monitoring_data WHERE plantation_id = :plantation_id and stage_id = 2";
+    $stmtMaxDroneFlyDate = $this->conn->prepare($queryMaxDroneFlyDate);
+    $stmtMaxDroneFlyDate->bindParam(':plantation_id', $plantation_id);
+    $stmtMaxDroneFlyDate->execute();
 
-        $droneData['prePlantationData']=$stmtPrePlantationData->fetch(PDO::FETCH_ASSOC);
-        
-        $droneData['postPlantationData']=$stmtPostPlantationData->fetchAll(PDO::FETCH_ASSOC);
-        // print_r($droneData['postPlantationData']);exit;
-        return $droneData;
-    }
+    $droneData['prePlantationData'] = $stmtPrePlantationData->fetch(PDO::FETCH_ASSOC);
+    $droneData['postPlantationData'] = $stmtPostPlantationData->fetchAll(PDO::FETCH_ASSOC);
+    $droneData['max_drone_fly_date'] = $stmtMaxDroneFlyDate->fetch(PDO::FETCH_ASSOC)['max_drone_fly_date'];
+
+    return $droneData;
+}
+
 }
