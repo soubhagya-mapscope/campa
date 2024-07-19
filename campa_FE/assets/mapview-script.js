@@ -3,7 +3,7 @@ const osmLayer = new ol.layer.Tile({
   source: new ol.source.OSM(),
   title: "OpenStreetMap",
   type: "base",
-  visible: true,
+  visible: false,
 });
 
 const satelliteLayer = new ol.layer.Tile({
@@ -13,7 +13,7 @@ const satelliteLayer = new ol.layer.Tile({
   }),
   title: "Satellite",
   type: "base",
-  visible: false,
+  visible: true,
 });
 
 const terrainLayer = new ol.layer.Tile({
@@ -225,39 +225,37 @@ map.setView(
   })
 );
 
-// Define the WMS layer
-var aiMlDataLayer2;
-try {
-  aiMlDataLayer2 = new ol.layer.Image({
-    source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/Biju/wms",
-      params: {
-        LAYERS: "Biju:village_boundary",
-        TILED: true,
-        VERSION: "1.1.0",
-        FORMAT: "image/png",
-      },
-      serverType: "geoserver",
-      crossOrigin: "anonymous",
-    }),
-    visible: false, // Set layer initial visibility to false
-  });
-  aiMlDataLayer2.setZIndex(99);
-  map.addLayer(aiMlDataLayer2);
-} catch (error) {
-  console.log("aiMlaiMlDataLayer2DataLayer: " + error);
-}
+// // Define the WMS layer
+// var aiMlDataLayer2;
+// try {
+//   aiMlDataLayer2 = new ol.layer.Image({
+//     source: new ol.source.ImageWMS({
+//       url: "https://geoserver.amnslis.in/geoserver/Biju/wms",
+//       params: {
+//         LAYERS: "Biju:village_boundary",
+//         TILED: true,
+//         VERSION: "1.1.0",
+//         FORMAT: "image/png",
+//       },
+//       serverType: "geoserver",
+//       crossOrigin: "anonymous",
+//     }),
+//     visible: false, // Set layer initial visibility to false
+//   });
+//   aiMlDataLayer2.setZIndex(99);
+//   map.addLayer(aiMlDataLayer2);
+// } catch (error) {
+//   console.log("aiMlaiMlDataLayer2DataLayer: " + error);
+// }
 
-// Add event listener to the checkbox
-document
-  .getElementById("transport1")
-  .addEventListener("change", function (event) {
-    if (event.target.checked) {
-      aiMlDataLayer2.setVisible(true);
-    } else {
-      aiMlDataLayer2.setVisible(false);
-    }
-  });
+// // Add event listener to the checkbox
+// document.getElementById("transport1").addEventListener("change", function (event) {
+//     if (event.target.checked) {
+//       aiMlDataLayer2.setVisible(true);
+//     } else {
+//       aiMlDataLayer2.setVisible(false);
+//     }
+//   });
 
 // Define the WMS layer
 var aiMlDataLayer2;
@@ -281,13 +279,41 @@ try {
 } catch (error) {
   console.log("aiMlDataLayer: " + error);
 }
-// Add event listener to the checkbox
-document.getElementById("urban1").addEventListener("change", function (event) {
-  //alert(36)
+ // Add event listener to the checkbox
+ document.getElementById("urban1").addEventListener("change", function (event) {
   if (event.target.checked) {
     aiMlDataLayer2.setVisible(true);
+    document.getElementById("swiplayerID").style.display = "block";
+
+    var layerNm = "Village Boundary";
+    //var swipeLayerName = document.getElementById("txtAd");
+    //swipeLayerName.innerHTML = "<strong>Swipe Layer : </strong>" + layerNm;
+
+    var swipe = document.getElementById("swiplayerID");
+    
+    var layer1_prerender = aiMlDataLayer2.on("prerender", function (event) {
+      var ctx = event.context;
+      var width = ctx.canvas.width * (swipe.value / 100);
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(width, 0, ctx.canvas.width - width, ctx.canvas.height);
+      ctx.clip();
+    });
+
+    var layer1_postrender = aiMlDataLayer2.on("postrender", function (event) {
+      const ctx = event.context;
+      ctx.restore();
+    });
+
+    swipe.addEventListener("input", function (evt) {
+      map.render();
+    });
   } else {
     aiMlDataLayer2.setVisible(false);
+    document.getElementById("swiplayerID").style.display = "none";
+    document.getElementById("txtAd").innerHTML = "";
+    aiMlDataLayer2.un("prerender", layer1_prerender);
+    aiMlDataLayer2.un("postrender", layer1_postrender);
   }
 });
 
@@ -398,7 +424,7 @@ try {
     source: new ol.source.ImageWMS({
       url: "http://192.168.1.34:8080/geoserver/campa/wms",
       params: {
-        LAYERS: "campa:3-orthomosaic",
+        LAYERS: "campa:geotiffSite1",
         TILED: true,
         VERSION: "1.1.0",
         FORMAT: "image/png",
@@ -466,53 +492,26 @@ map.on("singleclick", function (evt) {
             featureInfoContent.innerHTML = ""; // Clear previous content
 
             result.features.forEach(function (feature) {
-              // Create a card container
-              var cardContainer = document.createElement('div');
-              cardContainer.className = 'card mb-3';
-            
-              // Create a card body
-              var cardBody = document.createElement('div');
-              cardBody.className = 'card-body d-flex flex-column';
-            
-              // Create a card title
-              var cardTitle = document.createElement('h5');
-              cardTitle.className = 'card-title';
-              cardTitle.innerText = 'Feature Details'; // You can customize this title
-            
-              // Append title to card body
-              cardBody.appendChild(cardTitle);
-            
-              // Loop through properties and create card text
-              for (var prop in feature.properties) {
-                if (feature.properties.hasOwnProperty(prop)) {
-                  // Create a flexbox container for each property
-                  var propertyContainer = document.createElement('div');
-                  propertyContainer.className = 'd-flex justify-content-between align-items-center p-2 mb-2';
-                  propertyContainer.style.backgroundColor = '#f8f9fa'; // Customize the background color as needed
-            
-                  var propertyName = document.createElement('span');
-                  propertyName.className = 'font-weight-bold';
-                  propertyName.innerText = prop + ':';
-            
-                  var propertyValue = document.createElement('span');
-                  propertyValue.className = 'text-secondary';
-                  propertyValue.innerText = feature.properties[prop];
-            
-                  propertyContainer.appendChild(propertyName);
-                  propertyContainer.appendChild(propertyValue);
-                  
-                  cardBody.appendChild(propertyContainer);
-                }
-              }
-            
-              // Append card body to card container
-              cardContainer.appendChild(cardBody);
-            
-              // Append card container to the featureInfoContent element
-              featureInfoContent.appendChild(cardContainer);
+              var props = feature.properties;
+              featureInfoContent.innerHTML +=
+                //"Plantation Details"+ "</br>" + 
+                "<div class='table-responsive my-table-sm'><table class='table table-sm table-bordered mb-0'>"
+                + "<tr><td><strong>Circle Name :</strong></td><td>" + (props.circle_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Division Name :</strong></td><td>" + (props.division_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Range Name :</strong></td><td>" + (props.range_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Section Name :</strong></td><td>" + (props.section_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Beat Name :</strong></td><td>" + (props.beat_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Name :</strong></td><td>" + (props.name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Scheme :</strong></td><td>" + (props.scheme || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Area Achievement :</strong></td><td>" + (props.area_achievement || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Pit Target :</strong></td><td>" + (props.pit_target || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Pit Achievement :</strong></td><td>" + (props.pit_achievement || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Seedling Achievement :</strong></td><td>" + (props.seedling_achievement || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Seedling Target :</strong></td><td>" + (props.seedling_target || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Plantation Date :</strong></td><td>" + (props.plantation_date || 'N/A') + "</td></tr></table></div>";
             });
-
-            
+          } else {
+            featureInfoContent.innerHTML = '<p>No feature information available at this location.</p>';
           }
         })
         .catch(function (error) {
@@ -521,6 +520,7 @@ map.on("singleclick", function (evt) {
     }
   }
 });
+
 
 // Function to close the drawer
 function closeDrawer() {
@@ -543,3 +543,69 @@ document
   .addEventListener("click", function (event) {
     event.stopPropagation();
   });
+
+  //-------------------Division Boundary-------------------
+  var divDataLayer;
+  try {
+    divDataLayer = new ol.layer.Image({
+      source: new ol.source.ImageWMS({
+        url: "http://192.168.1.34:8080/geoserver/campa/wms",
+        params: {
+          LAYERS: "campa:dhenkanal_division_bnd",
+          TILED: true,
+          VERSION: "1.1.0",
+          //FORMAT: "image/png",
+          //SRS: "EPSG:4326",
+        },
+        serverType: "geoserver",
+        crossOrigin: "anonymous",
+      }),
+      visible: false, // Set layer initial visibility to false
+    });
+    divDataLayer.setZIndex(99);
+    map.addLayer(divDataLayer);
+  } catch (error) {
+    console.log("divDataLayer: " + error);
+  }
+  // Add event listener to the checkbox
+  document.getElementById("divBnd").addEventListener("change", function (event) {
+      //alert(336)
+      if (event.target.checked) {
+        divDataLayer.setVisible(true);
+      } else {
+        divDataLayer.setVisible(false);
+      }
+    });
+
+    //-------------------Forest Boundary-------------------
+  var fbDataLayer;
+  try {
+    fbDataLayer = new ol.layer.Image({
+      source: new ol.source.ImageWMS({
+        url: "http://192.168.1.34:8080/geoserver/campa/wms",
+        params: {
+          LAYERS: "campa:jv boundary",
+          TILED: true,
+          VERSION: "1.1.0",
+          //FORMAT: "image/png",
+          //SRS: "EPSG:4326",
+        },
+        serverType: "geoserver",
+        crossOrigin: "anonymous",
+      }),
+      visible: false, // Set layer initial visibility to false
+    });
+    fbDataLayer.setZIndex(99);
+    map.addLayer(fbDataLayer);
+  } catch (error) {
+    console.log("divDataLayer: " + error);
+  }
+  // Add event listener to the checkbox
+  document.getElementById("fbBnd").addEventListener("change", function (event) {
+      //alert(336)
+      if (event.target.checked) {
+        fbDataLayer.setVisible(true);
+      } else {
+        fbDataLayer.setVisible(false);
+      }
+    });
