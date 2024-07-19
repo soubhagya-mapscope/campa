@@ -1,7 +1,7 @@
 // Define base layers
 const osmLayer = new ol.layer.Tile({
   source: new ol.source.OSM(),
-  title: "OpenStreetMap", 
+  title: "OpenStreetMap",
   type: "base",
   visible: true,
 });
@@ -38,17 +38,17 @@ const googleStreetLayer = new ol.layer.Tile({
 });
 
 var scaleControl = new ol.control.ScaleLine({
-  units: 'metric', // You can change this to 'imperial' if preferred
+  units: "metric", // You can change this to 'imperial' if preferred
   bar: true,
   steps: 4,
   text: true,
-  minWidth: 140
+  minWidth: 140,
 });
 
 const fullscreenControl = new ol.control.FullScreen({
-	source: 'map',
-	label: '', // Empty string to use our custom button
-	labelActive: ''
+  source: "map",
+  label: "", // Empty string to use our custom button
+  labelActive: "",
 });
 
 // Initialize OpenLayers map
@@ -172,21 +172,24 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-const fullscreenBtn = document.getElementById('fullscreen-btn');
+const fullscreenBtn = document.getElementById("fullscreen-btn");
 
-fullscreenBtn.addEventListener('click', function() {
+fullscreenBtn.addEventListener("click", function () {
   // Toggle fullscreen using the browser's Fullscreen API
   if (!document.fullscreenElement) {
-    document.getElementById('map').requestFullscreen().catch(err => {
-      console.error(`Error attempting to enable fullscreen: ${err.message}`);
-    });
+    document
+      .getElementById("map")
+      .requestFullscreen()
+      .catch((err) => {
+        console.error(`Error attempting to enable fullscreen: ${err.message}`);
+      });
   } else {
     document.exitFullscreen();
   }
 });
 
 // Listen for fullscreenchange event on the document
-document.addEventListener('fullscreenchange', function() {
+document.addEventListener("fullscreenchange", function () {
   if (document.fullscreenElement) {
     fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
   } else {
@@ -199,53 +202,88 @@ document.addEventListener('fullscreenchange', function() {
 // Define the WMS layer with zoom levels
 var wmsLayerStateBoundary = new ol.layer.Image({
   source: new ol.source.ImageWMS({
-      url: 'https://geoserver.amnslis.in/geoserver/Biju/wms',
-      params: {
-          'LAYERS': 'Biju:state_boundary',
-          'FORMAT': 'image/png', // or other format supported by your GeoServer
-          'TRANSPARENT': true
-      },
-      serverType: 'geoserver'
-  })
+    url: "https://geoserver.amnslis.in/geoserver/Biju/wms",
+    params: {
+      LAYERS: "Biju:state_boundary",
+      FORMAT: "image/png", // or other format supported by your GeoServer
+      TRANSPARENT: true,
+    },
+    serverType: "geoserver",
+  }),
 });
 
 // Add the WMS layer to the map
 map.addLayer(wmsLayerStateBoundary);
 
 // Configure the map view
-map.setView(new ol.View({
-  center: ol.proj.fromLonLat([84.44, 20.29]), // Adjust the center as needed
-  zoom: 7, // Adjust the initial zoom level as needed
-  minZoom: 5, // Set minimum zoom level
-  maxZoom: 15 // Set maximum zoom level
-}));
-
+map.setView(
+  new ol.View({
+    center: ol.proj.fromLonLat([84.44, 20.29]), // Adjust the center as needed
+    zoom: 7, // Adjust the initial zoom level as needed
+    minZoom: 5, // Set minimum zoom level
+    maxZoom: 15, // Set maximum zoom level
+  })
+);
 
 // Define the WMS layer
 var aiMlDataLayer2;
 try {
   aiMlDataLayer2 = new ol.layer.Image({
-      source: new ol.source.ImageWMS({
-          url: 'https://geoserver.amnslis.in/geoserver/Biju/wms',
-          params: {
-              'LAYERS': 'Biju:village_boundary',
-              'TILED': true,
-              'VERSION': '1.1.0',
-              'FORMAT': 'image/png'
-          },
-          serverType: 'geoserver',
-          crossOrigin: 'anonymous'
-      }),
-      visible: false // Set layer initial visibility to false
+    source: new ol.source.ImageWMS({
+      url: "https://geoserver.amnslis.in/geoserver/Biju/wms",
+      params: {
+        LAYERS: "Biju:village_boundary",
+        TILED: true,
+        VERSION: "1.1.0",
+        FORMAT: "image/png",
+      },
+      serverType: "geoserver",
+      crossOrigin: "anonymous",
+    }),
+    visible: false, // Set layer initial visibility to false
   });
   aiMlDataLayer2.setZIndex(99);
   map.addLayer(aiMlDataLayer2);
 } catch (error) {
-  console.log('aiMlaiMlDataLayer2DataLayer: ' + error);
+  console.log("aiMlaiMlDataLayer2DataLayer: " + error);
 }
 
 // Add event listener to the checkbox
-document.getElementById('transport1').addEventListener('change', function (event) {
+document
+  .getElementById("transport1")
+  .addEventListener("change", function (event) {
+    if (event.target.checked) {
+      aiMlDataLayer2.setVisible(true);
+    } else {
+      aiMlDataLayer2.setVisible(false);
+    }
+  });
+
+// Define the WMS layer
+var aiMlDataLayer2;
+try {
+  aiMlDataLayer2 = new ol.layer.Image({
+    source: new ol.source.ImageWMS({
+      url: "https://geoserver.amnslis.in/geoserver/Biju/wms",
+      params: {
+        LAYERS: "Biju:village_boundary",
+        TILED: true,
+        VERSION: "1.1.0",
+        FORMAT: "image/png",
+      },
+      serverType: "geoserver",
+      crossOrigin: "anonymous",
+    }),
+    visible: false, // Set layer initial visibility to false
+  });
+  aiMlDataLayer2.setZIndex(99);
+  map.addLayer(aiMlDataLayer2);
+} catch (error) {
+  console.log("aiMlDataLayer: " + error);
+}
+// Add event listener to the checkbox
+document.getElementById("urban1").addEventListener("change", function (event) {
+  //alert(36)
   if (event.target.checked) {
     aiMlDataLayer2.setVisible(true);
   } else {
@@ -253,171 +291,255 @@ document.getElementById('transport1').addEventListener('change', function (event
   }
 });
 
-
-  // Define the WMS layer
-  var aiMlDataLayer2;
-  try {
-    aiMlDataLayer2 = new ol.layer.Image({
-          source: new ol.source.ImageWMS({
-              url: 'https://geoserver.amnslis.in/geoserver/Biju/wms',
-              params: {
-                  'LAYERS': 'Biju:village_boundary',
-                  'TILED': true,
-                  'VERSION': '1.1.0',
-                  'FORMAT': 'image/png'
-              },
-              serverType: 'geoserver',
-              crossOrigin: 'anonymous'
-          }),
-          visible: false // Set layer initial visibility to false
-      });
-      aiMlDataLayer2.setZIndex(99);
-      map.addLayer(aiMlDataLayer2);
-  } catch (error) {
-      console.log('aiMlDataLayer: ' + error);
-  }  
-  // Add event listener to the checkbox
-  document.getElementById('urban1').addEventListener('change', function (event) {
-    //alert(36)
-      if (event.target.checked) {
-        aiMlDataLayer2.setVisible(true);
-      } else {
-        aiMlDataLayer2.setVisible(false);
-      }
+// Define the WMS layer
+var aiMlDataLayer;
+try {
+  aiMlDataLayer = new ol.layer.Image({
+    source: new ol.source.ImageWMS({
+      url: "http://192.168.1.34:8080/geoserver/campa/wms",
+      params: {
+        LAYERS: "campa:plantation",
+        TILED: true,
+        VERSION: "1.1.0",
+        FORMAT: "image/png",
+      },
+      serverType: "geoserver",
+      crossOrigin: "anonymous",
+    }),
+    visible: false, // Set layer initial visibility to false
   });
-
-
-  // Define the WMS layer
-  var aiMlDataLayer;
-  try {
-      aiMlDataLayer = new ol.layer.Image({
-          source: new ol.source.ImageWMS({
-              url: 'http://192.168.1.34:8080/geoserver/campa/wms',
-              params: {
-                  'LAYERS': 'campa:plantation',
-                  'TILED': true,
-                  'VERSION': '1.1.0',
-                  'FORMAT': 'image/png'
-              },
-              serverType: 'geoserver',
-              crossOrigin: 'anonymous'
-          }),
-          visible: false // Set layer initial visibility to false
-      });
-      aiMlDataLayer.setZIndex(99);
-      map.addLayer(aiMlDataLayer);
-  } catch (error) {
-      console.log('aiMlDataLayer: ' + error);
-  }  
-  // Add event listener to the checkbox
-  document.getElementById('transport4').addEventListener('change', function (event) {
+  aiMlDataLayer.setZIndex(99);
+  map.addLayer(aiMlDataLayer);
+} catch (error) {
+  console.log("aiMlDataLayer: " + error);
+}
+// Add event listener to the checkbox
+document
+  .getElementById("transport4")
+  .addEventListener("change", function (event) {
     //alert(35)
-      if (event.target.checked) {
-          aiMlDataLayer.setVisible(true);
-      } else {
-          aiMlDataLayer.setVisible(false);
-      }
+    if (event.target.checked) {
+      aiMlDataLayer.setVisible(true);
+    } else {
+      aiMlDataLayer.setVisible(false);
+    }
   });
 
-
- 
-  // Define the WMS layer
-  var aiMlDataLayer1;
-  try {
-    aiMlDataLayer1 = new ol.layer.Image({
-          source: new ol.source.ImageWMS({
-              url: 'http://192.168.1.34:8080/geoserver/campa/wms',
-              params: {
-                  'LAYERS': 'campa:pits',
-                  'TILED': true,
-                  'VERSION': '1.1.0',
-                  'FORMAT': 'image/png'
-              },
-              serverType: 'geoserver',
-              crossOrigin: 'anonymous'
-          }),
-          visible: false // Set layer initial visibility to false
-      });
-      aiMlDataLayer1.setZIndex(99);
-      map.addLayer(aiMlDataLayer1);
-  } catch (error) {
-      console.log('aiMlDataLayer1: ' + error);
-  }  
-  // Add event listener to the checkbox
-  document.getElementById('transport5').addEventListener('change', function (event) {
+// Define the WMS layer
+var aiMlDataLayer1;
+try {
+  aiMlDataLayer1 = new ol.layer.Image({
+    source: new ol.source.ImageWMS({
+      url: "http://192.168.1.34:8080/geoserver/campa/wms",
+      params: {
+        LAYERS: "campa:pits",
+        TILED: true,
+        VERSION: "1.1.0",
+        FORMAT: "image/png",
+      },
+      serverType: "geoserver",
+      crossOrigin: "anonymous",
+    }),
+    visible: false, // Set layer initial visibility to false
+  });
+  aiMlDataLayer1.setZIndex(99);
+  map.addLayer(aiMlDataLayer1);
+} catch (error) {
+  console.log("aiMlDataLayer1: " + error);
+}
+// Add event listener to the checkbox
+document
+  .getElementById("transport5")
+  .addEventListener("change", function (event) {
     //alert(36)
-      if (event.target.checked) {
-        aiMlDataLayer1.setVisible(true);
-      } else {
-        aiMlDataLayer1.setVisible(false);
-      }
+    if (event.target.checked) {
+      aiMlDataLayer1.setVisible(true);
+    } else {
+      aiMlDataLayer1.setVisible(false);
+    }
   });
 
+// Define the WMS layer
+var aiMlDataLayer3;
+try {
+  aiMlDataLayer3 = new ol.layer.Image({
+    source: new ol.source.ImageWMS({
+      url: "http://192.168.1.34:8080/geoserver/campa/wms",
+      params: {
+        LAYERS: "campa:plantation_data",
+        TILED: true,
+        VERSION: "1.1.0",
+        FORMAT: "image/png",
+      },
+      serverType: "geoserver",
+      crossOrigin: "anonymous",
+    }),
+    visible: false, // Set layer initial visibility to false
+  });
+  aiMlDataLayer3.setZIndex(99);
+  map.addLayer(aiMlDataLayer3);
+} catch (error) {
+  console.log("aiMlDataLayer1: " + error);
+}
+// Add event listener to the checkbox
+document.getElementById("nature1").addEventListener("change", function (event) {
+  //alert(36)
+  if (event.target.checked) {
+    aiMlDataLayer3.setVisible(true);
+  } else {
+    aiMlDataLayer3.setVisible(false);
+  }
+});
 
-    // Define the WMS layer
-    var aiMlDataLayer3;
-    try {
-      aiMlDataLayer3 = new ol.layer.Image({
-            source: new ol.source.ImageWMS({
-                url: 'http://192.168.1.34:8080/geoserver/campa/wms',
-                params: {
-                    'LAYERS': 'campa:plantation_data',
-                    'TILED': true,
-                    'VERSION': '1.1.0',
-                    'FORMAT': 'image/png'
-                },
-                serverType: 'geoserver',
-                crossOrigin: 'anonymous'
-            }),
-            visible: false // Set layer initial visibility to false
-        });
-        aiMlDataLayer3.setZIndex(99);
-        map.addLayer(aiMlDataLayer3);
-    } catch (error) {
-        console.log('aiMlDataLayer1: ' + error);
-    }  
-    // Add event listener to the checkbox
-    document.getElementById('nature1').addEventListener('change', function (event) {
-      //alert(36)
-        if (event.target.checked) {
-          aiMlDataLayer3.setVisible(true);
-        } else {
-          aiMlDataLayer3.setVisible(false);
-        }
-    });
+// Define the WMS layer
+var aiMlDataLayer5;
+try {
+  aiMlDataLayer5 = new ol.layer.Image({
+    source: new ol.source.ImageWMS({
+      url: "http://192.168.1.34:8080/geoserver/campa/wms",
+      params: {
+        LAYERS: "campa:3-orthomosaic",
+        TILED: true,
+        VERSION: "1.1.0",
+        FORMAT: "image/png",
+        SRS: "EPSG:4326",
+      },
+      serverType: "geoserver",
+      crossOrigin: "anonymous",
+    }),
+    visible: false, // Set layer initial visibility to false
+  });
+  aiMlDataLayer5.setZIndex(99);
+  map.addLayer(aiMlDataLayer5);
+} catch (error) {
+  console.log("aiMlDataLayer1: " + error);
+}
+// Add event listener to the checkbox
+document
+  .getElementById("transport2")
+  .addEventListener("change", function (event) {
+    //alert(36)
+    if (event.target.checked) {
+      aiMlDataLayer5.setVisible(true);
+    } else {
+      aiMlDataLayer5.setVisible(false);
+    }
+  });
 
+function isClickOutsideDrawer(event) {
+  var drawer = document.getElementById("featureInfoDrawer");
+  return (
+    !drawer.contains(event.target) &&
+    !event.target.closest(".ol-overlay-container")
+  );
+}
 
-        // Define the WMS layer
-        var aiMlDataLayer5;
-        try {
-          aiMlDataLayer5 = new ol.layer.Image({
-                source: new ol.source.ImageWMS({
-                    url: 'http://192.168.1.34:8080/geoserver/campa/wms',
-                    params: {
-                        'LAYERS': 'campa:3-orthomosaic',
-                        'TILED': true,
-                        'VERSION': '1.1.0',
-                        'FORMAT': 'image/png',
-                        'SRS':'EPSG:4326'
-                    },
-                    serverType: 'geoserver',
-                    crossOrigin: 'anonymous'
-                }),
-                visible: false // Set layer initial visibility to false
+map.on("singleclick", function (evt) {
+  if (aiMlDataLayer3.getVisible()) {
+    var viewResolution = map.getView().getResolution();
+    var projection = map.getView().getProjection();
+    var source = aiMlDataLayer3.getSource();
+
+    var url = source.getFeatureInfoUrl(
+      evt.coordinate,
+      viewResolution,
+      projection,
+      {
+        INFO_FORMAT: "application/json",
+        FEATURE_COUNT: 50,
+      }
+    );
+
+    if (url) {
+      fetch(url)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (result) {
+          if (result.features && result.features.length > 0) {
+            // Open the drawer
+            document.getElementById("featureInfoDrawer").classList.add("open");
+
+            // Populate the drawer with feature information
+            var featureInfoContent =
+              document.getElementById("featureInfoContent");
+            featureInfoContent.innerHTML = ""; // Clear previous content
+
+            result.features.forEach(function (feature) {
+              // Create a card container
+              var cardContainer = document.createElement('div');
+              cardContainer.className = 'card mb-3';
+            
+              // Create a card body
+              var cardBody = document.createElement('div');
+              cardBody.className = 'card-body d-flex flex-column';
+            
+              // Create a card title
+              var cardTitle = document.createElement('h5');
+              cardTitle.className = 'card-title';
+              cardTitle.innerText = 'Feature Details'; // You can customize this title
+            
+              // Append title to card body
+              cardBody.appendChild(cardTitle);
+            
+              // Loop through properties and create card text
+              for (var prop in feature.properties) {
+                if (feature.properties.hasOwnProperty(prop)) {
+                  // Create a flexbox container for each property
+                  var propertyContainer = document.createElement('div');
+                  propertyContainer.className = 'd-flex justify-content-between align-items-center p-2 mb-2';
+                  propertyContainer.style.backgroundColor = '#f8f9fa'; // Customize the background color as needed
+            
+                  var propertyName = document.createElement('span');
+                  propertyName.className = 'font-weight-bold';
+                  propertyName.innerText = prop + ':';
+            
+                  var propertyValue = document.createElement('span');
+                  propertyValue.className = 'text-secondary';
+                  propertyValue.innerText = feature.properties[prop];
+            
+                  propertyContainer.appendChild(propertyName);
+                  propertyContainer.appendChild(propertyValue);
+                  
+                  cardBody.appendChild(propertyContainer);
+                }
+              }
+            
+              // Append card body to card container
+              cardContainer.appendChild(cardBody);
+            
+              // Append card container to the featureInfoContent element
+              featureInfoContent.appendChild(cardContainer);
             });
-            aiMlDataLayer5.setZIndex(99);
-            map.addLayer(aiMlDataLayer5);
-        } catch (error) {
-            console.log('aiMlDataLayer1: ' + error);
-        }  
-        // Add event listener to the checkbox
-        document.getElementById('transport2').addEventListener('change', function (event) {
-          //alert(36)
-            if (event.target.checked) {
-              aiMlDataLayer5.setVisible(true);
-            } else {
-              aiMlDataLayer5.setVisible(false);
-            }
+
+            
+          }
+        })
+        .catch(function (error) {
+          console.error("Error fetching feature info:", error);
         });
+    }
+  }
+});
 
+// Function to close the drawer
+function closeDrawer() {
+  document.getElementById("featureInfoDrawer").classList.remove("open");
+}
 
+// Add event listener to close button
+document.getElementById("closeDrawer").addEventListener("click", closeDrawer);
+
+// Add event listener to close drawer when clicking outside
+document.addEventListener("click", function (event) {
+  if (isClickOutsideDrawer(event)) {
+    closeDrawer();
+  }
+});
+
+// Prevent drawer from closing when clicking inside it
+document
+  .getElementById("featureInfoDrawer")
+  .addEventListener("click", function (event) {
+    event.stopPropagation();
+  });

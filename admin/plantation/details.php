@@ -227,11 +227,40 @@ if (isset($_GET['id'])) {
 
                                         endforeach;
                                     } else {
-                                        echo "<p>No post-plantation data available.</p>";
+                                        echo "<p class='ml-4'>No post-plantation data available.</p>";
                                     }
                                     ?>
                                 </div>
                             </fieldset>
+                        </div>
+
+                        <div class="col-md-12">
+
+                            <fieldset class="pre-plantation-fieldset">
+                                <legend class="tag-header">Drone Flight Schedule</legend>
+                                <!-- <h6 class="tag-header"><b>Pre-Plantation Data</b></h6> -->
+                                <!-- <div class="card" style="width: 18rem;"> -->
+                                <?php
+                                if ($droneData['prePlantationData'] != null) {
+                                ?>
+
+
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6 row-label">Quater 1</div>
+                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData']['drone_fly_date'] ?? "NA"; ?></span></div>
+                                    </div>
+
+
+                                <?php
+
+
+                                } else {
+                                    echo "<p>No pre-plantation data available.</p>";
+                                }
+                                ?>
+
+
+                            </fieldset> <!-- </div> -->
                         </div>
                     </div>
                 </div>
