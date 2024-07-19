@@ -227,16 +227,23 @@ map.setView(
 
 // Define the swipe layer (toggled visibility)
 var pltDataLayer1;
+var aiMlDataLayer3;
+var params = {
+  'LAYERS': "campa:plantation_data",
+  'TILED': true,
+  'VERSION': "1.1.0",
+  'FORMAT': "image/png"
+};
+
+if (plantationName) {
+  params['CQL_FILTER'] = "name='" + plantationName + "'";
+}
+
 try {
   pltDataLayer1 = new ol.layer.Image({
     source: new ol.source.ImageWMS({
       url: "http://192.168.1.34:8080/geoserver/campa/wms",
-      params: {
-        LAYERS: "campa:plantation",
-        TILED: true,
-        VERSION: "1.1.0",
-        FORMAT: "image/png",
-      },
+      params: params,
       serverType: "geoserver",
       crossOrigin: "anonymous",
     }),
@@ -496,6 +503,7 @@ try {
       url: "http://192.168.1.34:8080/geoserver/campa/wms",
       params: {
         LAYERS: "campa:plantation_data",
+        'CQL_FILTER': "name='" + plantationName + "'", // Add dynamic CQL filter
         TILED: true,
         VERSION: "1.1.0",
         FORMAT: "image/png",

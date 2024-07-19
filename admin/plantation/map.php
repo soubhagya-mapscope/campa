@@ -2,10 +2,14 @@
 require_once '../../middleware/AuthMiddleware.php';
 require_once '../../services/PlantationService.php';
 
-AuthMiddleware::check();
+AuthMiddleware::check(); 
 
-if (isset($_GET['id'])) {
-    // echo 'valid request.';
+    if (isset($_GET['name'])) {
+        $plantationName = $_GET['name'];
+        echo "<script>var plantationName = '" . htmlspecialchars($plantationName) . "';</script>";
+    } else {
+        echo "<script>var plantationName = null;</script>";
+    }
 ?>
 
     <!DOCTYPE html>
@@ -433,12 +437,4 @@ if (isset($_GET['id'])) {
 
     </body>
 
-    </html>
-
-
-
-<?php
-} else {
-    echo 'Invalid request.';
-}
-?>
+    </html> 
