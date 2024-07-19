@@ -112,7 +112,7 @@ if (isset($_GET['id'])) {
             <div class="col-md-6">
                 <h5>Plantation Map</h5>
                 <div style="max-width:100%;list-style:none;
-                         transition: none;overflow:hidden;width:500px;height:500px;">
+                         transition: none;overflow:hidden;width:500px;height:600px;">
                     <div id="my-map-canvas" style="height:100%; width:100%;max-width:100%;">
                         <iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=bhuba&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8">
                         </iframe>
@@ -254,15 +254,35 @@ if (isset($_GET['id'])) {
                                 if ($droneData['prePlantationData'] != null) {
                                 ?>
 
-
-                                    <div class="row mb-2">
-                                        <div class="col-sm-6 row-label">Quater 1</div>
-                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData']['drone_fly_date'] ?? "NA"; ?></span></div>
-                                    </div>
+<table class="table table-bordered custom-table">
+  <thead>
+    <tr>
+      <th scope="col">Year</th>
+      <th scope="col">Frequency</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Year 1</td>
+      <td><span class="badge-box-map-view quarterly">Quarterly</span></td>
+      <td><span class="badge-box-map-view completed">Completed</span></td>
+    </tr>
+    <tr>
+      <td>Year 2</td>
+      <td><span class="badge-box-map-view quarterly">Quarterly</span></td>
+      <td><span class="badge-box-map-view completed">Completed</span></td>
+    </tr>
+    <tr>
+      <td>Year 3</td>
+      <td><span class="badge-box-map-view quarterly">Quarterly</span></td>
+      <td><span class="badge-box-map-view completed">Completed</span></td>
+    </tr>
+  </tbody>
+</table>
 
 
                                 <?php
-
 
                                 } else {
                                     echo "<p>No pre-plantation data available.</p>";
