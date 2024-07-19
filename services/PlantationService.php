@@ -108,15 +108,22 @@ class PlantationService
     $stmtPostPlantationData->execute();
 
     // Fetch the maximum drone_fly_date
-    $queryMaxDroneFlyDate = "SELECT MAX(drone_fly_date) as max_drone_fly_date FROM drone_monitoring_data WHERE plantation_id = :plantation_id and stage_id = 2";
+    $queryMaxDroneFlyDate = "SELECT MAX(drone_fly_date) as max_drone_fly_date FROM drone_monitoring_data WHERE plantation_id = :plantation_id";
     $stmtMaxDroneFlyDate = $this->conn->prepare($queryMaxDroneFlyDate);
     $stmtMaxDroneFlyDate->bindParam(':plantation_id', $plantation_id);
     $stmtMaxDroneFlyDate->execute();
 
+      // Fetch the maximum drone_fly_date
+      $querystageDetails = "SELECT id, name FROM stage_m WHERE id=(select stage_id from drone_monitoring_data where  plantation_id = :plantation_id order by id desc limit 1)";
+      $stmtstageDetails = $this->conn->prepare($querystageDetails);
+      $stmtstageDetails->bindParam(':plantation_id', $plantation_id);
+      $stmtstageDetails->execute();
+
     $droneData['prePlantationData'] = $stmtPrePlantationData->fetch(PDO::FETCH_ASSOC);
     $droneData['postPlantationData'] = $stmtPostPlantationData->fetchAll(PDO::FETCH_ASSOC);
     $droneData['max_drone_fly_date'] = $stmtMaxDroneFlyDate->fetch(PDO::FETCH_ASSOC)['max_drone_fly_date'];
-
+    $droneData['stage_details'] = $stmtstageDetails->fetch(PDO::FETCH_ASSOC);
+    // print_r($droneData);exit;
     return $droneData;
 }
 
