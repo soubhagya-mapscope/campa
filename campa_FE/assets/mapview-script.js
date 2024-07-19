@@ -545,6 +545,29 @@ try {
   console.log("aiMlDataLayer3: " + error);
 }
 
+var aiMlDataLayer4;
+try {
+  aiMlDataLayer4 = new ol.layer.Image({
+    source: new ol.source.ImageWMS({
+      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      params: {
+        LAYERS: "campa:plantation_data",
+        TILED: true,
+        VERSION: "1.1.0",
+        FORMAT: "image/png",
+      },
+      serverType: "geoserver",
+      crossOrigin: "anonymous",
+    }),
+    visible: false, // Set layer initial visibility to false
+  });
+  aiMlDataLayer4.setZIndex(99);
+  map.addLayer(aiMlDataLayer4);
+} catch (error) {
+  console.log("aiMlDataLayer4: " + error);
+}
+
+
 // Function to set CQL filter
 function setCqlFilter(filter) {
   var source = aiMlDataLayer3.getSource();
@@ -559,25 +582,43 @@ function setCqlFilter(filter) {
 
 // Add event listener to the checkbox
 document.getElementById("nature1").addEventListener("change", function (event) {
-  if (event.target.checked) {
+  if (event.target.checked) { 
     //var cqlFilterValue;
-    var cqlFilterValue = "name='Bhuban NAC 10000 plantation'";
-    if (cqlFilterValue != null) {
-      //cqlFilterValue = "name=''"; // Replace with the dynamic value or set to null
-      aiMlDataLayer3.setVisible(true);
-      setCqlFilter(cqlFilterValue); // Update with your CQL filter
-      var extent = ol.extent.createEmpty();
-      ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672, 20.785411834716797, 85.91878509521484, 20.917316436767578] : ol.extent.createEmpty());
-      map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
-    } else {
-      aiMlDataLayer3.setVisible(true);
-      var extent = ol.extent.createEmpty();
-      ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672, 20.785411834716797, 85.91878509521484, 20.917316436767578] : ol.extent.createEmpty());
-      map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
-    }
+    // var cqlFilterValue = "name='Bhuban NAC 10000 plantation'";
+    // if (cqlFilterValue != null) {
+    //cqlFilterValue = "name=''"; // Replace with the dynamic value or set to null
+    aiMlDataLayer4.setVisible(true);
+    // setCqlFilter(cqlFilterValue); // Update with your CQL filter
+    var extent = ol.extent.createEmpty();
+    ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672, 20.785411834716797, 85.91878509521484, 20.917316436767578] : ol.extent.createEmpty());
+    map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+    // } else {
+    //   aiMlDataLayer3.setVisible(true);
+    //   var extent = ol.extent.createEmpty();
+    //   ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672, 20.785411834716797, 85.91878509521484, 20.917316436767578] : ol.extent.createEmpty());
+    //   map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+    // }
   } else {
-    aiMlDataLayer3.setVisible(false);
-    setCqlFilter(null); // Clear the CQL filter to show all layers
+    // alert();
+    aiMlDataLayer4.setVisible(false);
+    // map.removeLayer(aiMlDataLayer4);
+    // setCqlFilter(null); // Clear the CQL filter to show all layers
+  }
+});
+document.addEventListener("DOMContentLoaded", function () {
+  var cqlFilterValue = "name='" + plantationName + "'";
+  if (plantationName != null) {
+    //cqlFilterValue = "name=''"; // Replace with the dynamic value or set to null
+    aiMlDataLayer3.setVisible(true);
+    setCqlFilter(cqlFilterValue); // Update with your CQL filter
+    var extent = ol.extent.createEmpty();
+    ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672, 20.785411834716797, 85.91878509521484, 20.917316436767578] : ol.extent.createEmpty());
+    map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+  } else {
+    aiMlDataLayer3.setVisible(true);
+    var extent = ol.extent.createEmpty();
+    ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672, 20.785411834716797, 85.91878509521484, 20.917316436767578] : ol.extent.createEmpty());
+    map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
   }
 });
 
