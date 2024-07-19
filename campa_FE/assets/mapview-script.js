@@ -221,9 +221,44 @@ map.setView(
     center: ol.proj.fromLonLat([84.44, 20.29]), // Adjust the center as needed
     zoom: 7, // Adjust the initial zoom level as needed
     minZoom: 5, // Set minimum zoom level
-    maxZoom: 15, // Set maximum zoom level
+    maxZoom: 25, // Set maximum zoom level
   })
 );
+
+// Define the swipe layer (toggled visibility)
+var pltDataLayer1;
+try {
+  pltDataLayer1 = new ol.layer.Image({
+    source: new ol.source.ImageWMS({
+      url: "http://192.168.1.34:8080/geoserver/campa/wms",
+      params: {
+        LAYERS: "campa:plantation",
+        TILED: true,
+        VERSION: "1.1.0",
+        FORMAT: "image/png",
+      },
+      serverType: "geoserver",
+      crossOrigin: "anonymous",
+    }),
+    visible: false, // Set layer initial visibility to false
+  });
+  pltDataLayer1.setZIndex(99);
+  map.addLayer(pltDataLayer1);
+} catch (error) {
+  console.log("pltDataLayer1: " + error);
+}
+document.getElementById("transport4").addEventListener("change", function (event) {
+  if (event.target.checked) {
+    pltDataLayer1.setVisible(true);
+    // Zoom to the extent of both layers combined
+    var extent = ol.extent.createEmpty();
+    ol.extent.extend(extent, pltDataLayer1.getSource().getParams().LAYERS === 'campa:plantation' ? [85.84375780820847,20.907737731933594,85.84732729196548,20.91185975074768] : ol.extent.createEmpty());
+    map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+  } else {
+    pltDataLayer1.setVisible(false);
+  }
+});
+
 
 // Define the base layer (always visible)
 var orthomosaicLayer;
@@ -277,6 +312,11 @@ try {
 document.getElementById("urban1").addEventListener("change", function (event) {
   if (event.target.checked) {
     pltDataLayer.setVisible(true);
+    //pltDataLayer1.setVisible(true);
+    // Zoom to the extent of both layers combined
+    var extent = ol.extent.createEmpty();
+    ol.extent.extend(extent, pltDataLayer.getSource().getParams().LAYERS === 'campa:plantation' ? [85.84375780820847,20.907737731933594,85.84732729196548,20.91185975074768] : ol.extent.createEmpty());
+    map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
     document.getElementById("swiplayerID").style.display = "block";
 
     var swipe = document.getElementById("swiplayerID");
@@ -406,12 +446,49 @@ document
     //alert(36)
     if (event.target.checked) {
       aiMlDataLayer1.setVisible(true);
+      var extent = ol.extent.createEmpty();
+      ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.90795540809631,20.79056704044342,85.91619944572449,20.795581698417664] : ol.extent.createEmpty());
+      map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
     } else {
       aiMlDataLayer1.setVisible(false);
     }
   });
 
 // Define the WMS layer
+// var aiMlDataLayer3;
+// try {
+//   aiMlDataLayer3 = new ol.layer.Image({
+//     source: new ol.source.ImageWMS({
+//       url: "http://192.168.1.34:8080/geoserver/campa/wms",
+//       params: {
+//         LAYERS: "campa:plantation_data",
+//         TILED: true,
+//         VERSION: "1.1.0",
+//         FORMAT: "image/png",
+//       },
+//       serverType: "geoserver",
+//       crossOrigin: "anonymous",
+//     }),
+//     visible: false, // Set layer initial visibility to false
+//   });
+//   aiMlDataLayer3.setZIndex(99);
+//   map.addLayer(aiMlDataLayer3);
+// } catch (error) {
+//   console.log("aiMlDataLayer1: " + error);
+// }
+// // Add event listener to the checkbox
+// document.getElementById("nature1").addEventListener("change", function (event) {
+//   //alert(36)
+//   if (event.target.checked) {
+//     aiMlDataLayer3.setVisible(true);
+//     var extent = ol.extent.createEmpty();
+//       ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672,20.785411834716797,85.91878509521484,20.917316436767578] : ol.extent.createEmpty());
+//       map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+//   } else {
+//     aiMlDataLayer3.setVisible(false);
+//   }
+// });
+
 var aiMlDataLayer3;
 try {
   aiMlDataLayer3 = new ol.layer.Image({
@@ -431,17 +508,45 @@ try {
   aiMlDataLayer3.setZIndex(99);
   map.addLayer(aiMlDataLayer3);
 } catch (error) {
-  console.log("aiMlDataLayer1: " + error);
+  console.log("aiMlDataLayer3: " + error);
 }
+
+// Function to set CQL filter
+function setCqlFilter(filter) {
+  var source = aiMlDataLayer3.getSource();
+  var params = source.getParams();
+  if (filter) {
+    params.CQL_FILTER = filter;
+  } else {
+    delete params.CQL_FILTER; // Remove CQL_FILTER parameter to show all layers
+  }
+  source.updateParams(params);
+}
+
 // Add event listener to the checkbox
 document.getElementById("nature1").addEventListener("change", function (event) {
-  //alert(36)
   if (event.target.checked) {
+    //var cqlFilterValue;
+    var cqlFilterValue = "name='Bhuban NAC 10000 plantation'";
+    if(cqlFilterValue!=null){
+    //cqlFilterValue = "name=''"; // Replace with the dynamic value or set to null
     aiMlDataLayer3.setVisible(true);
+    setCqlFilter(cqlFilterValue); // Update with your CQL filter
+    var extent = ol.extent.createEmpty();
+    ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672,20.785411834716797,85.91878509521484,20.917316436767578] : ol.extent.createEmpty());
+    map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+  } else {
+    aiMlDataLayer3.setVisible(true);
+    var extent = ol.extent.createEmpty();
+    ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672,20.785411834716797,85.91878509521484,20.917316436767578] : ol.extent.createEmpty());
+    map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+  }
   } else {
     aiMlDataLayer3.setVisible(false);
+    setCqlFilter(null); // Clear the CQL filter to show all layers
   }
 });
+
 
 // Define the WMS layer
 var aiMlDataLayer5;
@@ -524,19 +629,19 @@ map.on("singleclick", function (evt) {
               featureInfoContent.innerHTML +=
                 //"Plantation Details"+ "</br>" + 
                 "<div class='table-responsive my-table-sm'><table class='table table-sm table-bordered mb-0'>"
-                + "<tr><td><strong>Circle Name </strong></td><td>" + (props.circle_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Division Name </strong></td><td>" + (props.division_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Range Name </strong></td><td>" + (props.range_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Section Name </strong></td><td>" + (props.section_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Beat Name </strong></td><td>" + (props.beat_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Name </strong></td><td>" + (props.name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Scheme </strong></td><td>" + (props.scheme || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Area Achievement </strong></td><td>" + (props.area_achievement || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Pit Target </strong></td><td>" + (props.pit_target || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Pit Achievement </strong></td><td>" + (props.pit_achievement || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Seedling Achievement </strong></td><td>" + (props.seedling_achievement || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Seedling Target </strong></td><td>" + (props.seedling_target || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Plantation Date </strong></td><td>" + (props.plantation_date || 'N/A') + "</td></tr></table></div>";
+                + "<tr><td><strong>Circle Name :</strong></td><td>" + (props.circle_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Division Name :</strong></td><td>" + (props.division_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Range Name :</strong></td><td>" + (props.range_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Section Name :</strong></td><td>" + (props.section_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Beat Name :</strong></td><td>" + (props.beat_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Name :</strong></td><td>" + (props.name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Scheme :</strong></td><td>" + (props.scheme || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Area Achievement :</strong></td><td>" + (props.area_achievement || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Pit Target :</strong></td><td>" + (props.pit_target || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Pit Achievement :</strong></td><td>" + (props.pit_achievement || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Seedling Achievement :</strong></td><td>" + (props.seedling_achievement || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Seedling Target :</strong></td><td>" + (props.seedling_target || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Plantation Date :</strong></td><td>" + (props.plantation_date || 'N/A') + "</td></tr></table></div>";
             });
           } else {
             featureInfoContent.innerHTML = '<p>No feature information available at this location.</p>';
