@@ -77,10 +77,10 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                 <div class="col-md-1">
                     <button type="submit" class="btn btn-primary w-100">Filter</button>
                 </div>
-                <div class="col-md-1">
+                <!-- <div class="col-md-1">
                     <button type="submit" class="btn btn-danger w-100">Reset</button>
 
-                </div>
+                </div> -->
 
             </div>
         </form>
@@ -288,11 +288,11 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
             });
 
             plantation_dataLayer.setVisible(true);
-            var extent = ol.extent.createEmpty();
-            ol.extent.extend(extent, plantation_dataLayer.getSource().getParams().LAYERS === 'campa:plantation_data' ? [85.844543921720302, 20.909266895553099, 85.844543921720302, 20.909266895553099] : ol.extent.createEmpty());
-            map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), {
-                duration: 1000
-            });
+            // var extent = ol.extent.createEmpty();
+            // ol.extent.extend(extent, plantation_dataLayer.getSource().getParams().LAYERS === 'campa:plantation_data' ? [85.844543921720302, 20.909266895553099, 85.844543921720302, 20.909266895553099] : ol.extent.createEmpty());
+            // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), {
+            //     duration: 1000
+            // });
         }
     });
 </script>

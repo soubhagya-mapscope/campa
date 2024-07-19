@@ -39,7 +39,7 @@ class PlantationService
         }
 
         if (!empty($filters['date'])) {
-            $query .= " AND DATE(created_on) = :date";
+            $query .= " AND DATE(plantation_date) = :date";
             $params[':date'] = $filters['date'];
         }
         $query .= " order by id ASC";
