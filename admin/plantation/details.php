@@ -302,19 +302,41 @@ if (isset($_GET['id'])) {
                         // Sample data for different IDs
                         $sampleData = [
                             1 => [
-                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-05-2024', 'status' => 'done', 'status_class' => 'completed'],
-                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-06-2024', 'status' => 'done', 'status_class' => 'completed'],
-                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-07-2024', 'status' => 'done', 'status_class' => 'completed'],
+                                ['year' => 'Pre-plantation', 'scheduled_date' => '12-01-2020', 'status' => 'done', 'status_class' => 'completed'],
+                                ['year' => '1yr (1st Half)', 'scheduled_date' => '02-07-2020', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '1yr (2nd Half)', 'scheduled_date' => '11-12-2020', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '2yr (1st Half)', 'scheduled_date' => '11-06-2021', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '2yr (2nd Half)', 'scheduled_date' => '16-11-2021', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '3yr (1st Half)', 'scheduled_date' => '02-05-2022', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '3yr (2nd Half)', 'scheduled_date' => '17-11-2022', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '4yr (1st Half)', 'scheduled_date' => '11-05-2023', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '4yr (2nd Half)', 'scheduled_date' => '18-11-2023', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '5yr (1st Half)', 'scheduled_date' => '11-05-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '5yr (2nd Half)', 'scheduled_date' => '11-07-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                               
                             ],
                             3 => [
-                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'done', 'status_class' => 'completed'],
-                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'completed'],
-                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'delayed'],
+                                ['year' => '1yr (1st Half)', 'scheduled_date' => '02-02-2024', 'status' => 'done', 'status_class' => 'completed'],
+                                ['year' => '1yr (2nd Half)', 'scheduled_date' => '11-04-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '2yr (1st Half)', 'scheduled_date' => '11-04-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '2yr (2nd Half)', 'scheduled_date' => '11-04-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '3yr (1st Half)', 'scheduled_date' => '02-02-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '3yr (2nd Half)', 'scheduled_date' => '11-04-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '4yr (1st Half)', 'scheduled_date' => '11-04-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '4yr (2nd Half)', 'scheduled_date' => '11-04-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '5yr (1st Half)', 'scheduled_date' => '11-04-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '5yr (2nd Half)', 'scheduled_date' => '11-04-2024', 'status' => 'not done', 'status_class' => 'pending'],
                             ],
                             6 => [
-                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'pending'],
-                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'pending'],
-                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                           
+                                ['year' => '2yr (1st Half)', 'scheduled_date' => '11-04-2024', 'status' => 'done', 'status_class' => 'completed'],
+                                ['year' => '2yr (2nd Half)', 'scheduled_date' => '11-04-2024', 'status' => 'done', 'status_class' => 'completed'],
+                                ['year' => '3yr (1st Half)', 'scheduled_date' => '02-02-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '3yr (2nd Half)', 'scheduled_date' => '11-04-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '4yr (1st Half)', 'scheduled_date' => '11-04-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '4yr (2nd Half)', 'scheduled_date' => '11-04-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '5yr (1st Half)', 'scheduled_date' => '11-04-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '5yr (2nd Half)', 'scheduled_date' => '11-04-2024', 'status' => 'not done', 'status_class' => 'pending'],
                             ]
                         ];
 

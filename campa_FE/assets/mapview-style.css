@@ -1,13 +1,18 @@
-body,
+/* body,
 html {
 	height: 100%;
 	margin: 0;
 	font-family: "Roboto", sans-serif;
+} */
+
+*{
+	overflow: hidden;
 }
 
 .map-container {
 	height: 90vh;
 	position: relative;
+	overflow: none;
 }
 
 #map {
@@ -370,6 +375,6 @@ img {
 	text-decoration: none;
   }
   
-
-
-  
+.pending{
+	background-color: #e02d1b!important;
+}
