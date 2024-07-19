@@ -144,8 +144,8 @@ if (isset($_GET['id'])) {
                         <!-- Pre-plantation data -->
                         <div class="col-md-12">
 
-                            <fieldset class="pre-plantation-fieldset">
-                                <legend class="tag-header">Pre-Plantation Data</legend>
+                            <fieldset class="pre-plantation-fieldset w-100">
+                                <legend class="tag-header">Pre-Plantation Data <?php //echo ($_GET['id']) ;?></legend>
                                 <!-- <h6 class="tag-header"><b>Pre-Plantation Data</b></h6> -->
                                 <!-- <div class="card" style="width: 18rem;"> -->
                                 <?php
@@ -193,7 +193,7 @@ if (isset($_GET['id'])) {
                         </div>
                         <!-- Post-plantation data -->
                         <div class="col-md-12 mt-4">
-                            <fieldset class="pre-plantation-fieldset">
+                            <fieldset class="pre-plantation-fieldset w-100">
                                 <legend class="tag-header">Post-Plantation Data</legend>
 
                                 <div class="row">
@@ -244,42 +244,41 @@ if (isset($_GET['id'])) {
                             </fieldset>
                         </div>
 
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
 
                             <fieldset class="pre-plantation-fieldset">
                                 <legend class="tag-header">Drone Flight Schedule</legend>
-                                <!-- <h6 class="tag-header"><b>Pre-Plantation Data</b></h6> -->
-                                <!-- <div class="card" style="width: 18rem;"> -->
+                             
                                 <?php
                                 if ($droneData['prePlantationData'] != null) {
                                 ?>
 
-<table class="table table-bordered custom-table">
-  <thead>
-    <tr>
-      <th scope="col">Year</th>
-      <th scope="col">Frequency</th>
-      <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Year 1</td>
-      <td><span class="badge-box-map-view quarterly">Quarterly</span></td>
-      <td><span class="badge-box-map-view completed">Completed</span></td>
-    </tr>
-    <tr>
-      <td>Year 2</td>
-      <td><span class="badge-box-map-view quarterly">Quarterly</span></td>
-      <td><span class="badge-box-map-view completed">Completed</span></td>
-    </tr>
-    <tr>
-      <td>Year 3</td>
-      <td><span class="badge-box-map-view quarterly">Quarterly</span></td>
-      <td><span class="badge-box-map-view completed">Completed</span></td>
-    </tr>
-  </tbody>
-</table>
+                                    <table class="table table-bordered custom-table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Year</th>
+                                                <th scope="col">Scheduled Date</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Pre Plantation</td>
+                                                <td><span class="badge-box-map-view quarterly">01-05-2024</span></td>
+                                                <td><span class="badge-box-map-view completed">Completed</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pre Plantation</td>
+                                                <td><span class="badge-box-map-view quarterly">01-05-2024</span></td>
+                                                <td><span class="badge-box-map-view completed">Completed</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pre Plantation</td>
+                                                <td><span class="badge-box-map-view quarterly">01-05-2024</span></td>
+                                                <td><span class="badge-box-map-view completed">Completed</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
 
                                 <?php
@@ -290,8 +289,62 @@ if (isset($_GET['id'])) {
                                 ?>
 
 
-                            </fieldset> <!-- </div> -->
-                        </div>
+                            </fieldset> 
+                        
+                        </div> -->
+
+
+                        <?php
+                        // Sample data for different IDs
+                        $sampleData = [
+                            1 => [
+                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-05-2024', 'status' => 'Completed', 'status_class' => 'completed'],
+                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-06-2024', 'status' => 'Completed', 'status_class' => 'completed'],
+                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-07-2024', 'status' => 'Completed', 'status_class' => 'completed'],
+                            ],
+                            3 => [
+                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'Completed', 'status_class' => 'completed'],
+                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'Completed', 'status_class' => 'completed'],
+                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'Delayed', 'status_class' => 'delayed'],
+                            ],
+                            6 => [
+                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'Pending', 'status_class' => 'pending'],
+                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'Pending', 'status_class' => 'pending'],
+                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'Pending', 'status_class' => 'pending'],
+                            ]
+                        ];
+
+                        $id = isset($_GET['id']) ? intval($_GET['id']) : null;
+                        $droneData = isset($sampleData[$id]) ? $sampleData[$id] : null;
+                        ?>
+
+                        <fieldset class="pre-plantation-fieldset w-100">
+                            <legend class="tag-header">Drone Flight Schedule</legend>
+
+                            <?php if ($droneData != null) : ?>
+                                <table class="table table-bordered custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Year</th>
+                                            <th scope="col">Scheduled Date</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($droneData as $data) : ?>
+                                            <tr>
+                                                <td><?php echo htmlspecialchars($data['year']); ?></td>
+                                                <td><span class="badge-box-map-view quarterly"><?php echo htmlspecialchars($data['scheduled_date']); ?></span></td>
+                                                <td><span class="badge-box-map-view <?php echo htmlspecialchars($data['status_class']); ?>"><?php echo htmlspecialchars($data['status']); ?></span></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            <?php else : ?>
+                                <p>No pre-plantation data available.</p>
+                            <?php endif; ?>
+                        </fieldset>
+
                     </div>
                 </div>
 
