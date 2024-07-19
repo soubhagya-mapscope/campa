@@ -112,9 +112,9 @@ if (isset($_GET['id'])) {
 
             <div id="featureInfoDrawer" class="drawer">
                 <div class="drawer-content">
-                    <!-- <h5>Feature Information</h5> -->
+                    <h5 class="mb-4">Feature Information</h5>
                     <div id="featureInfoContent"></div>
-                    <button id="closeDrawer" class="btn btn-secondary">Close</button>
+                    <button id="closeDrawer" class="btn btn-secondary mt-4">Close</button>
                 </div>
             </div>
             <div class="map-overlay">
