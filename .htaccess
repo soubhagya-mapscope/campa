@@ -1,6 +1,11 @@
 RewriteEngine On
 
-# Remove .php extension
+# Deny access to sensitive directories
+RewriteRule ^config/ - [F,L]
+RewriteRule ^sessions/ - [F,L]
+
+# Remove .php extension for files in /admin directory only
+RewriteCond %{REQUEST_URI} ^/campa/admin/
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [L]
