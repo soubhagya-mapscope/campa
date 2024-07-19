@@ -26,64 +26,64 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    
+
     <fieldset class="pre-plantation-fieldset">
-    <!-- <h1 class="h3 mb-2 text-gray-800">Plantation</h1> -->
+        <!-- <h1 class="h3 mb-2 text-gray-800">Plantation</h1> -->
         <legend class="tag-header-list">Plantation</legend>
-    <!-- Filters -->
-    <form method="GET" action="">
-        <div class="row mb-4 align-items-md-end">
-            <div class="col-md-2">
-                <label class="label">Select Circle</label>
-                <select name="circle" class="form-control">
+        <!-- Filters -->
+        <form method="GET" action="">
+            <div class="row mb-4 align-items-md-end">
+                <div class="col-md-2">
+                    <label class="label">Select Circle</label>
+                    <select name="circle" class="form-control">
 
-                    <option value="">Select Circle</option>
-                    <?php foreach ($uniqueCircles as $circle) : ?>
-                        <option value="<?php echo $circle; ?>" <?php echo $filters['circle'] == $circle ? 'selected' : ''; ?>><?php echo $circle; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <label class="label">Select Circle</label>
-                <select name="division" class="form-control">
-                    <option value="">Select Division</option>
-                    <?php foreach ($uniqueDivisions as $division) : ?>
-                        <option value="<?php echo $division; ?>" <?php echo $filters['division'] == $division ? 'selected' : ''; ?>><?php echo $division; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <label class="label">Select Circle</label>
-                <select name="range" class="form-control">
-                    <option value="">Select Range</option>
-                    <?php foreach ($uniqueRanges as $range) : ?>
-                        <option value="<?php echo $range; ?>" <?php echo $filters['range'] == $range ? 'selected' : ''; ?>><?php echo $range; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <label class="label">Select Circle</label>
-                <select name="scheme" class="form-control">
-                    <option value="">Select Scheme</option>
-                    <?php foreach ($uniqueSchemes as $scheme) : ?>
-                        <option value="<?php echo $scheme; ?>" <?php echo $filters['scheme'] == $scheme ? 'selected' : ''; ?>><?php echo $scheme; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <label class="label">Select Circle</label>
-                <input type="date" name="date" class="form-control" value="<?php echo $filters['date']; ?>">
-            </div>
-            <div class="col-md-1">
-                <button type="submit" class="btn btn-primary w-100">Filter</button>
-            </div>
-            <div class="col-md-1">
-                <button type="submit" class="btn btn-danger w-100">Reset</button>
+                        <option value="">Select Circle</option>
+                        <?php foreach ($uniqueCircles as $circle) : ?>
+                            <option value="<?php echo $circle; ?>" <?php echo $filters['circle'] == $circle ? 'selected' : ''; ?>><?php echo $circle; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="label">Select Division</label>
+                    <select name="division" class="form-control">
+                        <option value="">Select Division</option>
+                        <?php foreach ($uniqueDivisions as $division) : ?>
+                            <option value="<?php echo $division; ?>" <?php echo $filters['division'] == $division ? 'selected' : ''; ?>><?php echo $division; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="label">Select Range</label>
+                    <select name="range" class="form-control">
+                        <option value="">Select Range</option>
+                        <?php foreach ($uniqueRanges as $range) : ?>
+                            <option value="<?php echo $range; ?>" <?php echo $filters['range'] == $range ? 'selected' : ''; ?>><?php echo $range; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="label">Select Scheme</label>
+                    <select name="scheme" class="form-control">
+                        <option value="">Select Scheme</option>
+                        <?php foreach ($uniqueSchemes as $scheme) : ?>
+                            <option value="<?php echo $scheme; ?>" <?php echo $filters['scheme'] == $scheme ? 'selected' : ''; ?>><?php echo $scheme; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="label">Plantation Date</label>
+                    <input type="date" name="date" class="form-control" value="<?php echo $filters['date']; ?>">
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary w-100">Filter</button>
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-danger w-100">Reset</button>
+
+                </div>
 
             </div>
-           
-        </div>
-    </form>
+        </form>
     </fieldset>
     <!-- DataTable -->
     <div class="card shadow mb-4">
@@ -115,7 +115,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                                 <td><?php echo $plantation['area_gps']; ?></td>
                                 <td><?php echo $plantation['scheme']; ?></td>
                                 <td><?php $date = new DateTime($plantation['plantation_date']);
-    echo $date->format('d-m-Y'); ?></td>
+                                    echo $date->format('d-m-Y'); ?></td>
                                 <!-- <td>
                                 <button class="btn btn-info" data-toggle="modal" data-target="#detailsModal" data-id="<?php echo $plantation['id']; ?>">
                                     <i class="fas fa-info-circle"></i> View Details
@@ -127,8 +127,8 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                                 <td>
                                     <div class="dropdown">
                                         <div class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-cog"></i> Action
-                        </div>
+                                            <i class="fas fa-cog"></i> Action
+                                        </div>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#detailsModal" data-id="<?php echo $plantation['id']; ?>">
                                                 <i class="fas fa-info-circle"></i> View Details
@@ -136,6 +136,13 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                                             <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>">
                                                 <i class="fas fa-map-marker-alt"></i> View on Map
                                             </a>
+                                            <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>">
+                                                <i class="fas fa-map-marker-alt"></i> Upload Drone Data
+                                            </a>
+                                            <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>">
+                                                <i class="fas fa-map-marker-alt"></i> Download Plantation KML
+                                            </a>
+                                          
                                         </div>
                                     </div>
                                 </td>

@@ -34,7 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<div class="header-img">
 
 		<img src="../../public/images/Seal_of_Odisha.svg" class="image-org-top">
-		<h6>Government Of Odisha</h6>
+		<h6>Forest, Environment and Climate Change Department<br/>
+			Government of Odisha
+		</h6>
 	</div>
 
 	<div class="limiter">
@@ -55,15 +57,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				<form class="login100-form validate-form" method="POST" action="">
 					<?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
-						<span class="label-input100">Username</span>
+						<!-- <span class="label-input100">Username</span> -->
+						<fieldset class="login-fieldset">
+                                <legend class="tag-header-login">Username</legend>
 						<input class="input100" type="text" id="username" name="username" required placeholder="Enter username">
 						<span class="focus-input100"></span>
+						</fieldset>
+
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-						<span class="label-input100">Password</span>
+						<!-- <span class="label-input100">Password</span> -->
+						<fieldset class="login-fieldset">
+						<legend class="tag-header-login">Password</legend>
 						<input class="input100" type="password" id="password" name="password" required placeholder="Enter password">
 						<span class="focus-input100"></span>
+						</fieldset>
 					</div>
 
 					<div class="flex-sb-m w-full p-b-30">
