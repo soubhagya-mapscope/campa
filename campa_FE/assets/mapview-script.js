@@ -403,7 +403,7 @@ document.getElementById("urban1").addEventListener("change", function (event) {
     try {
       geotiffSite1Layer = new ol.layer.Image({
         source: new ol.source.ImageWMS({
-          url: "http://192.168.1.34:8080/geoserver/campa/wms",
+          url: "https://geoserver.amnslis.in/geoserver/campa/wms",
           params: {
             LAYERS: "campa:geotiffSite1",
             TILED: true,
@@ -427,7 +427,7 @@ document.getElementById("urban1").addEventListener("change", function (event) {
     try {
       orthomosaicLayer = new ol.layer.Image({
         source: new ol.source.ImageWMS({
-          url: "http://192.168.1.34:8080/geoserver/campa/wms",
+          url: "https://geoserver.amnslis.in/geoserver/campa/wms",
           params: {
             LAYERS: "campa:3-orthomosaic",
             TILED: true,
@@ -467,7 +467,7 @@ var aiMlDataLayer1;
 try {
   aiMlDataLayer1 = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "http://192.168.1.34:8080/geoserver/campa/wms",
+      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
       params: {
         LAYERS: "campa:pits",
         TILED: true,
@@ -504,7 +504,7 @@ document
 // try {
 //   aiMlDataLayer3 = new ol.layer.Image({
 //     source: new ol.source.ImageWMS({
-//       url: "http://192.168.1.34:8080/geoserver/campa/wms",
+//       url: "https://geoserver.amnslis.in/geoserver/campa/wms",
 //       params: {
 //         LAYERS: "campa:plantation_data",
 //         TILED: true,
