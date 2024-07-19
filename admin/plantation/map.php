@@ -276,6 +276,10 @@ if (isset($_GET['id'])) {
 										<input class="form-check-input" type="checkbox" id="transport5">
 										<label class="form-check-label" for="nature2">Pits Analysis (Drone)</label>
 									</div>
+                                    <div class="form-check">
+										<input class="form-check-input" type="checkbox" id="transport6">
+										<label class="form-check-label" for="nature2">Plantation Boundary</label>
+									</div>
 								</div>
 							</div>
 						</div>
