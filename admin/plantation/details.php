@@ -14,8 +14,8 @@ if (isset($_GET['id'])) {
     $pit_deviation = $plantation['pit_achievement'] - $plantation['pit_target'];
     $seedling_deviation = $plantation['seedling_achievement'] - $plantation['seedling_target'];
     // Calculate last and next monitoring dates
-    $lastMonitoringDate = !empty($droneData['max_drone_fly_date']) ? $droneData['max_drone_fly_date'] : "NA";
-    $nextMonitoringDate = $lastMonitoringDate !== "NA" ? date('Y-m-d', strtotime($lastMonitoringDate . ' +6 months')) : "NA";
+    $lastMonitoringDate = !empty($droneData['max_drone_fly_date']) ? date('d-m-Y', strtotime($droneData['max_drone_fly_date'])) : "NA";
+    $nextMonitoringDate = $lastMonitoringDate !== "NA" ? date('d-m-Y', strtotime($lastMonitoringDate . ' +6 months')) : "NA";
     $escapedPlantationName = htmlspecialchars($plantation['name'], ENT_QUOTES, 'UTF-8');
 
 ?>
@@ -73,28 +73,28 @@ if (isset($_GET['id'])) {
                         </div>
 
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Pit (Target) (Ha):</div>
+                            <div class="col-sm-6 row-label">Pit (Target) (Nos):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['pit_target']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Pit (Achievement) (Ha):</div>
+                            <div class="col-sm-6 row-label">Pit (Achievement) (Nos):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['pit_achievement']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Pit Deviation (Ha):</div>
+                            <div class="col-sm-6 row-label">Pit Deviation (Nos):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $pit_deviation; ?></span></div>
                         </div>
 
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Seedling (Target) (Ha) :</div>
+                            <div class="col-sm-6 row-label">Seedling (Target) (Nos) :</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['seedling_target']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Seedling (Achievement) (Ha):</div>
+                            <div class="col-sm-6 row-label">Seedling (Achievement) (Nos):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['seedling_achievement']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Seedling Deviation (Ha):</div>
+                            <div class="col-sm-6 row-label">Seedling Deviation (Nos):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $seedling_deviation; ?></span></div>
                         </div>
 
@@ -114,7 +114,7 @@ if (isset($_GET['id'])) {
             <div class="col-md-6">
                 <h5>Plantation Map</h5>
                 <div style="max-width:100%;list-style:none;
-                         transition: none;overflow:hidden;width:500px;height:500px;">
+                         transition: none;overflow:hidden;width:500px;height:600px;">
                     <div id="plantationMap" style="height:100%; width:100%; max-width:100%;"></div>
 
                 </div>
@@ -145,7 +145,7 @@ if (isset($_GET['id'])) {
 
                                     <div class="row mb-2">
                                         <div class="col-sm-6 row-label">Drone Fly Date:</div>
-                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData']['drone_fly_date'] ?? "NA"; ?></span></div>
+                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo date('d-m-Y', strtotime($droneData['prePlantationData']['drone_fly_date'])) ?? "NA"; ?></span></div>
                                     </div>
 
                                     <div class="row mb-2">
@@ -153,7 +153,7 @@ if (isset($_GET['id'])) {
                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['no_of_pits'] ?? "NA"; ?></div>
                                     </div>
                                     <div class="row mb-2">
-                                        <div class="col-sm-6 row-label">Area Identified from Ortho</div>
+                                        <div class="col-sm-6 row-label">Area Identified from Ortho (Ha)</div>
                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData']['area_identified'] ?? "NA"; ?></div>
                                     </div>
                                     <div class="row mb-2">
@@ -162,7 +162,7 @@ if (isset($_GET['id'])) {
                                     </div>
 
                                     <div class="row mb-2">
-                                        <div class="col-sm-6 row-label">Target Area:</div>
+                                        <div class="col-sm-6 row-label">Target Area (Ha):</div>
                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['target_area'] ?? "NA"; ?></div>
                                     </div>
                                     <div class="row mb-2">
@@ -196,14 +196,14 @@ if (isset($_GET['id'])) {
 
                                                     <div class="row mb-2">
                                                         <div class="col-sm-6 row-label">Drone Fly Date:</div>
-                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $data['drone_fly_date'] ?? "NA"; ?></span></div>
+                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo date('d-m-Y', strtotime($data['drone_fly_date']))  ?? "NA"; ?></span></div>
                                                     </div>
                                                     <div class="row mb-2">
                                                         <div class="col-sm-6 row-label">No. of Pits Identified:</div>
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $data['no_of_pits'] ?? "NA"; ?></span></div>
                                                     </div>
                                                     <div class="row mb-2">
-                                                        <div class="col-sm-6 row-label">Area Identified from Ortho:</div>
+                                                        <div class="col-sm-6 row-label">Area Identified from Ortho (Ha):</div>
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $data['area_identified'] ?? "NA"; ?></span></div>
                                                     </div>
                                                     <div class="row mb-2">
@@ -211,7 +211,7 @@ if (isset($_GET['id'])) {
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $data['no_of_pits_as_per_target'] ?? "NA"; ?></span></div>
                                                     </div>
                                                     <div class="row mb-2">
-                                                        <div class="col-sm-6 row-label">Target Area:</div>
+                                                        <div class="col-sm-6 row-label">Target Area (Ha):</div>
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $data['target_area'] ?? "NA"; ?></div>
                                                     </div>
                                                     <div class="row mb-2">
@@ -264,10 +264,6 @@ if (isset($_GET['id'])) {
                         </div>
                     </div>
                 </div>
-
-
-
-
 
             </div>
         </div>

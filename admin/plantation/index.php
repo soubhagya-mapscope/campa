@@ -142,7 +142,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                                             <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>">
                                                 <i class="fas fa-map-marker-alt"></i> Download Plantation KML
                                             </a>
-                                          
+
                                         </div>
                                     </div>
                                 </td>
@@ -282,10 +282,29 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                     projection: 'EPSG:4326',
                     center: [85.87369, 20.85132],
                     zoom: 13,
+                    
                 })
             });
 
             plantation_dataLayer.setVisible(true);
+            var extent = plantation_dataLayer.getSource().getExtent();
+            map.getView().fit(extent, { size: map.getSize(), maxZoom: 18 });
+             // Fetch the extent of the plantation_dataLayer and fit the map view
+    var wmsUrl = 'http://192.168.1.34:8080/geoserver/campa/wms?service=WMS&version=1.1.0&request=GetCapabilities';
+    fetch(wmsUrl)
+        .then(response => response.text())
+        .then(text => {
+            var parser = new ol.format.WMSCapabilities();
+            var result = parser.read(text);
+            var layers = result.Capability.Layer.Layer;
+            var layer = layers.find(l => l.Name === 'campa:plantation_data');
+            var bbox = layer.BoundingBox[0].extent; // Get the extent of the layer
+
+            map.getView().fit(bbox, { size: map.getSize(), maxZoom: 18 });
+        })
+        .catch(error => {
+            console.log('Error fetching WMS capabilities: ' + error);
+        });
         }
     });
 </script>
