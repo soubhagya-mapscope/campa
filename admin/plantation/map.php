@@ -28,13 +28,14 @@ if (isset($_GET['id'])) {
 
         <nav class="navbar navbar-expand navbar-light bg-white topbar  static-top shadow">
 
+        <a class="no-underline" href="./index.php">
         <div class="img-box-logo-head">
 
         <img src="../../public/images/LOGO-FPPS.svg" class="logo-ico">
         <div class="logo-text">Forest Plantation Planning and Monitoring System</div>
 
         </div>
-           
+        </a>
           
             <ul class="navbar-nav ml-auto">
 
@@ -357,7 +358,7 @@ if (isset($_GET['id'])) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="applyFilter()">Apply Filter</button>
+                        <button type="button" class="btn btn-success" onclick="applyFilter()">Apply Filter</button>
                     </div>
                 </div>
             </div>
