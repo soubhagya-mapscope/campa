@@ -216,7 +216,7 @@ iframe {
 
 .wrap-login100 {
     width: 440px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.6);
     border-radius: 10px;
     overflow: hidden;
     position: relative
@@ -238,7 +238,8 @@ iframe {
     background-size: cover;
     background-position: center;
     /* padding: 70px 15px 74px */
-    padding: 15px 0px 21px;
+    /* padding: 15px 0px 21px; */
+    padding: 14px 41px 14px;
 }
 
 .login100-form-title-1 {
@@ -319,7 +320,7 @@ iframe {
     height: 100%;
     top: 0;
     left: 0;
-    pointer-events: none
+    pointer-events: none;
 }
 
 .focus-input100::before {
@@ -342,11 +343,11 @@ input.input100 {
 }
 
 .input100:focus+.focus-input100::before {
-    width: 100%
+    width: 98%
 }
 
 .has-val.input100+.focus-input100::before {
-    width: 100%
+    width: 98%
 }
 
 .input-checkbox100 {
@@ -356,7 +357,7 @@ input.input100 {
 .label-checkbox100 {
     font-family: Poppins-Regular;
     font-size: 13px;
-    color: #999;
+    color: #334b50;
     line-height: 1.4;
     display: block;
     position: relative;
@@ -420,7 +421,7 @@ input.input100 {
     padding: 0 20px;
     min-width: 210px;
     height: 50px;
-    background-color: #57b846;
+    background-color: #7b9b15;
     border-radius: 25px;
     font-family: Poppins-Regular;
     font-size: 16px;
@@ -573,7 +574,7 @@ input.input100 {
 
 
 .login-fieldset {
-    border: 1px solid #e7e5e5; 
+    border: 1px solid #52631f;
     padding: 4px; 
     /* margin-bottom: 20px;  */
     border-radius: 5px;

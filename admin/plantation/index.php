@@ -71,7 +71,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <label class="label">Select Date</label>
+                    <label class="label">Plantation Date</label>
                     <input type="date" name="date" class="form-control" value="<?php echo $filters['date']; ?>">
                 </div>
                 <div class="col-md-1">
@@ -136,6 +136,13 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                                             <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>">
                                                 <i class="fas fa-map-marker-alt"></i> View on Map
                                             </a>
+                                            <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>">
+                                                <i class="fas fa-map-marker-alt"></i> Upload Drone Data
+                                            </a>
+                                            <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>">
+                                                <i class="fas fa-map-marker-alt"></i> Download Plantation KML
+                                            </a>
+                                          
                                         </div>
                                     </div>
                                 </td>
