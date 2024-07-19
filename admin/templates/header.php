@@ -17,6 +17,8 @@
 
     <!-- Custom styles for this template -->
     <link href="../../public/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.2.4/ol.css"> 
+
 
     <!-- Custom styles for this page -->
     <link href="../../public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -71,7 +73,7 @@
                             <img src="../../public/images/odisha-forest-black.png" class="image-hed-top">
                             <span>Forest, Environment and Climate Change Department<br />
                                 Government of Odisha
-</span>
+                            </span>
                         </div>
 
 

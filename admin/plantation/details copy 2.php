@@ -14,10 +14,8 @@ if (isset($_GET['id'])) {
     $pit_deviation = $plantation['pit_achievement'] - $plantation['pit_target'];
     $seedling_deviation = $plantation['seedling_achievement'] - $plantation['seedling_target'];
     // Calculate last and next monitoring dates
-    $lastMonitoringDate = !empty($droneData['max_drone_fly_date']) ? date('d-m-Y', strtotime($droneData['max_drone_fly_date'])) : "NA";
-    $nextMonitoringDate = $lastMonitoringDate !== "NA" ? date('d-m-Y', strtotime($lastMonitoringDate . ' +6 months')) : "NA";
-    $escapedPlantationName = htmlspecialchars($plantation['name'], ENT_QUOTES, 'UTF-8');
-
+    $lastMonitoringDate = !empty($droneData['max_drone_fly_date']) ? $droneData['max_drone_fly_date'] : "NA";
+    $nextMonitoringDate = $lastMonitoringDate !== "NA" ? date('Y-m-d', strtotime($lastMonitoringDate . ' +6 months')) : "NA";
 ?>
 
     <div class="modal-body">
@@ -73,28 +71,28 @@ if (isset($_GET['id'])) {
                         </div>
 
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Pit (Target) (Nos):</div>
+                            <div class="col-sm-6 row-label">Pit (Target) (Ha):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['pit_target']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Pit (Achievement) (Nos):</div>
+                            <div class="col-sm-6 row-label">Pit (Achievement) (Ha):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['pit_achievement']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Pit Deviation (Nos):</div>
+                            <div class="col-sm-6 row-label">Pit Deviation (Ha):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $pit_deviation; ?></span></div>
                         </div>
 
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Seedling (Target) (Nos) :</div>
+                            <div class="col-sm-6 row-label">Seedling (Target) (Ha) :</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['seedling_target']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Seedling (Achievement) (Nos):</div>
+                            <div class="col-sm-6 row-label">Seedling (Achievement) (Ha):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['seedling_achievement']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Seedling Deviation (Nos):</div>
+                            <div class="col-sm-6 row-label">Seedling Deviation (Ha):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $seedling_deviation; ?></span></div>
                         </div>
 
@@ -114,7 +112,7 @@ if (isset($_GET['id'])) {
             <div class="col-md-6">
                 <h5>Plantation Map</h5>
                 <div style="max-width:100%;list-style:none;
-                         transition: none;overflow:hidden;width:500px;height:600px;">
+                         transition: none;overflow:hidden;width:500px;height:500px;">
                     <div id="plantationMap" style="height:100%; width:100%; max-width:100%;"></div>
 
                 </div>
@@ -134,8 +132,8 @@ if (isset($_GET['id'])) {
                         <!-- Pre-plantation data -->
                         <div class="col-md-12">
 
-                            <fieldset class="pre-plantation-fieldset w-100">
-                                <legend class="tag-header">Pre-Plantation Data <?php //echo ($_GET['id']) ;?></legend>
+                            <fieldset class="pre-plantation-fieldset">
+                                <legend class="tag-header">Pre-Plantation Data</legend>
                                 <!-- <h6 class="tag-header"><b>Pre-Plantation Data</b></h6> -->
                                 <!-- <div class="card" style="width: 18rem;"> -->
                                 <?php
@@ -145,7 +143,7 @@ if (isset($_GET['id'])) {
 
                                     <div class="row mb-2">
                                         <div class="col-sm-6 row-label">Drone Fly Date:</div>
-                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo date('d-m-Y', strtotime($droneData['prePlantationData']['drone_fly_date'])) ?? "NA"; ?></span></div>
+                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData']['drone_fly_date'] ?? "NA"; ?></span></div>
                                     </div>
 
                                     <div class="row mb-2">
@@ -153,7 +151,7 @@ if (isset($_GET['id'])) {
                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['no_of_pits'] ?? "NA"; ?></div>
                                     </div>
                                     <div class="row mb-2">
-                                        <div class="col-sm-6 row-label">Area Identified from Ortho (Ha)</div>
+                                        <div class="col-sm-6 row-label">Area Identified from Ortho</div>
                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData']['area_identified'] ?? "NA"; ?></div>
                                     </div>
                                     <div class="row mb-2">
@@ -162,7 +160,7 @@ if (isset($_GET['id'])) {
                                     </div>
 
                                     <div class="row mb-2">
-                                        <div class="col-sm-6 row-label">Target Area (Ha):</div>
+                                        <div class="col-sm-6 row-label">Target Area:</div>
                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['target_area'] ?? "NA"; ?></div>
                                     </div>
                                     <div class="row mb-2">
@@ -183,7 +181,7 @@ if (isset($_GET['id'])) {
                         </div>
                         <!-- Post-plantation data -->
                         <div class="col-md-12 mt-4">
-                            <fieldset class="pre-plantation-fieldset w-100">
+                            <fieldset class="pre-plantation-fieldset">
                                 <legend class="tag-header">Post-Plantation Data</legend>
 
                                 <div class="row">
@@ -196,14 +194,14 @@ if (isset($_GET['id'])) {
 
                                                     <div class="row mb-2">
                                                         <div class="col-sm-6 row-label">Drone Fly Date:</div>
-                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo date('d-m-Y', strtotime($data['drone_fly_date']))  ?? "NA"; ?></span></div>
+                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $data['drone_fly_date'] ?? "NA"; ?></span></div>
                                                     </div>
                                                     <div class="row mb-2">
                                                         <div class="col-sm-6 row-label">No. of Pits Identified:</div>
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $data['no_of_pits'] ?? "NA"; ?></span></div>
                                                     </div>
                                                     <div class="row mb-2">
-                                                        <div class="col-sm-6 row-label">Area Identified from Ortho (Ha):</div>
+                                                        <div class="col-sm-6 row-label">Area Identified from Ortho:</div>
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $data['area_identified'] ?? "NA"; ?></span></div>
                                                     </div>
                                                     <div class="row mb-2">
@@ -211,7 +209,7 @@ if (isset($_GET['id'])) {
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $data['no_of_pits_as_per_target'] ?? "NA"; ?></span></div>
                                                     </div>
                                                     <div class="row mb-2">
-                                                        <div class="col-sm-6 row-label">Target Area (Ha):</div>
+                                                        <div class="col-sm-6 row-label">Target Area:</div>
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $data['target_area'] ?? "NA"; ?></div>
                                                     </div>
                                                     <div class="row mb-2">
@@ -227,121 +225,70 @@ if (isset($_GET['id'])) {
 
                                         endforeach;
                                     } else {
-                                        echo "<p class='ml-4'>No post-plantation data available.</p>";
+                                        echo "<p>No post-plantation data available.</p>";
                                     }
                                     ?>
                                 </div>
                             </fieldset>
                         </div>
-
-                        <!-- <div class="col-md-12">
-
-                            <fieldset class="pre-plantation-fieldset">
-                                <legend class="tag-header">Drone Flight Schedule</legend>
-                             
-                                <?php
-                                if ($droneData['prePlantationData'] != null) {
-                                ?>
-
-                                    <table class="table table-bordered custom-table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Year</th>
-                                                <th scope="col">Scheduled Date</th>
-                                                <th scope="col">Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Pre Plantation</td>
-                                                <td><span class="badge-box-map-view quarterly">01-05-2024</span></td>
-                                                <td><span class="badge-box-map-view completed">Completed</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Pre Plantation</td>
-                                                <td><span class="badge-box-map-view quarterly">01-05-2024</span></td>
-                                                <td><span class="badge-box-map-view completed">Completed</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Pre Plantation</td>
-                                                <td><span class="badge-box-map-view quarterly">01-05-2024</span></td>
-                                                <td><span class="badge-box-map-view completed">Completed</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-
-                                <?php
-
-                                } else {
-                                    echo "<p>No pre-plantation data available.</p>";
-                                }
-                                ?>
-
-
-                            </fieldset> 
-                        
-                        </div> -->
-
-
-                        <?php
-                        // Sample data for different IDs
-                        $sampleData = [
-                            1 => [
-                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-05-2024', 'status' => 'done', 'status_class' => 'completed'],
-                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-06-2024', 'status' => 'done', 'status_class' => 'completed'],
-                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-07-2024', 'status' => 'done', 'status_class' => 'completed'],
-                            ],
-                            3 => [
-                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'done', 'status_class' => 'completed'],
-                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'completed'],
-                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'delayed'],
-                            ],
-                            6 => [
-                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'pending'],
-                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'pending'],
-                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'pending'],
-                            ]
-                        ];
-
-                        $id = isset($_GET['id']) ? intval($_GET['id']) : null;
-                        $droneData = isset($sampleData[$id]) ? $sampleData[$id] : null;
-                        ?>
-
-                        <fieldset class="pre-plantation-fieldset w-100">
-                            <legend class="tag-header">Drone Flight Schedule</legend>
-
-                            <?php if ($droneData != null) : ?>
-                                <table class="table table-bordered custom-table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Year</th>
-                                            <th scope="col">Scheduled Date</th>
-                                            <th scope="col">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($droneData as $data) : ?>
-                                            <tr>
-                                                <td><?php echo htmlspecialchars($data['year']); ?></td>
-                                                <td><span class="badge-box-map-view quarterly"><?php echo htmlspecialchars($data['scheduled_date']); ?></span></td>
-                                                <td><span class="badge-box-map-view <?php echo htmlspecialchars($data['status_class']); ?>"><?php echo htmlspecialchars($data['status']); ?></span></td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            <?php else : ?>
-                                <p>No pre-plantation data available.</p>
-                            <?php endif; ?>
-                        </fieldset>
-
                     </div>
                 </div>
+
+
+
+
 
             </div>
         </div>
     </div>
-    
+    <script>
+        $(document).ready(function() {
+            const osmLayer = new ol.layer.Tile({
+                source: new ol.source.OSM(),
+                title: "OpenStreetMap",
+                type: "base",
+                visible: true,
+            });
+
+            function initOpenLayersMap() {
+
+                // alert();
+                var map = new ol.Map({
+                    target: 'plantationMap',
+                    layers: [
+                        new ol.layer.Tile({
+                            source: new ol.source.TileWMS({
+                                url: 'http://192.168.1.34:8080/geoserver/campa/wms?',
+                                params: {
+                                    'SERVICE': 'WMS',
+                                    'VERSION': '1.1.0',
+                                    'REQUEST': 'GetMap',
+                                    'LAYERS': 'campa:plantation_data',
+                                    'STYLES': '',
+                                    'FORMAT': 'image/png',
+                                    'SRS': 'EPSG:4326',
+                                    'BBOX': '85.83226013183594,20.790882110595703,85.91511535644531,20.911762237548828'
+                                }
+                            })
+                        }),
+                    ],
+                    view: new ol.View({
+                        projection: 'EPSG:4326',
+                        center: [85.87369, 20.85132],
+                        zoom: 14
+                    })
+                });
+                // Add these layers to your map
+                map.addLayer(osmLayer);
+            }
+
+            // Call the function to initialize the map
+            initOpenLayersMap();
+        });
+    </script>
+
+
+
 <?php
 } else {
     echo 'Invalid request.';
