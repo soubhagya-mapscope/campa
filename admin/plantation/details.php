@@ -148,34 +148,45 @@ if (isset($_GET['id'])) {
                                 <legend class="tag-header">Pre-Plantation Data</legend>
                                 <!-- <h6 class="tag-header"><b>Pre-Plantation Data</b></h6> -->
                                 <!-- <div class="card" style="width: 18rem;"> -->
+                                <?php
+                                if ($droneData['prePlantationData'] != null) {
+                                ?>
 
-                                <div class="row mb-2">
-                                    <div class="col-sm-6 row-label">Drone Fly Date:</div>
-                                    <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData']['drone_fly_date'] ?? "NA"; ?></span></div>
-                                </div>
 
-                                <div class="row mb-2">
-                                    <div class="col-sm-6 row-label">No. of Pits Identified:</div>
-                                    <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['no_of_pits'] ?? "NA"; ?></div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm-6 row-label">Area Identified from Ortho</div>
-                                    <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData']['area_identified'] ?? "NA"; ?></div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm-6 row-label">No. of Pits as per Target:</div>
-                                    <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['no_of_pits_as_per_target'] ?? "NA"; ?></div>
-                                </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6 row-label">Drone Fly Date:</div>
+                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData']['drone_fly_date'] ?? "NA"; ?></span></div>
+                                    </div>
 
-                                <div class="row mb-2">
-                                    <div class="col-sm-6 row-label">Target Area:</div>
-                                    <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['target_area'] ?? "NA"; ?></div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm-6 row-label">Survival Rate:</div>
-                                    <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['survival_rate'] ?? "NA"; ?></div>
-                                </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6 row-label">No. of Pits Identified:</div>
+                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['no_of_pits'] ?? "NA"; ?></div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6 row-label">Area Identified from Ortho</div>
+                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData']['area_identified'] ?? "NA"; ?></div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6 row-label">No. of Pits as per Target:</div>
+                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['no_of_pits_as_per_target'] ?? "NA"; ?></div>
+                                    </div>
 
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6 row-label">Target Area:</div>
+                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['target_area'] ?? "NA"; ?></div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6 row-label">Survival Rate:</div>
+                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"> <?php echo $droneData['prePlantationData']['survival_rate'] ?? "NA"; ?></div>
+                                    </div>
+
+                                <?php
+
+
+                                } else {
+                                    echo "<p>No pre-plantation data available.</p>";
+                                }
+                                ?>
 
 
                             </fieldset> <!-- </div> -->
