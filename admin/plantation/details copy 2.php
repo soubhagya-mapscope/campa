@@ -249,93 +249,37 @@ if (isset($_GET['id'])) {
                 type: "base",
                 visible: true,
             });
-            const satelliteLayer = new ol.layer.Tile({
-                source: new ol.source.TileImage({
-                    url: "https://mt1.google.com/vt/lyrs=s&hl=pl&&x={x}&y={y}&z={z}",
-                    crossOrigin: "anonymous",
-                }),
-                title: "Satellite",
-                type: "base",
-                visible: false,
-            });
-
-            const terrainLayer = new ol.layer.Tile({
-                source: new ol.source.BingMaps({
-                    imagerySet: "AerialWithLabels",
-                    key: "voi3DlahFqo0MOrFalC2~6BX9iFreRSXk_hCsSHtZ0A~AuXzxBFu7NJaGwZO6oX2bEbHUKwhiif5YTYYqOZvgRiSl3Rt2zrcB6Addylvwat9",
-                    //key:'Aj5jxhwjBJgTVTIRfrLBlZIxoyheEqfNqtvD8Nxv-dT0DIPNHK7S-LTDbca6wkjo' //thakur86@hotmail.com
-                }),
-                title: "Terrain",
-                type: "base",
-                visible: false,
-            });
-
-            const googleStreetLayer = new ol.layer.Tile({
-                source: new ol.source.TileImage({
-                    url: "https://mt1.google.com/vt/lyrs=r&hl=pl&&x={x}&y={y}&z={z}",
-                    crossOrigin: "anonymous",
-                }),
-                title: "Google Street",
-                type: "base",
-                visible: false,
-            });
-
-            // Define the WMS layer with zoom levels
-            var wmsLayerStateBoundary = new ol.layer.Image({
-                source: new ol.source.ImageWMS({
-                    url: 'https://geoserver.amnslis.in/geoserver/Biju/wms',
-                    params: {
-                        'LAYERS': 'Biju:state_boundary',
-                        'FORMAT': 'image/png', // or other format supported by your GeoServer
-                        'TRANSPARENT': true
-                    },
-                    serverType: 'geoserver'
-                })
-            });
-
-            // Define the WMS layer
-            var plantation_dataLayer;
-            try {
-                plantation_dataLayer = new ol.layer.Image({
-                    source: new ol.source.ImageWMS({
-                        url: 'http://192.168.1.34:8080/geoserver/campa/wms',
-                        params: {
-                            'LAYERS': 'campa:plantation_data',
-                            'TILED': true,
-                            'VERSION': '1.1.0',
-                            'FORMAT': 'image/png'
-                        },
-                        serverType: 'geoserver',
-                        crossOrigin: 'anonymous'
-                    }),
-                    visible: false // Set layer initial visibility to false
-                });
-                plantation_dataLayer.setZIndex(99);
-
-            } catch (error) {
-                console.log('aiMlDataLayer1: ' + error);
-            }
-
 
             function initOpenLayersMap() {
 
                 // alert();
                 var map = new ol.Map({
                     target: 'plantationMap',
-                    layers: [],
+                    layers: [
+                        new ol.layer.Tile({
+                            source: new ol.source.TileWMS({
+                                url: 'http://192.168.1.34:8080/geoserver/campa/wms?',
+                                params: {
+                                    'SERVICE': 'WMS',
+                                    'VERSION': '1.1.0',
+                                    'REQUEST': 'GetMap',
+                                    'LAYERS': 'campa:plantation_data',
+                                    'STYLES': '',
+                                    'FORMAT': 'image/png',
+                                    'SRS': 'EPSG:4326',
+                                    'BBOX': '85.83226013183594,20.790882110595703,85.91511535644531,20.911762237548828'
+                                }
+                            })
+                        }),
+                    ],
                     view: new ol.View({
                         projection: 'EPSG:4326',
                         center: [85.87369, 20.85132],
-                        zoom: 7,
+                        zoom: 14
                     })
                 });
+                // Add these layers to your map
                 map.addLayer(osmLayer);
-                map.addLayer(satelliteLayer);
-                map.addLayer(terrainLayer);
-                map.addLayer(googleStreetLayer);
-                map.addLayer(wmsLayerStateBoundary);
-                map.addLayer(plantation_dataLayer);
-                plantation_dataLayer.setVisible(true);
             }
 
             // Call the function to initialize the map
