@@ -130,7 +130,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                                             <i class="fas fa-cog"></i> Action
                                         </div>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#detailsModal" data-id="<?php echo $plantation['id']; ?>">
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#detailsModal" data-id="<?php echo $plantation['id'];  ?>" data-name="<?php echo $plantation['name'];  ?>">
                                                 <i class="fas fa-info-circle"></i> View Details
                                             </a>
                                             <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>">
@@ -177,20 +177,115 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
 
 <script>
     $(document).ready(function() {
+        // Handle the modal show event
         $('#detailsModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget);
-            var plantationId = button.data('id');
-            var modal = $(this);
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var plantationId = button.data('id'); // Extract info from data-* attributes
+            var plantationName = button.data('name'); // Extract info from data-* attributes
+            var modal = $(this); // Get the modal
+            // Perform AJAX request to fetch details.php content
             $.ajax({
-                url: 'details.php',
+                url: 'details.php', // URL to fetch the details
                 type: 'GET',
                 data: {
-                    id: plantationId
+                    id: plantationId // Send plantationId as a GET parameter
                 },
-                success: function(data) {
-                    modal.find('.modal-body').html(data);
+                success: function(response) {
+                    // Update the modal body with the fetched content
+                    modal.find('.modal-body').html(response);
+                    // Reinitialize the OpenLayers map inside the modal
+                    initOpenLayersMap(plantationName);
+                },
+                error: function() {
+                    // Handle errors if the request fails
+                    modal.find('.modal-body').html('<p>An error occurred while loading the details.</p>');
                 }
             });
         });
+
+        function initOpenLayersMap(plantationName) {
+            const osmLayer = new ol.layer.Tile({
+                source: new ol.source.OSM(),
+                title: "OpenStreetMap",
+                type: "base",
+                visible: true,
+            });
+            const satelliteLayer = new ol.layer.Tile({
+                source: new ol.source.TileImage({
+                    url: "https://mt1.google.com/vt/lyrs=s&hl=pl&&x={x}&y={y}&z={z}",
+                    crossOrigin: "anonymous",
+                }),
+                title: "Satellite",
+                type: "base",
+                visible: false,
+            });
+
+            const terrainLayer = new ol.layer.Tile({
+                source: new ol.source.BingMaps({
+                    imagerySet: "AerialWithLabels",
+                    key: "voi3DlahFqo0MOrFalC2~6BX9iFreRSXk_hCsSHtZ0A~AuXzxBFu7NJaGwZO6oX2bEbHUKwhiif5YTYYqOZvgRiSl3Rt2zrcB6Addylvwat9",
+                }),
+                title: "Terrain",
+                type: "base",
+                visible: false,
+            });
+
+            const googleStreetLayer = new ol.layer.Tile({
+                source: new ol.source.TileImage({
+                    url: "https://mt1.google.com/vt/lyrs=r&hl=pl&&x={x}&y={y}&z={z}",
+                    crossOrigin: "anonymous",
+                }),
+                title: "Google Street",
+                type: "base",
+                visible: false,
+            });
+
+            // Define the WMS layer with zoom levels
+            var wmsLayerStateBoundary = new ol.layer.Image({
+                source: new ol.source.ImageWMS({
+                    url: 'https://geoserver.amnslis.in/geoserver/Biju/wms',
+                    params: {
+                        'LAYERS': 'Biju:state_boundary',
+                        'FORMAT': 'image/png',
+                        'TRANSPARENT': true
+                    },
+                    serverType: 'geoserver'
+                })
+            });
+            // Define the WMS layer
+            var plantation_dataLayer;
+            try {
+                plantation_dataLayer = new ol.layer.Image({
+                    source: new ol.source.ImageWMS({
+                        url: 'http://192.168.1.34:8080/geoserver/campa/wms',
+                        params: {
+                            'LAYERS': 'campa:plantation_data',
+                            'CQL_FILTER': "name='" + plantationName + "'", // Add dynamic CQL filter
+                            'TILED': true,
+                            'VERSION': '1.1.0',
+                            'FORMAT': 'image/png'
+                        },
+                        serverType: 'geoserver',
+                        crossOrigin: 'anonymous'
+                    }),
+                    visible: false // Set layer initial visibility to false
+                });
+                plantation_dataLayer.setZIndex(99);
+            } catch (error) {
+                console.log('plantation_dataLayer: ' + error);
+            }
+
+            var map = new ol.Map({
+                target: 'plantationMap',
+                layers: [osmLayer, satelliteLayer, terrainLayer, googleStreetLayer, wmsLayerStateBoundary, plantation_dataLayer],
+                view: new ol.View({
+                    projection: 'EPSG:4326',
+                    center: [85.87369, 20.85132],
+                    zoom: 13,
+                })
+            });
+
+            plantation_dataLayer.setVisible(true);
+        }
     });
 </script>
