@@ -51,7 +51,7 @@ if (isset($_GET['id'])) {
                                 <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
+                                        <i class="fas fa-search fa-sm"></i> 
                                     </button>
                                 </div>
                             </div>
@@ -192,33 +192,48 @@ if (isset($_GET['id'])) {
         </div>
 
         <!-- Layer Select Modal -->
-        <div class="modal fade" id="layerSelectModal" tabindex="-1" aria-labelledby="layerSelectModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xs modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <p class="modal-title" id="layerSelectModalLabel">Layers</p>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="accordion" id="layerAccordion">
-                            <!-- Accordion Item 1 -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                        <i class="fas fa-map-marker-alt me-2"></i> Forest Layers
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#layerAccordion">
-                                    <div class="accordion-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="poi1">
-                                            <label class="form-check-label" for="poi1">FB Boundary</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="poi2">
-                                            <label class="form-check-label" for="poi2">Division Boundary</label>
-                                        </div>
-                                        <!-- <div class="form-check">
+        <div class="modal fade" id="layerSelectModal" tabindex="-1" aria-labelledby="layerSelectModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-xs modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<p class="modal-title" id="layerSelectModalLabel">Layers</p>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="accordion" id="layerAccordion">
+						<!-- Accordion Item 1 -->
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="headingOne">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+									<i class="fas fa-map-marker-alt me-2"></i> Forest Layers
+								</button>
+							</h2>
+							<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+								data-bs-parent="#layerAccordion">
+								<div class="accordion-body">								
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="divBnd">
+										<label class="form-check-label" for="divBnd">Division Boundary</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="rngBnd">
+										<label class="form-check-label" for="rngBnd">Range Boundary</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="secBnd">
+										<label class="form-check-label" for="secBnd">Section Boundary</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="beatBnd">
+										<label class="form-check-label" for="beatBnd">Beat Boundary</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="fbBnd">
+										<label class="form-check-label" for="fbBnd">FB Boundary</label>
+									</div>
+									<!-- <div class="form-check">
 										<input class="form-check-input" type="checkbox" id="poi3">
 										<label class="form-check-label" for="poi3">Attractions</label>
 									</div>
@@ -226,57 +241,61 @@ if (isset($_GET['id'])) {
 										<input class="form-check-input" type="checkbox" id="poi4">
 										<label class="form-check-label" for="poi4">Shopping</label>
 									</div> -->
-                                    </div>
-                                </div>
-                            </div>
+								</div>
+							</div>
+						</div>
 
-                            <!-- Accordion Item 2 -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        <i class="fas fa-road me-1"></i> Drone Image Analysis
-                                    </button>
-                                </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#layerAccordion">
-                                    <div class="accordion-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="transport1">
-                                            <label class="form-check-label" for="transport1">Image-1</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="transport2">
-                                            <label class="form-check-label" for="transport2">Image-2</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="transport3">
-                                            <label class="form-check-label" for="transport3">Image-3</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="transport4">
-                                            <label class="form-check-label" for="nature1">Plantation</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="transport5">
-                                            <label class="form-check-label" for="nature2">Pits</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+						<!-- Accordion Item 2 -->
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="headingTwo">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+									<i class="fas fa-road me-1"></i> Drone Image Analysis
+								</button>
+							</h2>
+							<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+								data-bs-parent="#layerAccordion">
+								<div class="accordion-body">
+									<!-- <div class="form-check">
+										<input class="form-check-input" type="checkbox" id="transport1">
+										<label class="form-check-label" for="transport1">Image-1</label>
+									</div> -->
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="transport2">
+										<label class="form-check-label" for="transport2">Ortho</label>
+									</div>
+									<!-- <div class="form-check">
+										<input class="form-check-input" type="checkbox" id="transport3">
+										<label class="form-check-label" for="transport3">Image-3</label>
+									</div> -->
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="transport4">
+										<label class="form-check-label" for="nature1">Plantation Analysis (Drone)</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="transport5">
+										<label class="form-check-label" for="nature2">Pits Analysis (Drone)</label>
+									</div>
+								</div>
+							</div>
+						</div>
 
-                            <!-- Accordion Item 3 -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingThree">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        <i class="fas fa-tree me-2"></i> Plantation site
-                                    </button>
-                                </h2>
-                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#layerAccordion">
-                                    <div class="accordion-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="nature1">
-                                            <label class="form-check-label" for="nature1">Plantation</label>
-                                        </div>
-                                        <!-- <div class="form-check">
+						<!-- Accordion Item 3 -->
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="headingThree">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+									<i class="fas fa-tree me-2"></i> Plantation site
+								</button>
+							</h2>
+							<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+								data-bs-parent="#layerAccordion">
+								<div class="accordion-body">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="nature1">
+										<label class="form-check-label" for="nature1">Plantation</label>
+									</div>
+									<!-- <div class="form-check">
 										<input class="form-check-input" type="checkbox" id="nature3">
 										<label class="form-check-label" for="nature3">Forests</label>
 									</div>
@@ -284,32 +303,51 @@ if (isset($_GET['id'])) {
 										<input class="form-check-input" type="checkbox" id="nature4">
 										<label class="form-check-label" for="nature4">Mountains</label>
 									</div> -->
-                                    </div>
-                                </div>
-                            </div>
+								</div>
+							</div>
+						</div>
 
-                            <!-- Accordion Item 4 -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingFour">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                        <i class="fas fa-building me-2"></i> Swipe layers
-                                    </button>
-                                </h2>
-                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#layerAccordion">
-                                    <div class="accordion-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="urban1">
-                                            <label class="form-check-label" for="urban1">layer-1</label>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+						<!-- Accordion Item 4 -->
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="headingFour">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+									<i class="fas fa-building me-2"></i> Swipe layers
+								</button>
+							</h2>
+							<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+								data-bs-parent="#layerAccordion">
+								<div class="accordion-body">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="urban1">
+										<label class="form-check-label" for="urban1">layer-1</label>
+									</div>
+									<input
+                                          type="range"
+                                          class="form-range"
+                                          id="swiplayerID"
+                                          style="display: none"
+                                        />
+									<!-- <div class="form-check">
+										<input class="form-check-input" type="checkbox" id="urban2">
+										<label class="form-check-label" for="urban2">Neighborhoods</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="urban3">
+										<label class="form-check-label" for="urban3">City Boundaries</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="urban4">
+										<label class="form-check-label" for="urban4">Land Use</label>
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
         <!-- Filter Layer  Modal -->
 
