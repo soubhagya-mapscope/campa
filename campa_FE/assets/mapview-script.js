@@ -466,17 +466,53 @@ map.on("singleclick", function (evt) {
             featureInfoContent.innerHTML = ""; // Clear previous content
 
             result.features.forEach(function (feature) {
+              // Create a card container
+              var cardContainer = document.createElement('div');
+              cardContainer.className = 'card mb-3';
+            
+              // Create a card body
+              var cardBody = document.createElement('div');
+              cardBody.className = 'card-body d-flex flex-column';
+            
+              // Create a card title
+              var cardTitle = document.createElement('h5');
+              cardTitle.className = 'card-title';
+              cardTitle.innerText = 'Feature Details'; // You can customize this title
+            
+              // Append title to card body
+              cardBody.appendChild(cardTitle);
+            
+              // Loop through properties and create card text
               for (var prop in feature.properties) {
                 if (feature.properties.hasOwnProperty(prop)) {
-                  featureInfoContent.innerHTML +=
-                    "<p><strong>" +
-                    prop +
-                    ":</strong> " +
-                    feature.properties[prop] +
-                    "</p>";
+                  // Create a flexbox container for each property
+                  var propertyContainer = document.createElement('div');
+                  propertyContainer.className = 'd-flex justify-content-between align-items-center p-2 mb-2';
+                  propertyContainer.style.backgroundColor = '#f8f9fa'; // Customize the background color as needed
+            
+                  var propertyName = document.createElement('span');
+                  propertyName.className = 'font-weight-bold';
+                  propertyName.innerText = prop + ':';
+            
+                  var propertyValue = document.createElement('span');
+                  propertyValue.className = 'text-secondary';
+                  propertyValue.innerText = feature.properties[prop];
+            
+                  propertyContainer.appendChild(propertyName);
+                  propertyContainer.appendChild(propertyValue);
+                  
+                  cardBody.appendChild(propertyContainer);
                 }
               }
+            
+              // Append card body to card container
+              cardContainer.appendChild(cardBody);
+            
+              // Append card container to the featureInfoContent element
+              featureInfoContent.appendChild(cardContainer);
             });
+
+            
           }
         })
         .catch(function (error) {
