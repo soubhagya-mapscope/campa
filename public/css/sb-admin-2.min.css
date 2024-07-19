@@ -12632,7 +12632,7 @@ body.sidebar-toggled footer.sticky-footer {
 .table-green {
     /* border: 1px solid #28a745; */
     border-radius: 10px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 
@@ -12644,6 +12644,9 @@ body.sidebar-toggled footer.sticky-footer {
     border: 1px solid #28a745;
 } */
 
+/* .table-green{
+    min-height: 300px !important;
+} */
 .table-green thead th {
     background-color: #598433;
     color: #fff;
