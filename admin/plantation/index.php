@@ -208,7 +208,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                 source: new ol.source.OSM(),
                 title: "OpenStreetMap",
                 type: "base",
-                visible: true,
+                visible: false,
             });
             const satelliteLayer = new ol.layer.Tile({
                 source: new ol.source.TileImage({
@@ -217,7 +217,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                 }),
                 title: "Satellite",
                 type: "base",
-                visible: false,
+                visible: true,
             });
 
             const terrainLayer = new ol.layer.Tile({
@@ -265,6 +265,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                             'VERSION': '1.1.0',
                             'FORMAT': 'image/png'
                         },
+
                         serverType: 'geoserver',
                         crossOrigin: 'anonymous'
                     }),
@@ -279,32 +280,14 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                 target: 'plantationMap',
                 layers: [osmLayer, satelliteLayer, terrainLayer, googleStreetLayer, wmsLayerStateBoundary, plantation_dataLayer],
                 view: new ol.View({
-                    projection: 'EPSG:4326',
-                    center: [85.87369, 20.85132],
-                    zoom: 13,
-                    
+                    center: ol.proj.fromLonLat([84.44, 20.29]),
+                    zoom: 7, // Adjust the initial zoom level as needed
+                    minZoom: 5, // Set minimum zoom level
+                    maxZoom: 25, // Set maximum zoom level
                 })
             });
 
             plantation_dataLayer.setVisible(true);
-            var extent = plantation_dataLayer.getSource().getExtent();
-            map.getView().fit(extent, { size: map.getSize(), maxZoom: 18 });
-             // Fetch the extent of the plantation_dataLayer and fit the map view
-    var wmsUrl = 'http://192.168.1.34:8080/geoserver/campa/wms?service=WMS&version=1.1.0&request=GetCapabilities';
-    fetch(wmsUrl)
-        .then(response => response.text())
-        .then(text => {
-            var parser = new ol.format.WMSCapabilities();
-            var result = parser.read(text);
-            var layers = result.Capability.Layer.Layer;
-            var layer = layers.find(l => l.Name === 'campa:plantation_data');
-            var bbox = layer.BoundingBox[0].extent; // Get the extent of the layer
-
-            map.getView().fit(bbox, { size: map.getSize(), maxZoom: 18 });
-        })
-        .catch(error => {
-            console.log('Error fetching WMS capabilities: ' + error);
-        });
         }
     });
 </script>

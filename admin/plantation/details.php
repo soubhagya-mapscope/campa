@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
     $plantationService = new PlantationService();
     $plantation = $plantationService->getPlantationById($_GET['id']);
     $droneData = $plantationService->getDroneDataByPlantationId($_GET['id']);
-
+    
     // Calculate deviations
     $area_deviation = $plantation['area_gps'] - $plantation['area_target'];
     $pit_deviation = $plantation['pit_achievement'] - $plantation['pit_target'];
@@ -71,8 +71,12 @@ if (isset($_GET['id'])) {
                             <div class="col-sm-6 row-label">Area Deviation (Ha):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $area_deviation; ?></span></div>
                         </div>
-
                         <div class="row mb-2">
+                            <div class="col-sm-6 row-label">stage Name:</div>
+                            <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['stage_details']['name']?? 'NA'; ?></span></div>
+                        </div>
+                        <?php if ($droneData['stage_details']['id'] ==1) {?>
+                            <div class="row mb-2">
                             <div class="col-sm-6 row-label">Pit (Target) (Nos):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['pit_target']; ?></span></div>
                         </div>
@@ -85,7 +89,12 @@ if (isset($_GET['id'])) {
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $pit_deviation; ?></span></div>
                         </div>
 
-                        <div class="row mb-2">
+                            <?php }?>
+
+
+                            <?php if ($droneData['stage_details']['id'] ==2){ ?>
+
+                                <div class="row mb-2">
                             <div class="col-sm-6 row-label">Seedling (Target) (Nos) :</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['seedling_target']; ?></span></div>
                         </div>
@@ -97,6 +106,11 @@ if (isset($_GET['id'])) {
                             <div class="col-sm-6 row-label">Seedling Deviation (Nos):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $seedling_deviation; ?></span></div>
                         </div>
+
+                                    <?php }?>
+                     
+
+                    
 
                         <div class="row mb-2">
                             <div class="col-sm-6 row-label">Last Monitoring Date:</div>
