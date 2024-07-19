@@ -83,7 +83,7 @@ if (isset($_GET['id'])) {
                         endforeach;
                     }
                     else {
-                        echo "<p>No post-plantation data available.</p>";
+                        echo "<p class='ml-4'>No post-plantation data available.</p>";
                     }
                         ?>
                     </div>
