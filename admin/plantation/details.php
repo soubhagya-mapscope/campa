@@ -298,19 +298,19 @@ if (isset($_GET['id'])) {
                         // Sample data for different IDs
                         $sampleData = [
                             1 => [
-                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-05-2024', 'status' => 'Completed', 'status_class' => 'completed'],
-                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-06-2024', 'status' => 'Completed', 'status_class' => 'completed'],
-                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-07-2024', 'status' => 'Completed', 'status_class' => 'completed'],
+                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-05-2024', 'status' => 'done', 'status_class' => 'completed'],
+                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-06-2024', 'status' => 'done', 'status_class' => 'completed'],
+                                ['year' => 'Pre-plantation', 'scheduled_date' => '01-07-2024', 'status' => 'done', 'status_class' => 'completed'],
                             ],
                             3 => [
-                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'Completed', 'status_class' => 'completed'],
-                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'Completed', 'status_class' => 'completed'],
-                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'Delayed', 'status_class' => 'delayed'],
+                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'done', 'status_class' => 'completed'],
+                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'completed'],
+                                ['year' => '1st Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'delayed'],
                             ],
                             6 => [
-                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'Pending', 'status_class' => 'pending'],
-                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'Pending', 'status_class' => 'pending'],
-                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'Pending', 'status_class' => 'pending'],
+                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '2nd Year', 'scheduled_date' => '01-05-2024', 'status' => 'not done', 'status_class' => 'pending'],
                             ]
                         ];
 
