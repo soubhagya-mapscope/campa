@@ -1,0 +1,237 @@
+body,
+html {
+	height: 100%;
+	margin: 0;
+	font-family: "Roboto", sans-serif;
+}
+
+.map-container {
+	height: 100vh;
+	position: relative;
+}
+
+#map {
+	width: 100%;
+	height: 100%;
+}
+ 
+#zoom-controls {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+#zoom-controls button {
+	display: block;
+	margin: 1px;
+	padding: 0;
+	color: #fff;
+	font-size: 1.14em;
+	font-weight: bold;
+	text-decoration: none;
+	text-align: center;
+	height: 1.375em;
+	width: 1.375em;
+	line-height: 0.4em;
+	background-color: rgba(0, 60, 136, 0.5);
+	border: none;
+	border-radius: 2px;
+}
+
+#zoom-controls button:hover {
+	background-color: rgba(0, 60, 136, 0.7);
+}
+
+.ol-scale-line {
+	background: rgba(0, 60, 136, 0.3);
+	border-radius: 4px;
+	bottom: 8px;
+	left: 8px;
+	padding: 2px;
+	position: absolute;
+}
+
+.ol-scale-line-inner {
+	border: 1px solid #eee;
+	border-top: none;
+	color: #eee;
+	font-size: 10px;
+	text-align: center;
+	margin: 1px;
+	will-change: contents, width;
+	transition: all 0.25s;
+}
+
+.custom-fullscreen-btn {
+	position: absolute;
+	left: 10px;
+	top: 165px;
+	transform: translateY(-50%);
+	background-color: rgba(0, 117, 50, 0.6);
+	border: none;
+	border-radius: 4px;
+	padding: 10px;
+	cursor: pointer;
+	z-index: 1000;
+}
+
+.custom-fullscreen-btn:hover {
+	background-color: rgba(0, 117, 50, 0.8);
+}
+
+.custom-fullscreen-btn i {
+	font-size: 20px;
+	color: #ffffff;
+}
+
+/* Ensure the button is visible in fullscreen mode */
+.map:-webkit-full-screen .custom-fullscreen-btn,
+.map:-moz-full-screen .custom-fullscreen-btn,
+.map:-ms-fullscreen .custom-fullscreen-btn,
+.map:fullscreen .custom-fullscreen-btn {
+	display: block;
+}
+
+#layer-switcher {
+	top: 10px;
+	left: 10px;
+}
+
+#layer-select {
+	position: absolute;
+	top: 40px;
+	left: 10px;
+}
+
+#filter {
+	position: absolute;
+	top: 90px;
+	left: 10px;
+	font-size: 1em;
+	padding: 6px;
+	background-color: rgba(0, 117, 50, 0.6);
+	border: none;
+	border-radius: 4px;
+}
+
+#filter-btn {
+	font-size: 1em;
+	padding: 5px;
+	background-color: transparent;
+	color: #ffffff;
+	border: none;
+	border-radius: 4px;
+	width: fit-content;
+}
+
+#filter:hover {
+	background-color: rgba(0, 117, 50, 0.8);
+}
+
+#layers-modal-btn {
+	font-size: 1em;
+	padding: 5px;
+	background-color: transparent;
+	border: none;
+	border-radius: 4px;
+	width: fit-content;
+}
+
+#layer-switcher-btn {
+	font-size: 1em;
+	padding: 5px;
+	background-color: rgba(0, 117, 50, 0.6);
+	border: none;
+	border-radius: 4px;
+	width: fit-content;
+	color: #fff;
+	font-weight: 400;
+}
+
+#layer-select {
+	font-size: 1em;
+	padding: 5px;
+	background-color: rgba(0, 117, 50, 0.6);
+	border: none;
+	border-radius: 4px;
+}
+
+#layer-select:hover {
+	background-color: rgba(0, 117, 50, 0.8);
+}
+
+#layers-modal-btn {
+	color: #ffffff;
+}
+
+.card {
+	cursor: pointer;
+	transition: transform 0.2s;
+}
+
+.card:hover {
+	transform: scale(1.05);
+}
+
+.card-img-top {
+	height: 100px;
+	object-fit: cover;
+}
+
+
+
+
+#layerSelectModal {
+	position: fixed;
+	top: 12px;
+	left: 58px;
+	width: 250px;
+}
+
+#layerSelectModal .modal-header {
+	height: fit-content;
+	padding: 0.4rem 1rem;
+	font-size: 0.9rem;
+}
+
+#layerSelectModal .modal-content {
+	border: none;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	background-color: #ffffffab;
+}
+
+#layerSelectModal .accordion-button {
+	background-color: #e6f4ea;
+	color: #2e7d32;
+	font-weight: 400;
+	font-size: small;
+}
+
+#layerSelectModal .accordion-button:not(.collapsed) {
+	background-color: #c8e6c9;
+}
+
+#layerSelectModal .accordion-button:focus {
+	box-shadow: none;
+	border-color: #a5d6a7;
+}
+
+#layerSelectModal .form-check {
+	margin-bottom: 0.5rem;
+	font-size: small;
+}
+
+#layerSelectModal .form-check-input:checked {
+	background-color: #4caf50;
+	border-color: #4caf50;
+}
+
+#layerSelectModal .form-check-label {
+	color: #1b5e20;
+}
+
+.card-title{
+	font-size: 12px;
+}
+
