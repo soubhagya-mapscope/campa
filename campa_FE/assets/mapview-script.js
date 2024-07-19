@@ -242,8 +242,13 @@ if (plantationName) {
 try {
   pltDataLayer1 = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "http://192.168.1.34:8080/geoserver/campa/wms",
-      params: params,
+      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      params: {
+        LAYERS: "campa:plantation",
+        TILED: true,
+        VERSION: "1.1.0",
+        FORMAT: "image/png",
+      },
       serverType: "geoserver",
       crossOrigin: "anonymous",
     }),
@@ -266,13 +271,46 @@ document.getElementById("transport4").addEventListener("change", function (event
   }
 });
 
+var pltBndDataLayer;
+try {
+  pltBndDataLayer = new ol.layer.Image({
+    source: new ol.source.ImageWMS({
+      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      params: {
+        LAYERS: "campa:corected_drone_polygon",
+        TILED: true,
+        VERSION: "1.1.0",
+        FORMAT: "image/png",
+      },
+      serverType: "geoserver",
+      crossOrigin: "anonymous",
+    }),
+    visible: false, // Set layer initial visibility to false
+  });
+  pltBndDataLayer.setZIndex(99);
+  map.addLayer(pltBndDataLayer);
+} catch (error) {
+  console.log("pltBndDataLayer: " + error);
+}
+document.getElementById("transport6").addEventListener("change", function (event) {
+  //alert(9)
+  if (event.target.checked) {
+    pltBndDataLayer.setVisible(true);
+    // Zoom to the extent of both layers combined
+    var extent = ol.extent.createEmpty();
+   ol.extent.extend(extent, pltBndDataLayer.getSource().getParams().LAYERS === 'campa:corected_drone_polygon' ? [85.8437631726265,20.907748460769653,85.8473111987114,20.91187047958374] : ol.extent.createEmpty());
+   map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+  } else {
+    pltBndDataLayer.setVisible(false);
+  }
+});
 
 // Define the base layer (always visible)
 var orthomosaicLayer;
 try {
   orthomosaicLayer = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "http://192.168.1.34:8080/geoserver/campa/wms",
+      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
       params: {
         LAYERS: "campa:geotiffSite1",
         TILED: true,
@@ -297,7 +335,7 @@ var pltDataLayer;
 try {
   pltDataLayer = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "http://192.168.1.34:8080/geoserver/campa/wms",
+      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
       params: {
         LAYERS: "campa:plantation",
         TILED: true,
@@ -365,7 +403,7 @@ document.getElementById("urban1").addEventListener("change", function (event) {
     try {
       geotiffSite1Layer = new ol.layer.Image({
         source: new ol.source.ImageWMS({
-          url: "http://192.168.1.34:8080/geoserver/campa/wms",
+          url: "https://geoserver.amnslis.in/geoserver/campa/wms",
           params: {
             LAYERS: "campa:geotiffSite1",
             TILED: true,
@@ -389,7 +427,7 @@ document.getElementById("urban1").addEventListener("change", function (event) {
     try {
       orthomosaicLayer = new ol.layer.Image({
         source: new ol.source.ImageWMS({
-          url: "http://192.168.1.34:8080/geoserver/campa/wms",
+          url: "https://geoserver.amnslis.in/geoserver/campa/wms",
           params: {
             LAYERS: "campa:3-orthomosaic",
             TILED: true,
@@ -429,7 +467,7 @@ var aiMlDataLayer1;
 try {
   aiMlDataLayer1 = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "http://192.168.1.34:8080/geoserver/campa/wms",
+      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
       params: {
         LAYERS: "campa:pits",
         TILED: true,
@@ -466,7 +504,7 @@ document
 // try {
 //   aiMlDataLayer3 = new ol.layer.Image({
 //     source: new ol.source.ImageWMS({
-//       url: "http://192.168.1.34:8080/geoserver/campa/wms",
+//       url: "https://geoserver.amnslis.in/geoserver/campa/wms",
 //       params: {
 //         LAYERS: "campa:plantation_data",
 //         TILED: true,
@@ -500,7 +538,7 @@ var aiMlDataLayer3;
 try {
   aiMlDataLayer3 = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "http://192.168.1.34:8080/geoserver/campa/wms",
+      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
       params: {
         LAYERS: "campa:plantation_data",
         'CQL_FILTER': "name='" + plantationName + "'", // Add dynamic CQL filter
@@ -561,7 +599,7 @@ var aiMlDataLayer5;
 try {
   aiMlDataLayer5 = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "http://192.168.1.34:8080/geoserver/campa/wms",
+      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
       params: {
         LAYERS: "campa:geotiffSite1",
         TILED: true,
@@ -637,19 +675,19 @@ map.on("singleclick", function (evt) {
               featureInfoContent.innerHTML +=
                 //"Plantation Details"+ "</br>" + 
                 "<div class='table-responsive my-table-sm'><table class='table table-sm table-bordered mb-0'>"
-                + "<tr><td><strong>Circle Name :</strong></td><td>" + (props.circle_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Division Name :</strong></td><td>" + (props.division_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Range Name :</strong></td><td>" + (props.range_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Section Name :</strong></td><td>" + (props.section_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Beat Name :</strong></td><td>" + (props.beat_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Name :</strong></td><td>" + (props.name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Scheme :</strong></td><td>" + (props.scheme || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Area Achievement :</strong></td><td>" + (props.area_achievement || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Pit Target :</strong></td><td>" + (props.pit_target || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Pit Achievement :</strong></td><td>" + (props.pit_achievement || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Seedling Achievement :</strong></td><td>" + (props.seedling_achievement || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Seedling Target :</strong></td><td>" + (props.seedling_target || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Plantation Date :</strong></td><td>" + (props.plantation_date || 'N/A') + "</td></tr></table></div>";
+                + "<tr><td><strong>Circle Name</strong></td><td>" + (props.circle_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Division Name</strong></td><td>" + (props.division_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Range Name</strong></td><td>" + (props.range_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Section Name</strong></td><td>" + (props.section_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Beat Name</strong></td><td>" + (props.beat_name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Name</strong></td><td>" + (props.name || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Scheme</strong></td><td>" + (props.scheme || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Area Achievement</strong></td><td>" + (props.area_achievement || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Pit Target</strong></td><td>" + (props.pit_target || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Pit Achievement</strong></td><td>" + (props.pit_achievement || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Seedling Achievement</strong></td><td>" + (props.seedling_achievement || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Seedling Target</strong></td><td>" + (props.seedling_target || 'N/A') + "</td></tr>"
+                + "<tr><td><strong>Plantation Date</strong></td><td>" + (props.plantation_date || 'N/A') + "</td></tr></table></div>";
             });
           } else {
             featureInfoContent.innerHTML = '<p>No feature information available at this location.</p>';
@@ -690,7 +728,7 @@ document
   try {
     fbDataLayer = new ol.layer.Image({
       source: new ol.source.ImageWMS({
-        url: "http://192.168.1.34:8080/geoserver/campa/wms",
+        url: "https://geoserver.amnslis.in/geoserver/campa/wms",
         params: {
           LAYERS: "campa:jv boundary",
           TILED: true,
@@ -723,7 +761,7 @@ document
   try {
     divDataLayer = new ol.layer.Image({
       source: new ol.source.ImageWMS({
-        url: "http://192.168.1.34:8080/geoserver/campa/wms",
+        url: "https://geoserver.amnslis.in/geoserver/campa/wms",
         params: {
           LAYERS: "campa:dhenkanal_division_bnd",
           TILED: true,
@@ -761,7 +799,7 @@ document
   try {
     rngDataLayer = new ol.layer.Image({
       source: new ol.source.ImageWMS({
-        url: "http://192.168.1.34:8080/geoserver/campa/wms",
+        url: "https://geoserver.amnslis.in/geoserver/campa/wms",
         params: {
           LAYERS: "campa:range",
           TILED: true,
@@ -794,7 +832,7 @@ document
   try {
     secDataLayer = new ol.layer.Image({
       source: new ol.source.ImageWMS({
-        url: "http://192.168.1.34:8080/geoserver/campa/wms",
+        url: "https://geoserver.amnslis.in/geoserver/campa/wms",
         params: {
           LAYERS: "campa:section_boundary",
           TILED: true,
@@ -827,7 +865,7 @@ document
   try {
     beatDataLayer = new ol.layer.Image({
       source: new ol.source.ImageWMS({
-        url: "http://192.168.1.34:8080/geoserver/campa/wms",
+        url: "https://geoserver.amnslis.in/geoserver/campa/wms",
         params: {
           LAYERS: "campa:beat_boundary",
           TILED: true,
