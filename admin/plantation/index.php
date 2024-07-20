@@ -134,7 +134,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                                                 <i class="fas fa-info-circle"></i> View Details
                                             </a>
 
-                                            <a class="dropdown-item" href="map.php?name=<?php echo $plantation['name']; ?>">
+                                            <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>&name=<?php echo $plantation['name']; ?>">
                                                 <i class="fas fa-map-marker-alt"></i> View on Map
                                             </a>
                                             <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>">

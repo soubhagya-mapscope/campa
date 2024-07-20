@@ -4,11 +4,16 @@ require_once '../../services/PlantationService.php';
 
 AuthMiddleware::check(); 
 
-    if (isset($_GET['name'])) {
-        $plantationName = $_GET['name'];
+    if (isset($_GET['name']) || isset($_GET['id'])){
+        $plantationService = new PlantationService(); 
+        $plantation = $plantationService->getPlantationById($_GET['id']); 
+        $plantationName = $plantation['name'];
+        $plantationGeojson = $plantation['geojson'] ?? null;
         echo "<script>var plantationName = '" . htmlspecialchars($plantationName) . "';</script>";
+        echo "<script>var plantationGeojson = " . json_encode($plantationGeojson) . ";</script>";
     } else {
         echo "<script>var plantationName = null;</script>";
+        echo "<script>var plantationGeojson = null;</script>";
     }
 ?>
 

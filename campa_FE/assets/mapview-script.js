@@ -1,4 +1,5 @@
 // Define base layers
+console.log(JSON.parse(plantationGeojson)); 
 const osmLayer = new ol.layer.Tile({
   source: new ol.source.OSM(),
   title: "OpenStreetMap",
