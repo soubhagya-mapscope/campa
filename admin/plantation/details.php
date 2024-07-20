@@ -329,18 +329,6 @@ if (isset($_GET['id'])) {
                                 ['year' => '4yr (2nd Half)', 'scheduled_date' => '18-11-2023', 'status' => 'not done', 'status_class' => 'pending'],
                                 ['year' => '5yr (1st Half)', 'scheduled_date' => '11-05-2024', 'status' => 'not done', 'status_class' => 'pending'],
                                 ['year' => '5yr (2nd Half)', 'scheduled_date' => '11-07-2024', 'status' => 'not done', 'status_class' => 'pending'],
-
-                                ['year' => 'Pre-plantation', 'scheduled_date' => '12-06-2024', 'status' => 'done', 'status_class' => 'completed'],
-                                ['year' => '1yr (1st Half)', 'scheduled_date' => '02-12-2024', 'status' => 'not done', 'status_class' => 'pending'],
-                                ['year' => '1yr (2nd Half)', 'scheduled_date' => '11-06-2025', 'status' => 'not done', 'status_class' => 'pending'],
-                                ['year' => '2yr (1st Half)', 'scheduled_date' => '11-12-2025', 'status' => 'not done', 'status_class' => 'pending'],
-                                ['year' => '2yr (2nd Half)', 'scheduled_date' => '16-06-2026', 'status' => 'not done', 'status_class' => 'pending'],
-                                ['year' => '3yr (1st Half)', 'scheduled_date' => '02-12-2026', 'status' => 'not done', 'status_class' => 'pending'],
-                                ['year' => '3yr (2nd Half)', 'scheduled_date' => '17-06-2027', 'status' => 'not done', 'status_class' => 'pending'],
-                                ['year' => '4yr (1st Half)', 'scheduled_date' => '11-12-2027', 'status' => 'not done', 'status_class' => 'pending'],
-                                ['year' => '4yr (2nd Half)', 'scheduled_date' => '18-06-2028', 'status' => 'not done', 'status_class' => 'pending'],
-                                ['year' => '5yr (1st Half)', 'scheduled_date' => '11-12-2028', 'status' => 'not done', 'status_class' => 'pending'],
-                                ['year' => '5yr (2nd Half)', 'scheduled_date' => '11-06-2029', 'status' => 'not done', 'status_class' => 'pending'],
                                
                             ],
                             3 => [
