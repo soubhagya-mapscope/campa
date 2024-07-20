@@ -439,15 +439,13 @@ try {
   console.log("orthomosaicLayer: " + error);
 }
 
-// Layer 3
 var orthomosaicLayer1;
 try {
   orthomosaicLayer1 = new ol.layer.Image({
     source: new ol.source.ImageWMS({
       url: "https://geoserver.amnslis.in/geoserver/campa/wms",
       params: {
-        LAYERS: "campa:1-orthomosaic",
-        TILED: true,
+        LAYERS: "campa:1-orthomosaic_cog",
         VERSION: "1.1.0",
         FORMAT: "image/png",
         SRS: "EPSG:4326",
@@ -455,12 +453,12 @@ try {
       serverType: "geoserver",
       crossOrigin: "anonymous",
     }),
-    visible: false,
+    visible: false,  // Set to true to make the layer visible
   });
   orthomosaicLayer1.setZIndex(99);
   map.addLayer(orthomosaicLayer1);
 } catch (error) {
-  console.log("orthomosaicLayer1: " + error);
+  console.log("orthomosaicLayer1 error: " + error);
 }
 
 // Add event listener to the checkbox
