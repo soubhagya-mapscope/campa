@@ -24,6 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+	<link rel="icon" href="../../public/images/icons/favicon.ico" sizes="any" />
+    <link rel="icon" href="../../public/images/icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../../public/images/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="../../public/images/icons/manifest.webmanifest" />
 	<link rel="stylesheet" type="text/css" href="../../public/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="../../public/css/util.css">
 	<link rel="stylesheet" type="text/css" href="../../public/css/main.css">
