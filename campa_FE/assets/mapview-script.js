@@ -225,7 +225,7 @@ map.setView(
   })
 );
 
-// Define the swipe layer (toggled visibility)
+//---------------------------plantation Analysis(Drone) --------------------
 var pltDataLayer1;
 try {
   pltDataLayer1 = new ol.layer.Image({
@@ -252,13 +252,13 @@ document.getElementById("transport4").addEventListener("change", function (event
     pltDataLayer1.setVisible(true);
     // Zoom to the extent of both layers combined
     // var extent = ol.extent.createEmpty();
-    // ol.extent.extend(extent, pltDataLayer1.getSource().getParams().LAYERS === 'campa:plantation' ? [85.84375780820847, 20.907737731933594, 85.84732729196548, 20.91185975074768] : ol.extent.createEmpty());
+    // ol.extent.extend(extent, pltDataLayer1.getSource().getParams().LAYERS === 'campa:plantation' ? [85.84375780820847,20.907737731933594,85.84732729196548,20.91185975074768] : ol.extent.createEmpty());
     // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
   } else {
     pltDataLayer1.setVisible(false);
   }
 });
-
+//-------------------------Plantation boundary WMS--------------------------------//
 var pltBndDataLayer;
 try {
   pltBndDataLayer = new ol.layer.Image({
@@ -285,16 +285,18 @@ document.getElementById("transport6").addEventListener("change", function (event
   if (event.target.checked) {
     pltBndDataLayer.setVisible(true);
     // Zoom to the extent of both layers combined
-    // var extent = ol.extent.createEmpty();
-    // ol.extent.extend(extent, pltBndDataLayer.getSource().getParams().LAYERS === 'campa:corected_drone_polygon' ? [85.8437631726265, 20.907748460769653, 85.8473111987114, 20.91187047958374] : ol.extent.createEmpty());
-    // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+  //   var extent = ol.extent.createEmpty();
+  //  ol.extent.extend(extent, pltBndDataLayer.getSource().getParams().LAYERS === 'campa:corected_drone_polygon' ? [85.8437631726265,20.907748460769653,85.8473111987114,20.91187047958374] : ol.extent.createEmpty());
+  //  map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
   } else {
     pltBndDataLayer.setVisible(false);
   }
 });
 
+// //-----------------------------------Swipe layer work--------------------------------//
 
 // Define the base layer (always visible)
+// Base Layer (always visible)
 var orthomosaicLayer;
 try {
   orthomosaicLayer = new ol.layer.Image({
@@ -314,12 +316,11 @@ try {
   });
   orthomosaicLayer.setZIndex(98);
   map.addLayer(orthomosaicLayer);
-  //orthomosaicLayer.setVisible(true);
 } catch (error) {
   console.log("orthomosaicLayer: " + error);
 }
 
-// Define the swipe layer (toggled visibility)
+// Swipe Layer (toggled visibility)
 var pltDataLayer;
 try {
   pltDataLayer = new ol.layer.Image({
@@ -343,50 +344,52 @@ try {
 }
 
 // Add event listener to the checkbox for layer toggle and swipe functionality
-document.getElementById("urban1").addEventListener("change", function (event) {
-  if (event.target.checked) {
-    pltDataLayer.setVisible(true);
-    //pltDataLayer1.setVisible(true);
-    // Zoom to the extent of both layers combined
-    var extent = ol.extent.createEmpty();
-    ol.extent.extend(extent, pltDataLayer.getSource().getParams().LAYERS === 'campa:plantation' ? [85.84375780820847, 20.907737731933594, 85.84732729196548, 20.91185975074768] : ol.extent.createEmpty());
-    map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
-    document.getElementById("swiplayerID").style.display = "block";
+        document.getElementById("urban1").addEventListener("change", function (event) {
+            const swipe = document.getElementById("swiplayerID");
 
-    var swipe = document.getElementById("swiplayerID");
+            if (event.target.checked) {
+                pltDataLayer1.setVisible(true);
+                aiMlDataLayer1.setVisible(true);
+                swipe.style.display = "block";
 
-    var layer1_prerender = function (event) {
-      var ctx = event.context;
-      var width = ctx.canvas.width * (swipe.value / 100);
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(width, 0, ctx.canvas.width - width, ctx.canvas.height);
-      ctx.clip();
-    };
+                const layer_prerender = function (event) {
+                    const ctx = event.context;
+                    const width = ctx.canvas.width * (swipe.value / 100);
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.rect(width, 0, ctx.canvas.width - width, ctx.canvas.height);
+                    ctx.clip();
+                };
 
-    var layer1_postrender = function (event) {
-      const ctx = event.context;
-      ctx.restore();
-    };
+                const layer_postrender = function (event) {
+                    const ctx = event.context;
+                    ctx.restore();
+                };
 
-    pltDataLayer.on("prerender", layer1_prerender);
-    pltDataLayer.on("postrender", layer1_postrender);
+                pltDataLayer1.on("prerender", layer_prerender);
+                pltDataLayer1.on("postrender", layer_postrender);
 
-    swipe.addEventListener("input", function () {
-      map.render();
-    });
+                aiMlDataLayer1.on("prerender", layer_prerender);
+                aiMlDataLayer1.on("postrender", layer_postrender);
 
-  } else {
-    pltDataLayer.setVisible(false);
-    document.getElementById("swiplayerID").style.display = "none";
-    document.getElementById("txtAd").innerHTML = "";
-    pltDataLayer.un("prerender", layer1_prerender);
-    pltDataLayer.un("postrender", layer1_postrender);
-  }
-});
+                swipe.addEventListener("input", function () {
+                    map.render();
+                });
+
+            } else {
+                pltDataLayer1.setVisible(false);
+                aiMlDataLayer1.setVisible(false);
+                swipe.style.display = "none";
+                pltDataLayer1.un("prerender", layer_prerender);
+                pltDataLayer1.un("postrender", layer_postrender);
+                aiMlDataLayer1.un("prerender", layer_prerender);
+                aiMlDataLayer1.un("postrender", layer_postrender);
+            }
+        });
 
 
 
+//------------ ALL drone ortho images -------------------------------
 // Layer 1
 var geotiffSite1Layer;
 try {
@@ -435,23 +438,51 @@ try {
   console.log("orthomosaicLayer: " + error);
 }
 
+// Layer 3
+var orthomosaicLayer1;
+try {
+  orthomosaicLayer1 = new ol.layer.Image({
+    source: new ol.source.ImageWMS({
+      url: "http://192.168.1.34:8080/geoserver/campa/wms",
+      params: {
+        LAYERS: "campa:1-orthomosaic",
+        TILED: true,
+        VERSION: "1.1.0",
+        FORMAT: "image/png",
+        SRS: "EPSG:4326",
+      },
+      serverType: "geoserver",
+      crossOrigin: "anonymous",
+    }),
+    visible: false,
+  });
+  orthomosaicLayer1.setZIndex(99);
+  map.addLayer(orthomosaicLayer1);
+} catch (error) {
+  console.log("orthomosaicLayer1: " + error);
+}
+
 // Add event listener to the checkbox
 document.getElementById("transport2").addEventListener("change", function (event) {
   if(event.target.checked) {
     geotiffSite1Layer.setVisible(true);
     orthomosaicLayer.setVisible(true);
-    // Zoom to the extent of both layers combined
+    orthomosaicLayer1.setVisible(true);
+    // Zoom to the extent of all three layers combined
     // var extent = ol.extent.createEmpty();
-    // ol.extent.extend(extent, geotiffSite1Layer.getSource().getParams().LAYERS === 'campa:geotiffSite1' ? [85.844267198, 20.90827591, 85.846982418, 20.911329492] : ol.extent.createEmpty());
-    // ol.extent.extend(extent, orthomosaicLayer.getSource().getParams().LAYERS === 'campa:3-orthomosaic' ? [85.832449894, 20.865525744, 85.83517625, 20.870097175] : ol.extent.createEmpty());
+    // ol.extent.extend(extent, [85.844267198, 20.90827591, 85.846982418, 20.911329492]); // geotiffSite1Layer extent
+    // ol.extent.extend(extent, [85.832449894, 20.865525744, 85.83517625, 20.870097175]); // orthomosaicLayer extent
+    // ol.extent.extend(extent, [85.909415484, 20.791341688, 85.915252679, 20.794856705]); // orthomosaicLayer1 extent
     // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
   } else {
     geotiffSite1Layer.setVisible(false);
     orthomosaicLayer.setVisible(false);
+    orthomosaicLayer1.setVisible(false);
   }
 });
 
-// Define the WMS layer
+
+//----------------------Map for pits analysis --------------------
 var aiMlDataLayer1;
 try {
   aiMlDataLayer1 = new ol.layer.Image({
@@ -480,49 +511,16 @@ document
     //alert(36)
     if (event.target.checked) {
       aiMlDataLayer1.setVisible(true);
-      var extent = ol.extent.createEmpty();
-      ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.90795540809631, 20.79056704044342, 85.91619944572449, 20.795581698417664] : ol.extent.createEmpty());
-      map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+      // var extent = ol.extent.createEmpty();
+      // ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.90795540809631,20.79056704044342,85.91619944572449,20.795581698417664] : ol.extent.createEmpty());
+      // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
     } else {
       aiMlDataLayer1.setVisible(false);
     }
   });
 
-// Define the WMS layer
-// var aiMlDataLayer3;
-// try {
-//   aiMlDataLayer3 = new ol.layer.Image({
-//     source: new ol.source.ImageWMS({
-//       url: "http://192.168.1.34:8080/geoserver/campa/wms",
-//       params: {
-//         LAYERS: "campa:plantation_data",
-//         TILED: true,
-//         VERSION: "1.1.0",
-//         FORMAT: "image/png",
-//       },
-//       serverType: "geoserver",
-//       crossOrigin: "anonymous",
-//     }),
-//     visible: false, // Set layer initial visibility to false
-//   });
-//   aiMlDataLayer3.setZIndex(99);
-//   map.addLayer(aiMlDataLayer3);
-// } catch (error) {
-//   console.log("aiMlDataLayer1: " + error);
-// }
-// // Add event listener to the checkbox
-// document.getElementById("nature1").addEventListener("change", function (event) {
-//   //alert(36)
-//   if (event.target.checked) {
-//     aiMlDataLayer3.setVisible(true);
-//     var extent = ol.extent.createEmpty();
-//       ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672,20.785411834716797,85.91878509521484,20.917316436767578] : ol.extent.createEmpty());
-//       map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
-//   } else {
-//     aiMlDataLayer3.setVisible(false);
-//   }
-// });
 
+//----------------------Map for Planatation site analysis --------------------
 var aiMlDataLayer3;
 try {
   aiMlDataLayer3 = new ol.layer.Image({
@@ -566,8 +564,6 @@ try {
 } catch (error) {
   console.log("aiMlDataLayer4: " + error);
 }
-
-
 // Function to set CQL filter
 function setCqlFilter(filter) {
   var source = aiMlDataLayer3.getSource();
@@ -579,32 +575,18 @@ function setCqlFilter(filter) {
   }
   source.updateParams(params);
 }
-
 // Add event listener to the checkbox
 document.getElementById("nature1").addEventListener("change", function (event) {
   if (event.target.checked) { 
-    //var cqlFilterValue;
-    // var cqlFilterValue = "name='Bhuban NAC 10000 plantation'";
-    // if (cqlFilterValue != null) {
-    //cqlFilterValue = "name=''"; // Replace with the dynamic value or set to null
     aiMlDataLayer4.setVisible(true);
-    // setCqlFilter(cqlFilterValue); // Update with your CQL filter
-    var extent = ol.extent.createEmpty();
-    ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672, 20.785411834716797, 85.91878509521484, 20.917316436767578] : ol.extent.createEmpty());
-    map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
-    // } else {
-    //   aiMlDataLayer3.setVisible(true);
-    //   var extent = ol.extent.createEmpty();
-    //   ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672, 20.785411834716797, 85.91878509521484, 20.917316436767578] : ol.extent.createEmpty());
-    //   map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
-    // }
+    // var extent = ol.extent.createEmpty();
+    // ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672, 20.785411834716797, 85.91878509521484, 20.917316436767578] : ol.extent.createEmpty());
+    // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
   } else {
-    // alert();
     aiMlDataLayer4.setVisible(false);
-    // map.removeLayer(aiMlDataLayer4);
-    // setCqlFilter(null); // Clear the CQL filter to show all layers
   }
 });
+
 document.addEventListener("DOMContentLoaded", function () {
   var cqlFilterValue = "name='" + plantationName + "'";
   if (plantationName != null) {
@@ -616,48 +598,8 @@ document.addEventListener("DOMContentLoaded", function () {
     map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
   } else {
     aiMlDataLayer3.setVisible(true);
-    var extent = ol.extent.createEmpty();
-    ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672, 20.785411834716797, 85.91878509521484, 20.917316436767578] : ol.extent.createEmpty());
-    map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
   }
 });
-
-
-// Define the WMS layer
-var aiMlDataLayer5;
-try {
-  aiMlDataLayer5 = new ol.layer.Image({
-    source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
-      params: {
-        LAYERS: "campa:geotiffSite1",
-        TILED: true,
-        VERSION: "1.1.0",
-        FORMAT: "image/png",
-        SRS: "EPSG:4326",
-      },
-      serverType: "geoserver",
-      crossOrigin: "anonymous",
-    }),
-    visible: false, // Set layer initial visibility to false
-  });
-  aiMlDataLayer5.setZIndex(99);
-  map.addLayer(aiMlDataLayer5);
-} catch (error) {
-  console.log("aiMlDataLayer1: " + error);
-}
-// Add event listener to the checkbox
-document
-  .getElementById("transport2")
-  .addEventListener("change", function (event) {
-    //alert(36)
-    if (event.target.checked) {
-      aiMlDataLayer5.setVisible(true);
-    } else {
-      aiMlDataLayer5.setVisible(false);
-    }
-  });
-
 
 
 function isClickOutsideDrawer(event) {
@@ -668,6 +610,7 @@ function isClickOutsideDrawer(event) {
   );
 }
 
+//-----------------onclick-function work for plantation details show----------------------//
 map.on("singleclick", function (evt) {
   if (aiMlDataLayer3.getVisible()) {
     var viewResolution = map.getView().getResolution();
@@ -753,171 +696,171 @@ document
   });
 
 //-------------------Forest Boundary-------------------
-var fbDataLayer;
-try {
-  fbDataLayer = new ol.layer.Image({
-    source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
-      params: {
-        LAYERS: "campa:jv boundary",
-        TILED: true,
-        VERSION: "1.1.0",
-        //FORMAT: "image/png",
-        //SRS: "EPSG:4326",
-      },
-      serverType: "geoserver",
-      crossOrigin: "anonymous",
-    }),
-    visible: false, // Set layer initial visibility to false
-  });
-  fbDataLayer.setZIndex(99);
-  map.addLayer(fbDataLayer);
-} catch (error) {
-  console.log("divDataLayer: " + error);
-}
-// Add event listener to the checkbox
-document.getElementById("fbBnd").addEventListener("change", function (event) {
-  //alert(336)
-  if (event.target.checked) {
-    fbDataLayer.setVisible(true);
-  } else {
-    fbDataLayer.setVisible(false);
+  var fbDataLayer;
+  try {
+    fbDataLayer = new ol.layer.Image({
+      source: new ol.source.ImageWMS({
+        url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+        params: {
+          LAYERS: "campa:jv boundary",
+          TILED: true,
+          VERSION: "1.1.0",
+          //FORMAT: "image/png",
+          //SRS: "EPSG:4326",
+        },
+        serverType: "geoserver",
+        crossOrigin: "anonymous",
+      }),
+      visible: false, // Set layer initial visibility to false
+    });
+    fbDataLayer.setZIndex(99);
+    map.addLayer(fbDataLayer);
+  } catch (error) {
+    console.log("divDataLayer: " + error);
   }
-});
+  // Add event listener to the checkbox
+  document.getElementById("fbBnd").addEventListener("change", function (event) {
+      //alert(336)
+      if (event.target.checked) {
+        fbDataLayer.setVisible(true);
+      } else {
+        fbDataLayer.setVisible(false);
+      }
+    });
 
-//-------------------Division Boundary-------------------
-var divDataLayer;
-try {
-  divDataLayer = new ol.layer.Image({
-    source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
-      params: {
-        LAYERS: "campa:dhenkanal_division_bnd",
-        TILED: true,
-        VERSION: "1.1.0",
-        //FORMAT: "image/png",
-        //SRS: "EPSG:4326",
-      },
-      serverType: "geoserver",
-      crossOrigin: "anonymous",
-    }),
-    visible: false, // Set layer initial visibility to false
-  });
-  divDataLayer.setZIndex(99);
-  map.addLayer(divDataLayer);
+    //-------------------Division Boundary-------------------
+  var divDataLayer;
+  try {
+    divDataLayer = new ol.layer.Image({
+      source: new ol.source.ImageWMS({
+        url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+        params: {
+          LAYERS: "campa:dhenkanal_division_bnd",
+          TILED: true,
+          VERSION: "1.1.0",
+          //FORMAT: "image/png",
+          //SRS: "EPSG:4326",
+        },
+        serverType: "geoserver",
+        crossOrigin: "anonymous",
+      }),
+      visible: false, // Set layer initial visibility to false
+    });
+    divDataLayer.setZIndex(99);
+    map.addLayer(divDataLayer);
 
-} catch (error) {
-  console.log("divDataLayer: " + error);
-}
-// Add event listener to the checkbox
-document.getElementById("divBnd").addEventListener("change", function (event) {
-  //alert(336)
-  if (event.target.checked) {
-    divDataLayer.setVisible(true);
-    var extent = ol.extent.createEmpty();
-    ol.extent.extend(extent, divDataLayer.getSource().getParams().LAYERS === 'campa:dhenkanal_division_bnd' ? [85.04489135742188, 20.43292236328125, 86.10012817382812, 21.23822021484375] : ol.extent.createEmpty());
-    map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
-  } else {
-    divDataLayer.setVisible(false);
+  } catch (error) {
+    console.log("divDataLayer: " + error);
   }
-});
+  // Add event listener to the checkbox
+  document.getElementById("divBnd").addEventListener("change", function (event) {
+      //alert(336)
+      if (event.target.checked) {
+        divDataLayer.setVisible(true);
+        var extent = ol.extent.createEmpty();
+        ol.extent.extend(extent, divDataLayer.getSource().getParams().LAYERS === 'campa:dhenkanal_division_bnd' ? [85.04489135742188,20.43292236328125,86.10012817382812,21.23822021484375] : ol.extent.createEmpty());
+        map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+      } else {
+        divDataLayer.setVisible(false);
+      }
+    });
 
 
-//-------------------Range Boundary-------------------
-var rngDataLayer;
-try {
-  rngDataLayer = new ol.layer.Image({
-    source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
-      params: {
-        LAYERS: "campa:range",
-        TILED: true,
-        VERSION: "1.1.0",
-        //FORMAT: "image/png",
-        //SRS: "EPSG:4326",
-      },
-      serverType: "geoserver",
-      crossOrigin: "anonymous",
-    }),
-    visible: false, // Set layer initial visibility to false
-  });
-  rngDataLayer.setZIndex(99);
-  map.addLayer(rngDataLayer);
-} catch (error) {
-  console.log("rngDataLayer: " + error);
-}
-// Add event listener to the checkbox
-document.getElementById("rngBnd").addEventListener("change", function (event) {
-  //alert(336)
-  if (event.target.checked) {
-    rngDataLayer.setVisible(true);
-  } else {
-    rngDataLayer.setVisible(false);
+    //-------------------Range Boundary-------------------
+  var rngDataLayer;
+  try {
+    rngDataLayer = new ol.layer.Image({
+      source: new ol.source.ImageWMS({
+        url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+        params: {
+          LAYERS: "campa:range",
+          TILED: true,
+          VERSION: "1.1.0",
+          //FORMAT: "image/png",
+          //SRS: "EPSG:4326",
+        },
+        serverType: "geoserver",
+        crossOrigin: "anonymous",
+      }),
+      visible: false, // Set layer initial visibility to false
+    });
+    rngDataLayer.setZIndex(99);
+    map.addLayer(rngDataLayer);
+  } catch (error) {
+    console.log("rngDataLayer: " + error);
   }
-});
+  // Add event listener to the checkbox
+  document.getElementById("rngBnd").addEventListener("change", function (event) {
+      //alert(336)
+      if (event.target.checked) {
+        rngDataLayer.setVisible(true);
+      } else {
+        rngDataLayer.setVisible(false);
+      }
+    });
 
-//-------------------Section Boundary-------------------
-var secDataLayer;
-try {
-  secDataLayer = new ol.layer.Image({
-    source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
-      params: {
-        LAYERS: "campa:section_boundary",
-        TILED: true,
-        VERSION: "1.1.0",
-        //FORMAT: "image/png",
-        //SRS: "EPSG:4326",
-      },
-      serverType: "geoserver",
-      crossOrigin: "anonymous",
-    }),
-    visible: false, // Set layer initial visibility to false
-  });
-  secDataLayer.setZIndex(99);
-  map.addLayer(secDataLayer);
-} catch (error) {
-  console.log("secDataLayer: " + error);
-}
-// Add event listener to the checkbox
-document.getElementById("secBnd").addEventListener("change", function (event) {
-  //alert(336)
-  if (event.target.checked) {
-    secDataLayer.setVisible(true);
-  } else {
-    secDataLayer.setVisible(false);
+    //-------------------Section Boundary-------------------
+  var secDataLayer;
+  try {
+    secDataLayer = new ol.layer.Image({
+      source: new ol.source.ImageWMS({
+        url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+        params: {
+          LAYERS: "campa:section_boundary",
+          TILED: true,
+          VERSION: "1.1.0",
+          //FORMAT: "image/png",
+          //SRS: "EPSG:4326", 
+        },
+        serverType: "geoserver",
+        crossOrigin: "anonymous",
+      }),
+      visible: false, // Set layer initial visibility to false
+    });
+    secDataLayer.setZIndex(99);
+    map.addLayer(secDataLayer);
+  } catch (error) {
+    console.log("secDataLayer: " + error);
   }
-});
+  // Add event listener to the checkbox
+  document.getElementById("secBnd").addEventListener("change", function (event) {
+      //alert(336)
+      if (event.target.checked) {
+        secDataLayer.setVisible(true);
+      } else {
+        secDataLayer.setVisible(false);
+      }
+    });
 
-//-------------------Beat Boundary-------------------
-var beatDataLayer;
-try {
-  beatDataLayer = new ol.layer.Image({
-    source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
-      params: {
-        LAYERS: "campa:beat_boundary",
-        TILED: true,
-        VERSION: "1.1.0",
-        //FORMAT: "image/png",
-        //SRS: "EPSG:4326",
-      },
-      serverType: "geoserver",
-      crossOrigin: "anonymous",
-    }),
-    visible: false, // Set layer initial visibility to false
-  });
-  beatDataLayer.setZIndex(99);
-  map.addLayer(beatDataLayer);
-} catch (error) {
-  console.log("beatDataLayer: " + error);
-}
-// Add event listener to the checkbox
-document.getElementById("beatBnd").addEventListener("change", function (event) {
-  //alert(336)
-  if (event.target.checked) {
-    beatDataLayer.setVisible(true);
-  } else {
-    beatDataLayer.setVisible(false);
+    //-------------------Beat Boundary-------------------
+  var beatDataLayer;
+  try {
+    beatDataLayer = new ol.layer.Image({
+      source: new ol.source.ImageWMS({
+        url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+        params: {
+          LAYERS: "campa:beat_boundary",
+          TILED: true,
+          VERSION: "1.1.0",
+          //FORMAT: "image/png",
+          //SRS: "EPSG:4326",
+        },
+        serverType: "geoserver",
+        crossOrigin: "anonymous",
+      }),
+      visible: false, // Set layer initial visibility to false
+    });
+    beatDataLayer.setZIndex(99);
+    map.addLayer(beatDataLayer);
+  } catch (error) {
+    console.log("beatDataLayer: " + error);
   }
-});
+  // Add event listener to the checkbox
+  document.getElementById("beatBnd").addEventListener("change", function (event) {
+      //alert(336)
+      if (event.target.checked) {
+        beatDataLayer.setVisible(true);
+      } else {
+        beatDataLayer.setVisible(false);
+      }
+    });
