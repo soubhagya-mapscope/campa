@@ -251,9 +251,9 @@ document.getElementById("transport4").addEventListener("change", function (event
   if (event.target.checked) {
     pltDataLayer1.setVisible(true);
     // Zoom to the extent of both layers combined
-    var extent = ol.extent.createEmpty();
-    ol.extent.extend(extent, pltDataLayer1.getSource().getParams().LAYERS === 'campa:plantation' ? [85.84375780820847, 20.907737731933594, 85.84732729196548, 20.91185975074768] : ol.extent.createEmpty());
-    map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+    // var extent = ol.extent.createEmpty();
+    // ol.extent.extend(extent, pltDataLayer1.getSource().getParams().LAYERS === 'campa:plantation' ? [85.84375780820847, 20.907737731933594, 85.84732729196548, 20.91185975074768] : ol.extent.createEmpty());
+    // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
   } else {
     pltDataLayer1.setVisible(false);
   }
@@ -285,9 +285,9 @@ document.getElementById("transport6").addEventListener("change", function (event
   if (event.target.checked) {
     pltBndDataLayer.setVisible(true);
     // Zoom to the extent of both layers combined
-    var extent = ol.extent.createEmpty();
-    ol.extent.extend(extent, pltBndDataLayer.getSource().getParams().LAYERS === 'campa:corected_drone_polygon' ? [85.8437631726265, 20.907748460769653, 85.8473111987114, 20.91187047958374] : ol.extent.createEmpty());
-    map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+    // var extent = ol.extent.createEmpty();
+    // ol.extent.extend(extent, pltBndDataLayer.getSource().getParams().LAYERS === 'campa:corected_drone_polygon' ? [85.8437631726265, 20.907748460769653, 85.8473111987114, 20.91187047958374] : ol.extent.createEmpty());
+    // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
   } else {
     pltBndDataLayer.setVisible(false);
   }
@@ -437,14 +437,14 @@ try {
 
 // Add event listener to the checkbox
 document.getElementById("transport2").addEventListener("change", function (event) {
-  if (event.target.checked) {
+  if(event.target.checked) {
     geotiffSite1Layer.setVisible(true);
     orthomosaicLayer.setVisible(true);
     // Zoom to the extent of both layers combined
-    var extent = ol.extent.createEmpty();
-    ol.extent.extend(extent, geotiffSite1Layer.getSource().getParams().LAYERS === 'campa:geotiffSite1' ? [85.844267198, 20.90827591, 85.846982418, 20.911329492] : ol.extent.createEmpty());
-    ol.extent.extend(extent, orthomosaicLayer.getSource().getParams().LAYERS === 'campa:3-orthomosaic' ? [85.832449894, 20.865525744, 85.83517625, 20.870097175] : ol.extent.createEmpty());
-    map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+    // var extent = ol.extent.createEmpty();
+    // ol.extent.extend(extent, geotiffSite1Layer.getSource().getParams().LAYERS === 'campa:geotiffSite1' ? [85.844267198, 20.90827591, 85.846982418, 20.911329492] : ol.extent.createEmpty());
+    // ol.extent.extend(extent, orthomosaicLayer.getSource().getParams().LAYERS === 'campa:3-orthomosaic' ? [85.832449894, 20.865525744, 85.83517625, 20.870097175] : ol.extent.createEmpty());
+    // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
   } else {
     geotiffSite1Layer.setVisible(false);
     orthomosaicLayer.setVisible(false);
