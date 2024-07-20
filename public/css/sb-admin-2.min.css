@@ -12843,3 +12843,16 @@ body.sidebar-toggled footer.sticky-footer {
         color: #fff;
         background-color: #28a745;
       }
+
+
+      .card-container{
+        height: 560px;
+        overflow-y: auto;
+      }
+
+      .bg-primary-set{
+        background-color: #265d49;
+        color: #fff;
+        border-radius: 8px;
+        padding: 2.5%;
+      }

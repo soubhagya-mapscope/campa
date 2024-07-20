@@ -130,9 +130,9 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                                             <i class="fas fa-cog"></i> Action
                                         </div>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#detailsModal" data-id="<?php echo $plantation['id']; ?>" data-geojson='<?php echo json_encode($plantation['geojson']); ?>' data-name="<?php echo $plantation['name']; ?>">
-    <i class="fas fa-info-circle"></i> View Details
-</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#detailsModal" data-id="<?php echo $plantation['id']; ?>" data-geojson='<?php echo json_encode($plantation['geojson']); ?>' data-name="<?php echo $plantation['name']; ?>">
+                                                <i class="fas fa-info-circle"></i> View Details
+                                            </a>
 
                                             <a class="dropdown-item" href="map.php?name=<?php echo $plantation['name']; ?>">
                                                 <i class="fas fa-map-marker-alt"></i> View on Map
@@ -242,22 +242,31 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                 })
             });
 
-            // Add the plantation GeoJSON layer
-            var vectorSource = new ol.source.Vector({
+           // Add the plantation GeoJSON layer with style
+           var vectorSource = new ol.source.Vector({
                 features: new ol.format.GeoJSON().readFeatures(plantationGeojson, {
                     featureProjection: 'EPSG:3857'
                 })
             });
 
             var vectorLayer = new ol.layer.Vector({
-                source: vectorSource
+                source: vectorSource,
+                style: new ol.style.Style({
+                    fill: new ol.style.Fill({
+                        color: 'rgba(0, 128, 0, 0.5)' // Green inside
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: 'orange', // Orange boundary
+                        width: 2
+                    })
+                })
             });
 
             map.addLayer(vectorLayer);
 
             // Zoom to the GeoJSON layer
             var extent = vectorSource.getExtent();
-            map.getView().fit(extent, { duration: 1000 });
+            map.getView().fit(extent, { duration: 1000, padding: [70, 70, 70, 70] });
         }
     });
 </script>

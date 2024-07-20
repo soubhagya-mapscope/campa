@@ -28,7 +28,7 @@ if (isset($_GET['id'])) {
                     <div class="card-header">
                         <h5 class="mb-0">Plantation Details</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body card-container">
                         <?php
                         $area_deviation = $plantation['area_gps'] - $plantation['area_target'];
                         $pit_deviation = $plantation['pit_achievement'] - $plantation['pit_target'];
@@ -126,9 +126,9 @@ if (isset($_GET['id'])) {
             </div>
             <!-- Right side with map -->
             <div class="col-md-6">
-                <h5>Plantation Map</h5>
+                <h5 class="bg-primary-set">Plantation Map</h5>
                 <div style="max-width:100%;list-style:none;
-                         transition: none;overflow:hidden;width:500px;height:600px;">
+                         transition: none;overflow:hidden;width:550px;height:550px;">
                     <div id="plantationMap" style="height:100%; width:100%; max-width:100%;"></div>
 
                 </div>
