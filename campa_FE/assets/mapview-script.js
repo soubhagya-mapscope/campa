@@ -313,7 +313,7 @@ try {
       serverType: "geoserver",
       crossOrigin: "anonymous",
     }),
-    visible: true, // Base layer is always visible
+    visible: false, // Base layer is always visible
   });
   orthomosaicLayer.setZIndex(98);
   map.addLayer(orthomosaicLayer);
