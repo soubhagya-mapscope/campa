@@ -15,7 +15,7 @@ class PlantationService
 
     public function getFilteredPlantations($filters)
     {
-        $query = "SELECT * FROM plantation_data WHERE 1=1";
+        $query = "SELECT *, ST_AsGeoJSON(geom) as geojson  FROM plantation_data WHERE 1=1";
         $params = [];
 
         if (!empty($filters['circle'])) {
@@ -39,7 +39,7 @@ class PlantationService
         }
 
         if (!empty($filters['date'])) {
-            $query .= " AND DATE(created_on) = :date";
+            $query .= " AND DATE(plantation_date) = :date";
             $params[':date'] = $filters['date'];
         }
         $query .= " order by id ASC";
@@ -55,7 +55,7 @@ class PlantationService
 
     public function getPlantationById($id)
     {
-        $query = "SELECT * FROM plantation_data WHERE id = :id";
+        $query = "SELECT *, ST_AsGeoJSON(geom) as geojson FROM plantation_data WHERE id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();

@@ -77,10 +77,10 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                 <div class="col-md-1">
                     <button type="submit" class="btn btn-primary w-100">Filter</button>
                 </div>
-                <div class="col-md-1">
+                <!-- <div class="col-md-1">
                     <button type="submit" class="btn btn-danger w-100">Reset</button>
 
-                </div>
+                </div> -->
 
             </div>
         </form>
@@ -130,10 +130,11 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                                             <i class="fas fa-cog"></i> Action
                                         </div>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#detailsModal" data-id="<?php echo $plantation['id'];  ?>" data-name="<?php echo $plantation['name'];  ?>">
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#detailsModal" data-id="<?php echo $plantation['id']; ?>" data-geojson='<?php echo json_encode($plantation['geojson']); ?>' data-name="<?php echo $plantation['name']; ?>">
                                                 <i class="fas fa-info-circle"></i> View Details
                                             </a>
-                                            <a class="dropdown-item" href="map.php?name=<?php echo $plantation['name']; ?>">
+
+                                            <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>&name=<?php echo $plantation['name']; ?>">
                                                 <i class="fas fa-map-marker-alt"></i> View on Map
                                             </a>
                                             <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>">
@@ -174,7 +175,6 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
 </div>
 <?php include '../templates/footer.php'; ?>
 <!-- /.container-fluid -->
-
 <script>
     $(document).ready(function() {
         // Handle the modal show event
@@ -182,7 +182,12 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
             var button = $(event.relatedTarget); // Button that triggered the modal
             var plantationId = button.data('id'); // Extract info from data-* attributes
             var plantationName = button.data('name'); // Extract info from data-* attributes
+            var plantationGeojson = button.data('geojson'); // Extract info from data-* attributes
+            plantationGeojson = JSON.parse(plantationGeojson); // Parse the JSON string
+
             var modal = $(this); // Get the modal
+            console.log(plantationGeojson);
+
             // Perform AJAX request to fetch details.php content
             $.ajax({
                 url: 'details.php', // URL to fetch the details
@@ -194,7 +199,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                     // Update the modal body with the fetched content
                     modal.find('.modal-body').html(response);
                     // Reinitialize the OpenLayers map inside the modal
-                    initOpenLayersMap(plantationName);
+                    initOpenLayersMap(plantationGeojson);
                 },
                 error: function() {
                     // Handle errors if the request fails
@@ -203,13 +208,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
             });
         });
 
-        function initOpenLayersMap(plantationName) {
-            const osmLayer = new ol.layer.Tile({
-                source: new ol.source.OSM(),
-                title: "OpenStreetMap",
-                type: "base",
-                visible: false,
-            });
+        function initOpenLayersMap(plantationGeojson) {
             const satelliteLayer = new ol.layer.Tile({
                 source: new ol.source.TileImage({
                     url: "https://mt1.google.com/vt/lyrs=s&hl=pl&&x={x}&y={y}&z={z}",
@@ -220,28 +219,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                 visible: true,
             });
 
-            const terrainLayer = new ol.layer.Tile({
-                source: new ol.source.BingMaps({
-                    imagerySet: "AerialWithLabels",
-                    key: "voi3DlahFqo0MOrFalC2~6BX9iFreRSXk_hCsSHtZ0A~AuXzxBFu7NJaGwZO6oX2bEbHUKwhiif5YTYYqOZvgRiSl3Rt2zrcB6Addylvwat9",
-                }),
-                title: "Terrain",
-                type: "base",
-                visible: false,
-            });
-
-            const googleStreetLayer = new ol.layer.Tile({
-                source: new ol.source.TileImage({
-                    url: "https://mt1.google.com/vt/lyrs=r&hl=pl&&x={x}&y={y}&z={z}",
-                    crossOrigin: "anonymous",
-                }),
-                title: "Google Street",
-                type: "base",
-                visible: false,
-            });
-
-            // Define the WMS layer with zoom levels
-            var wmsLayerStateBoundary = new ol.layer.Image({
+            const wmsLayerStateBoundary = new ol.layer.Image({
                 source: new ol.source.ImageWMS({
                     url: 'https://geoserver.amnslis.in/geoserver/Biju/wms',
                     params: {
@@ -252,33 +230,10 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                     serverType: 'geoserver'
                 })
             });
-            // Define the WMS layer
-            var plantation_dataLayer;
-            try {
-                plantation_dataLayer = new ol.layer.Image({
-                    source: new ol.source.ImageWMS({
-                        url: 'http://192.168.1.34:8080/geoserver/campa/wms',
-                        params: {
-                            'LAYERS': 'campa:plantation_data',
-                            'CQL_FILTER': "name='" + plantationName + "'", // Add dynamic CQL filter
-                            'TILED': true,
-                            'VERSION': '1.1.0',
-                            'FORMAT': 'image/png'
-                        },
-
-                        serverType: 'geoserver',
-                        crossOrigin: 'anonymous'
-                    }),
-                    visible: false // Set layer initial visibility to false
-                });
-                plantation_dataLayer.setZIndex(99);
-            } catch (error) {
-                console.log('plantation_dataLayer: ' + error);
-            }
 
             var map = new ol.Map({
                 target: 'plantationMap',
-                layers: [osmLayer, satelliteLayer, terrainLayer, googleStreetLayer, wmsLayerStateBoundary, plantation_dataLayer],
+                layers: [satelliteLayer, wmsLayerStateBoundary],
                 view: new ol.View({
                     center: ol.proj.fromLonLat([84.44, 20.29]),
                     zoom: 7, // Adjust the initial zoom level as needed
@@ -287,12 +242,31 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                 })
             });
 
-            plantation_dataLayer.setVisible(true);
-            var extent = ol.extent.createEmpty();
-            ol.extent.extend(extent, plantation_dataLayer.getSource().getParams().LAYERS === 'campa:plantation_data' ? [85.844543921720302, 20.909266895553099, 85.844543921720302, 20.909266895553099] : ol.extent.createEmpty());
-            map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), {
-                duration: 1000
+           // Add the plantation GeoJSON layer with style
+           var vectorSource = new ol.source.Vector({
+                features: new ol.format.GeoJSON().readFeatures(plantationGeojson, {
+                    featureProjection: 'EPSG:3857'
+                })
             });
+
+            var vectorLayer = new ol.layer.Vector({
+                source: vectorSource,
+                style: new ol.style.Style({
+                    fill: new ol.style.Fill({
+                        color: 'rgba(0, 128, 0, 0.5)' // Green inside
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: 'orange', // Orange boundary
+                        width: 2
+                    })
+                })
+            });
+
+            map.addLayer(vectorLayer);
+
+            // Zoom to the GeoJSON layer
+            var extent = vectorSource.getExtent();
+            map.getView().fit(extent, { duration: 1000, padding: [70, 70, 70, 70] });
         }
     });
 </script>

@@ -26,8 +26,10 @@
 
 body,
 html {
-    height: 100%;
-    font-family: Poppins-Regular, sans-serif
+    height: 100vh;
+    font-family: Poppins-Regular, sans-serif;
+    font-size: 14px;
+
 }
 
 a {
@@ -245,11 +247,11 @@ iframe {
 .login100-form-title-1 {
     font-family: Poppins-Bold;
     margin-top: 7px;
-    font-size: 20px;
+    font-size: 1rem; 
     color: #fff;
     text-transform: uppercase;
     line-height: 1.6;
-    text-align: center
+    text-align: center;
 }
 
 .login100-form-title::before {
@@ -280,7 +282,9 @@ iframe {
     justify-content: space-between;
     /* padding: 30px 30px 49px 130px; */
 
-    padding: 27px 43px 58px 40px;
+    /* padding: 27px 43px 58px 40px; */
+    padding: 16px 42px 22px 42px;
+    
 }
 
 .wrap-input100 {
@@ -339,7 +343,7 @@ iframe {
 }
 
 input.input100 {
-    height: 45px
+    height: 3rem;
 }
 
 .input100:focus+.focus-input100::before {
@@ -583,3 +587,6 @@ input.input100 {
     font-size: 12px;
     margin-left: 8px;
 }
+
+
+

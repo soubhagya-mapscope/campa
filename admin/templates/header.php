@@ -10,14 +10,18 @@
     <meta name="author" content="">
 
     <title>Forest Plantation Planning and Monitoring System</title>
-
+    <!-- `sizes="any"` is to fix Chrome bug -->
+    <link rel="icon" href="../../public/images/icons/favicon.ico" sizes="any" />
+    <link rel="icon" href="../../public/images/icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../../public/images/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="../../public/images/icons/manifest.webmanifest" />
     <!-- Custom fonts for this template -->
     <link href="../../public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="../../public/css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.2.4/ol.css"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.2.4/ol.css">
 
 
     <!-- Custom styles for this page -->

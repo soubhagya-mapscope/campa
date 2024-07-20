@@ -1,12 +1,18 @@
 <?php
 // echo "jii";exit;
 class Database {
-    private $host = "192.168.1.49";
+    // private $host = "192.168.1.49";
+    // private $port = "5432";
+    // private $db_name = "campa";
+    // private $username = "postgres";
+    // private $password = "postgres";
+    private $host = "164.164.122.69";
     private $port = "5432";
     private $db_name = "campa";
-    private $username = "postgres";
-    private $password = "postgres";
+    private $username = "app_amns";
+    private $password = 'U$er@Mn$2024';
     public $conn;
+
 
     public function getConnection() {
         $this->conn = null;
