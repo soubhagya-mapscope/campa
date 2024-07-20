@@ -285,7 +285,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="transport6">
-                                        <label class="form-check-label" for="nature2">Plantation Boundary</label>
+                                        <label class="form-check-label" for="nature2">Plantation Boundary (Drone)</label>
                                     </div>
                                 </div>
                             </div>
@@ -301,7 +301,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#layerAccordion">
                                 <div class="accordion-body">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="nature1">
+                                        <input class="form-check-input" type="checkbox" id="nature1" disabled>
                                         <label class="form-check-label" for="nature1">Plantation</label>
                                     </div>
                                     <!-- <div class="form-check">
