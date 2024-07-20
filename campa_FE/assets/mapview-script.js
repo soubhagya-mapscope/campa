@@ -313,7 +313,7 @@ try {
       serverType: "geoserver",
       crossOrigin: "anonymous",
     }),
-    visible: true, // Base layer is always visible
+    visible: false, // Base layer is always visible
   });
   orthomosaicLayer.setZIndex(98);
   map.addLayer(orthomosaicLayer);
@@ -444,7 +444,7 @@ var orthomosaicLayer1;
 try {
   orthomosaicLayer1 = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "http://192.168.1.34:8080/geoserver/campa/wms",
+      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
       params: {
         LAYERS: "campa:1-orthomosaic",
         TILED: true,
