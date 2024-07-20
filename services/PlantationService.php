@@ -15,7 +15,7 @@ class PlantationService
 
     public function getFilteredPlantations($filters)
     {
-        $query = "SELECT * FROM plantation_data WHERE 1=1";
+        $query = "SELECT *, ST_AsGeoJSON(geom) as geojson  FROM plantation_data WHERE 1=1";
         $params = [];
 
         if (!empty($filters['circle'])) {
