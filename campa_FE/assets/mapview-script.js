@@ -605,9 +605,17 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       var vectorLayer = new ol.layer.Vector({
-        source: vectorSource
+        source: vectorSource,
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(0, 128, 0, 0.5)' // Green inside
+          }),
+          stroke: new ol.style.Stroke({
+            color: 'orange', // Orange boundary
+            width: 2
+          })
+        })
       });
-
       map.addLayer(vectorLayer);
 
       var extent = vectorSource.getExtent();
