@@ -668,22 +668,52 @@ map.on("singleclick", function (evt) {
 
             result.features.forEach(function (feature) {
               var props = feature.properties;
-              featureInfoContent.innerHTML +=
-                //"Plantation Details"+ "</br>" + 
-                "<div class='table-responsive my-table-sm'><table class='table table-sm table-bordered mb-0'>"
-                + "<tr><td><strong>Circle Name </strong></td><td>" + (props.circle_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Division Name </strong></td><td>" + (props.division_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Range Name </strong></td><td>" + (props.range_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Section Name </strong></td><td>" + (props.section_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Beat Name </strong></td><td>" + (props.beat_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Name </strong></td><td>" + (props.name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Scheme </strong></td><td>" + (props.scheme || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Area Achievement </strong></td><td>" + (props.area_achievement || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Pit Target </strong></td><td>" + (props.pit_target || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Pit Achievement </strong></td><td>" + (props.pit_achievement || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Seedling Achievement </strong></td><td>" + (props.seedling_achievement || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Seedling Target </strong></td><td>" + (props.seedling_target || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Plantation Date </strong></td><td>" + (props.plantation_date || 'N/A') + "</td></tr></table></div>";
+              // $.ajax({
+              //   url: 'details.php', // URL to fetch the details
+              //   type: 'GET',
+              //   data: {
+              //     id: 1 // Send plantationId as a GET parameter
+              //   },
+              //   success: function (response) {
+              //     // Update the modal body with the fetched content
+              //     featureInfoContent.innerHTML += response;
+              //     // Reinitialize the OpenLayers map inside the modal
+              //     // initOpenLayersMap(plantationGeojson);
+              //   },
+              //   error: function () {
+              //     // Handle errors if the request fails
+              //     featureInfoContent.innerHTML = '<p>No feature information available at this location.</p>';
+              //   }
+              // });
+              fetch('detailsMap.php?id=1')
+                .then(function (response) {
+                  // When the page is loaded convert it to text
+                  return response.text()
+                })
+                .then(function (html) {
+                  
+                  console.log(html);
+                  featureInfoContent.innerHTML += html;
+                })
+                .catch(function (err) {
+                  featureInfoContent.innerHTML = '<p>No feature information available at this location.</p>';
+                });
+              // featureInfoContent.innerHTML +=
+              //   //"Plantation Details"+ "</br>" + 
+              //   "<div class='table-responsive my-table-sm'><table class='table table-sm table-bordered mb-0'>"
+              //   + "<tr><td><strong>Circle Name </strong></td><td>" + (props.circle_name || 'N/A') + "</td></tr>"
+              //   + "<tr><td><strong>Division Name </strong></td><td>" + (props.division_name || 'N/A') + "</td></tr>"
+              //   + "<tr><td><strong>Range Name </strong></td><td>" + (props.range_name || 'N/A') + "</td></tr>"
+              //   + "<tr><td><strong>Section Name </strong></td><td>" + (props.section_name || 'N/A') + "</td></tr>"
+              //   + "<tr><td><strong>Beat Name </strong></td><td>" + (props.beat_name || 'N/A') + "</td></tr>"
+              //   + "<tr><td><strong>Name </strong></td><td>" + (props.name || 'N/A') + "</td></tr>"
+              //   + "<tr><td><strong>Scheme </strong></td><td>" + (props.scheme || 'N/A') + "</td></tr>"
+              //   + "<tr><td><strong>Area Achievement </strong></td><td>" + (props.area_achievement || 'N/A') + "</td></tr>"
+              //   + "<tr><td><strong>Pit Target </strong></td><td>" + (props.pit_target || 'N/A') + "</td></tr>"
+              //   + "<tr><td><strong>Pit Achievement </strong></td><td>" + (props.pit_achievement || 'N/A') + "</td></tr>"
+              //   + "<tr><td><strong>Seedling Achievement </strong></td><td>" + (props.seedling_achievement || 'N/A') + "</td></tr>"
+              //   + "<tr><td><strong>Seedling Target </strong></td><td>" + (props.seedling_target || 'N/A') + "</td></tr>"
+              //   + "<tr><td><strong>Plantation Date </strong></td><td>" + (props.plantation_date || 'N/A') + "</td></tr></table></div>";
             });
           } else {
             featureInfoContent.innerHTML = '<p>No feature information available at this location.</p>';

@@ -28,6 +28,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
     <link rel="icon" href="../../public/images/icons/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="../../public/images/icons/apple-touch-icon.png" />
     <link rel="manifest" href="../../public/images/icons/manifest.webmanifest" />
+    <link href="../../public/css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.3.0/ol.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
