@@ -528,8 +528,10 @@ document
   });
 
 
-//----------------------Map for Planatation site analysis --------------------
+//----------------------Map for Planatation site --------------------
 var aiMlDataLayer3;
+var vectorLayer;
+
 try {
   aiMlDataLayer3 = new ol.layer.Image({
     source: new ol.source.ImageWMS({
@@ -551,27 +553,6 @@ try {
   console.log("aiMlDataLayer3: " + error);
 }
 
-var aiMlDataLayer4;
-try {
-  aiMlDataLayer4 = new ol.layer.Image({
-    source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
-      params: {
-        LAYERS: "campa:plantation_data",
-        TILED: true,
-        VERSION: "1.1.0",
-        FORMAT: "image/png",
-      },
-      serverType: "geoserver",
-      crossOrigin: "anonymous",
-    }),
-    visible: false, // Set layer initial visibility to false
-  });
-  aiMlDataLayer4.setZIndex(99);
-  map.addLayer(aiMlDataLayer4);
-} catch (error) {
-  console.log("aiMlDataLayer4: " + error);
-}
 // Function to set CQL filter
 function setCqlFilter(filter) {
   var source = aiMlDataLayer3.getSource();
@@ -583,57 +564,60 @@ function setCqlFilter(filter) {
   }
   source.updateParams(params);
 }
+
 // Add event listener to the checkbox
 document.getElementById("nature1").addEventListener("change", function (event) {
   if (event.target.checked) {
-    aiMlDataLayer4.setVisible(true);
-    // var extent = ol.extent.createEmpty();
-    // ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672, 20.785411834716797, 85.91878509521484, 20.917316436767578] : ol.extent.createEmpty());
-    // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
+    aiMlDataLayer3.setVisible(true);
+    map.addLayer(aiMlDataLayer3); // Ensure the layer is added to the map
+    zoomToGeoJSON(); // Add the vectorLayer
   } else {
-    aiMlDataLayer4.setVisible(false);
+    aiMlDataLayer3.setVisible(false);
+    map.removeLayer(aiMlDataLayer3);
+    if (vectorLayer) {
+      map.removeLayer(vectorLayer);
+    }
   }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
   var cqlFilterValue = "name='" + plantationName + "'";
   if (plantationName != null) {
-    //cqlFilterValue = "name=''"; // Replace with the dynamic value or set to null
     aiMlDataLayer3.setVisible(true);
-    
     setCqlFilter(cqlFilterValue); // Update with your CQL filter
-    // var extent = ol.extent.createEmpty();
-    // ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672, 20.785411834716797, 85.91878509521484, 20.917316436767578] : ol.extent.createEmpty());
-    // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
-    function zoomToGeoJSON() {
-      var vectorSource = new ol.source.Vector({
-        features: new ol.format.GeoJSON().readFeatures(plantationGeojson, {
-          featureProjection: 'EPSG:3857' // Match the map projection
-        })
-      });
-
-      var vectorLayer = new ol.layer.Vector({
-        source: vectorSource,
-        style: new ol.style.Style({
-          fill: new ol.style.Fill({
-            color: 'rgba(0, 128, 0, 0.5)' // Green inside
-          }),
-          stroke: new ol.style.Stroke({
-            color: 'orange', // Orange boundary
-            width: 2
-          })
-        })
-      });
-      map.addLayer(vectorLayer);
-
-      var extent = vectorSource.getExtent();
-      map.getView().fit(extent, { padding: [100, 100, 100, 100], maxZoom: 19 });
-    }
+    document.getElementById("nature1").checked = true;
+    zoomToGeoJSON(); // Add the vectorLayer
   } else {
-    aiMlDataLayer4.setVisible(false);
+    aiMlDataLayer3.setVisible(false);
   }
-  zoomToGeoJSON();
 });
+
+function zoomToGeoJSON() {
+  var vectorSource = new ol.source.Vector({
+    features: new ol.format.GeoJSON().readFeatures(plantationGeojson, {
+      featureProjection: 'EPSG:3857' // Match the map projection
+    })
+  });
+
+  vectorLayer = new ol.layer.Vector({
+    source: vectorSource,
+    style: new ol.style.Style({
+      fill: new ol.style.Fill({
+        color: 'rgba(0, 128, 0, 0.5)' // Green inside
+      }),
+      stroke: new ol.style.Stroke({
+        color: 'orange', // Orange boundary
+        width: 2
+      })
+    })
+  });
+
+  map.addLayer(vectorLayer);
+
+  var extent = vectorSource.getExtent();
+  map.getView().fit(extent, { padding: [100, 100, 100, 100], maxZoom: 19 });
+}
+
 
 
 function isClickOutsideDrawer(event) {
