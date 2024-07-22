@@ -601,7 +601,7 @@ map.on("singleclick", function (evt) {
                   featureInfoContent.innerHTML += html;
                 })
                 .catch(function (err) {
-                  featureInfoContent.innerHTML = '<p>No feature information available at this location.</p>';
+                  featureInfoContent.innerHTML = '<p>Error fetching feature info:.</p>';
                 }).finally(function () {
                   hide_loader();
                 }); 
@@ -611,7 +611,8 @@ map.on("singleclick", function (evt) {
           }
         })
         .catch(function (error) {
-          console.error("Error fetching feature info:", error);
+          featureInfoContent.innerHTML = '<p>Error fetching feature info:.</p>';
+          // console.error("Error fetching feature info:", error);
         });
     }
   }
