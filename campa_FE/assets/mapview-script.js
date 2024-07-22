@@ -439,15 +439,13 @@ try {
   console.log("orthomosaicLayer: " + error);
 }
 
-// Layer 3
 var orthomosaicLayer1;
 try {
   orthomosaicLayer1 = new ol.layer.Image({
     source: new ol.source.ImageWMS({
       url: "https://geoserver.amnslis.in/geoserver/campa/wms",
       params: {
-        LAYERS: "campa:1-orthomosaic",
-        TILED: true,
+        LAYERS: "campa:1-orthomosaic_cog",
         VERSION: "1.1.0",
         FORMAT: "image/png",
         SRS: "EPSG:4326",
@@ -455,12 +453,12 @@ try {
       serverType: "geoserver",
       crossOrigin: "anonymous",
     }),
-    visible: false,
+    visible: false,  // Set to true to make the layer visible
   });
   orthomosaicLayer1.setZIndex(99);
   map.addLayer(orthomosaicLayer1);
 } catch (error) {
-  console.log("orthomosaicLayer1: " + error);
+  console.log("orthomosaicLayer1 error: " + error);
 }
 
 // Add event listener to the checkbox
@@ -678,24 +676,20 @@ map.on("singleclick", function (evt) {
               document.getElementById("featureInfoContent");
             featureInfoContent.innerHTML = ""; // Clear previous content
 
-            result.features.forEach(function (feature) {
-              var props = feature.properties;
-              featureInfoContent.innerHTML +=
-                //"Plantation Details"+ "</br>" + 
-                "<div class='table-responsive my-table-sm'><table class='table table-sm table-bordered mb-0'>"
-                + "<tr><td><strong>Circle Name </strong></td><td>" + (props.circle_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Division Name </strong></td><td>" + (props.division_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Range Name </strong></td><td>" + (props.range_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Section Name </strong></td><td>" + (props.section_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Beat Name </strong></td><td>" + (props.beat_name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Name </strong></td><td>" + (props.name || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Scheme </strong></td><td>" + (props.scheme || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Area Achievement </strong></td><td>" + (props.area_achievement || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Pit Target </strong></td><td>" + (props.pit_target || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Pit Achievement </strong></td><td>" + (props.pit_achievement || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Seedling Achievement </strong></td><td>" + (props.seedling_achievement || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Seedling Target </strong></td><td>" + (props.seedling_target || 'N/A') + "</td></tr>"
-                + "<tr><td><strong>Plantation Date </strong></td><td>" + (props.plantation_date || 'N/A') + "</td></tr></table></div>";
+            result.features.forEach(function (feature) { 
+              fetch('detailsMap.php?id=' + plantationId)
+                .then(function (response) {
+                  // When the page is loaded convert it to text
+                  return response.text()
+                })
+                .then(function (html) {
+                  
+                  console.log(html);
+                  featureInfoContent.innerHTML += html;
+                })
+                .catch(function (err) {
+                  featureInfoContent.innerHTML = '<p>No feature information available at this location.</p>';
+                }); 
             });
           } else {
             featureInfoContent.innerHTML = '<p>No feature information available at this location.</p>';
