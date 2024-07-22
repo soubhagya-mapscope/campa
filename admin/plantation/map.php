@@ -271,15 +271,15 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                     <!-- <div class="form-check">
 										<input class="form-check-input" type="checkbox" id="transport1">
 										<label class="form-check-label" for="transport1">Image-1</label>
-									</div> -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="transport2">
-                                        <label class="form-check-label" for="transport2">Ortho</label>
-                                    </div>
+									</div> -->                                   
                                     <!-- <div class="form-check">
 										<input class="form-check-input" type="checkbox" id="transport3">
 										<label class="form-check-label" for="transport3">Image-3</label>
 									</div> -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="transport6">
+                                        <label class="form-check-label" for="nature2">Plantation Boundary (Drone)</label>
+                                    </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="transport4">
                                         <label class="form-check-label" for="nature1">Plantation Analysis (Drone)</label>
@@ -287,10 +287,14 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="transport5">
                                         <label class="form-check-label" for="nature2">Pits Analysis (Drone)</label>
+                                    </div>                                   
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="transport2">
+                                        <label class="form-check-label" for="transport2">Ortho</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="transport6">
-                                        <label class="form-check-label" for="nature2">Plantation Boundary (Drone)</label>
+                                        <input type="range" id="transparencySlider" min="0" max="100" value="100">
+                                        <label class="form-check-label" for="transparencySlider"><strong>Ortho Transparency</strong></label>
                                     </div>
                                 </div>
                             </div>

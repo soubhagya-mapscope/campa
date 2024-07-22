@@ -479,6 +479,15 @@ document.getElementById("transport2").addEventListener("change", function (event
     orthomosaicLayer1.setVisible(false);
   }
 });
+  // Add event listener to the transparency slider
+  document.getElementById("transparencySlider").addEventListener("input", function (event) {
+    //alert(99)
+    var value = event.target.value;
+    var opacity = value / 100; // Convert to 0-1 range
+    geotiffSite1Layer.setOpacity(opacity);
+    orthomosaicLayer.setOpacity(opacity);
+    orthomosaicLayer1.setOpacity(opacity);
+  });
 
 
 //----------------------Map for pits analysis --------------------
@@ -591,6 +600,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (plantationName != null) {
     //cqlFilterValue = "name=''"; // Replace with the dynamic value or set to null
     aiMlDataLayer3.setVisible(true);
+    
     setCqlFilter(cqlFilterValue); // Update with your CQL filter
     // var extent = ol.extent.createEmpty();
     // ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.82842254638672, 20.785411834716797, 85.91878509521484, 20.917316436767578] : ol.extent.createEmpty());
