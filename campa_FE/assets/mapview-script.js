@@ -1,17 +1,17 @@
 // Define base layers
 function show_loader() {
   var element = document.getElementById("loader");
-  element.classList.add("lds-ellipsis"); 
+  element.classList.add("lds-ellipsis");
   var container = document.getElementsByClassName("loader-container");
-  container[0].classList.remove("hideDiv"); 
+  container[0].classList.remove("hideDiv");
 
   //event.preventDefault();
 }
 function hide_loader() {
   var element = document.getElementById("loader");
   element.classList.remove("lds-ellipsis");
-  var container = document.getElementsByClassName("loader-container"); 
-  container[0].classList.add("hideDiv"); 
+  var container = document.getElementsByClassName("loader-container");
+  container[0].classList.add("hideDiv");
 
   //event.preventDefault();
 }
@@ -301,14 +301,20 @@ try {
   console.log("pltDataLayer1: " + error);
 }
 document.getElementById("transport4").addEventListener("change", function (event) {
+  const transparencySliderPlant = document.getElementById("transparencySliderPlant");
+  const transparencyLabelPlant = document.querySelector("label[for='transparencySliderPlant']");
   if (event.target.checked) {
     pltDataLayer1.setVisible(true);
+    transparencySliderPlant.style.display = "block";
+    transparencyLabelPlant.style.display = "block";
     // Zoom to the extent of both layers combined
     // var extent = ol.extent.createEmpty();
     // ol.extent.extend(extent, pltDataLayer1.getSource().getParams().LAYERS === 'campa:plantation' ? [85.84375780820847,20.907737731933594,85.84732729196548,20.91185975074768] : ol.extent.createEmpty());
     // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
   } else {
     pltDataLayer1.setVisible(false);
+    transparencySliderPlant.style.display = "none";
+    transparencyLabelPlant.style.display = "none";
   }
 });
 
@@ -339,13 +345,19 @@ document
   .getElementById("transport5")
   .addEventListener("change", function (event) {
     //alert(36)
+    const transparencySliderPit = document.getElementById("transparencySliderPit");
+    const transparencyLabelPit = document.querySelector("label[for='transparencySliderPit']");
     if (event.target.checked) {
       aiMlDataLayer1.setVisible(true);
+      transparencySliderPit.style.display = "block";
+      transparencyLabelPit.style.display = "block";
       // var extent = ol.extent.createEmpty();
       // ol.extent.extend(extent, aiMlDataLayer1.getSource().getParams().LAYERS === 'campa:pits' ? [85.90795540809631,20.79056704044342,85.91619944572449,20.795581698417664] : ol.extent.createEmpty());
       // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
     } else {
       aiMlDataLayer1.setVisible(false);
+      transparencySliderPit.style.display = "none";
+      transparencyLabelPit.style.display = "none";
     }
   });
 
@@ -368,7 +380,7 @@ try {
     }),
     visible: false,
   });
- // geotiffSite1Layer.setZIndex(99);
+  // geotiffSite1Layer.setZIndex(99);
   map.addLayer(geotiffSite1Layer);
 } catch (error) {
   console.log("geotiffSite1Layer: " + error);
@@ -443,15 +455,31 @@ document.getElementById("transport2").addEventListener("change", function (event
     orthomosaicLayer1.setVisible(false);
   }
 });
-  // Add event listener to the transparency slider
-  document.getElementById("transparencySlider").addEventListener("input", function (event) {
-    //alert(99)
-    var value = event.target.value;
-    var opacity = value / 100; // Convert to 0-1 range
-    geotiffSite1Layer.setOpacity(opacity);
-    orthomosaicLayer.setOpacity(opacity);
-    orthomosaicLayer1.setOpacity(opacity);
-  });
+// Add event listener to the transparency slider
+document.getElementById("transparencySlider").addEventListener("input", function (event) {
+  //alert(99)
+  var value = event.target.value;
+  var opacity = value / 100; // Convert to 0-1 range
+  geotiffSite1Layer.setOpacity(opacity);
+  orthomosaicLayer.setOpacity(opacity);
+  orthomosaicLayer1.setOpacity(opacity);
+});
+
+document.getElementById("transparencySliderPit").addEventListener("input", function (event) {
+  //alert(99)
+  var value = event.target.value;
+  var opacity = value / 100; // Convert to 0-1 range
+  aiMlDataLayer1.setOpacity(opacity);
+  //orthomosaicLayer.setOpacity(opacity);
+  //orthomosaicLayer1.setOpacity(opacity);
+});
+
+document.getElementById("transparencySliderPlant").addEventListener("input", function (event) {
+  //alert(99)
+  var value = event.target.value;
+  var opacity = value / 100; // Convert to 0-1 range
+  pltDataLayer1.setOpacity(opacity);
+});
 
 
 //----------------------Map for Planatation site --------------------
@@ -586,11 +614,11 @@ map.on("singleclick", function (evt) {
               document.getElementById("featureInfoContent");
             featureInfoContent.innerHTML = ""; // Clear previous content
 
-            result.features.forEach(function (feature) { 
+            result.features.forEach(function (feature) {
               var str = feature.id;
               var n = str.lastIndexOf('.');
               var resultID = str.substring(n + 1);
-             
+
 
               fetch('detailsMap.php?id=' + resultID)
                 .then(function (response) {
@@ -604,7 +632,7 @@ map.on("singleclick", function (evt) {
                   featureInfoContent.innerHTML = '<p>Error fetching feature info:.</p>';
                 }).finally(function () {
                   hide_loader();
-                }); 
+                });
             });
           } else {
             featureInfoContent.innerHTML = '<p>No feature information available at this location.</p>';

@@ -292,8 +292,16 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                         <label class="form-check-label" for="nature1">Plantation Analysis (Drone)</label>
                                     </div>
                                     <div class="form-check">
+                                        <input type="range" id="transparencySliderPlant" min="0" max="100" value="100" style="display: none">
+                                        <label class="form-check-label" for="transparencySliderPlant" style="display: none"><strong>Plantation Opacity</strong></label>
+                                    </div>
+                                    <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="transport5">
                                         <label class="form-check-label" for="nature2">Pits Analysis (Drone)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="range" id="transparencySliderPit" min="0" max="100" value="100" style="display: none">
+                                        <label class="form-check-label" for="transparencySliderPit" style="display: none"><strong>Pit Opacity</strong></label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="transport2">
@@ -301,7 +309,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                     </div>
                                     <div class="form-check">
                                         <input type="range" id="transparencySlider" min="0" max="100" value="100" style="display: none">
-                                        <label class="form-check-label" for="transparencySlider" style="display: none"><strong>Ortho Transparency</strong></label>
+                                        <label class="form-check-label" for="transparencySlider" style="display: none"><strong>Ortho Opacity</strong></label>
                                     </div>
                                 </div>
                             </div>
