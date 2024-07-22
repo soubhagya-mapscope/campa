@@ -362,7 +362,7 @@ try {
     }),
     visible: false,
   });
-  geotiffSite1Layer.setZIndex(99);
+ // geotiffSite1Layer.setZIndex(99);
   map.addLayer(geotiffSite1Layer);
 } catch (error) {
   console.log("geotiffSite1Layer: " + error);
@@ -386,7 +386,7 @@ try {
     }),
     visible: false,
   });
-  orthomosaicLayer.setZIndex(99);
+  //orthomosaicLayer.setZIndex(99);
   map.addLayer(orthomosaicLayer);
 } catch (error) {
   console.log("orthomosaicLayer: " + error);
@@ -409,7 +409,7 @@ try {
     }),
     visible: false,  // Set to true to make the layer visible
   });
-  orthomosaicLayer1.setZIndex(99);
+  //orthomosaicLayer1.setZIndex(99);
   map.addLayer(orthomosaicLayer1);
 } catch (error) {
   console.log("orthomosaicLayer1 error: " + error);
