@@ -1,12 +1,18 @@
 // Define base layers
 function show_loader() {
   var element = document.getElementById("loader");
-  element.classList.add("loader");
+  element.classList.add("lds-ellipsis"); 
+  var container = document.getElementsByClassName("loader-container");
+  container[0].classList.remove("hideDiv"); 
+
   //event.preventDefault();
 }
 function hide_loader() {
   var element = document.getElementById("loader");
-  element.classList.remove("loader");
+  element.classList.remove("lds-ellipsis");
+  var container = document.getElementsByClassName("loader-container"); 
+  container[0].classList.add("hideDiv"); 
+
   //event.preventDefault();
 }
 
@@ -656,7 +662,6 @@ map.on("singleclick", function (evt) {
     );
 
     if (url) {
-      show_loader();
       fetch(url)
         .then(function (response) {
           return response.json();
@@ -665,7 +670,7 @@ map.on("singleclick", function (evt) {
           if (result.features && result.features.length > 0) {
             // Open the drawer
             document.getElementById("featureInfoDrawer").classList.add("open");
-
+            show_loader();
             // Populate the drawer with feature information
             var featureInfoContent =
               document.getElementById("featureInfoContent");
