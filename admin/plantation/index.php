@@ -186,8 +186,6 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
             plantationGeojson = JSON.parse(plantationGeojson); // Parse the JSON string
 
             var modal = $(this); // Get the modal
-            console.log(plantationGeojson);
-
             // Perform AJAX request to fetch details.php content
             $.ajax({
                 url: 'details.php', // URL to fetch the details

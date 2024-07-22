@@ -1,5 +1,15 @@
 // Define base layers
-console.log(JSON.parse(plantationGeojson));
+function show_loader() {
+  var element = document.getElementById("loader");
+  element.classList.add("loader");
+  //event.preventDefault();
+}
+function hide_loader() {
+  var element = document.getElementById("loader");
+  element.classList.remove("loader");
+  //event.preventDefault();
+}
+
 const osmLayer = new ol.layer.Tile({
   source: new ol.source.OSM(),
   title: "OpenStreetMap",
@@ -646,6 +656,7 @@ map.on("singleclick", function (evt) {
     );
 
     if (url) {
+      show_loader();
       fetch(url)
         .then(function (response) {
           return response.json();
@@ -661,18 +672,23 @@ map.on("singleclick", function (evt) {
             featureInfoContent.innerHTML = ""; // Clear previous content
 
             result.features.forEach(function (feature) { 
-              fetch('detailsMap.php?id=' + plantationId)
+              var str = feature.id;
+              var n = str.lastIndexOf('.');
+              var resultID = str.substring(n + 1);
+             
+
+              fetch('detailsMap.php?id=' + resultID)
                 .then(function (response) {
                   // When the page is loaded convert it to text
                   return response.text()
                 })
                 .then(function (html) {
-                  
-                  console.log(html);
                   featureInfoContent.innerHTML += html;
                 })
                 .catch(function (err) {
                   featureInfoContent.innerHTML = '<p>No feature information available at this location.</p>';
+                }).finally(function () {
+                  hide_loader();
                 }); 
             });
           } else {
