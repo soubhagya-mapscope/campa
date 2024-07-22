@@ -417,7 +417,11 @@ try {
 
 // Add event listener to the checkbox
 document.getElementById("transport2").addEventListener("change", function (event) {
+  const transparencySlider = document.getElementById("transparencySlider");
+  const transparencyLabel = document.querySelector("label[for='transparencySlider']");
   if (event.target.checked) {
+    transparencySlider.style.display = "block";
+    transparencyLabel.style.display = "block";
     geotiffSite1Layer.setVisible(true);
     orthomosaicLayer.setVisible(true);
     orthomosaicLayer1.setVisible(true);
