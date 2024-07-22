@@ -23,7 +23,7 @@ if (isset($_GET['id'])) {
     <div class="modal-body">
         <div class="row">
             <!-- Left side with plantation details -->
-            <div class="col-md-6">
+            <div class="col-md">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0">Plantation Details</h5>
@@ -125,14 +125,7 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <!-- Right side with map -->
-            <div class="col-md-6">
-                <h5 class="bg-primary-set">Plantation Map</h5>
-                <div style="max-width:100%;list-style:none;
-                         transition: none;overflow:hidden;width:550px;height:550px;">
-                    <div id="plantationMap" style="height:100%; width:100%; max-width:100%;"></div>
-
-                </div>
-            </div>
+            
         </div>
         <div class="row mt-4">
             <div class="col-md-12">
