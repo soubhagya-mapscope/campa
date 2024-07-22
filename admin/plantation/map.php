@@ -300,8 +300,8 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                         <label class="form-check-label" for="transport2">Ortho</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="range" id="transparencySlider" min="0" max="100" value="100">
-                                        <label class="form-check-label" for="transparencySlider"><strong>Ortho Transparency</strong></label>
+                                        <input type="range" id="transparencySlider" min="0" max="100" value="100" style="display: none">
+                                        <label class="form-check-label" for="transparencySlider" style="display: none"><strong>Ortho Transparency</strong></label>
                                     </div>
                                 </div>
                             </div>
