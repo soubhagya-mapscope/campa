@@ -9,14 +9,11 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
     $plantation = $plantationService->getPlantationById($_GET['id']);
     $plantationName = $plantation['name'];
     $plantationGeojson = $plantation['geojson'] ?? null;
-    $plantationId = $plantation['id'] ?? null;
     echo "<script>var plantationName = '" . htmlspecialchars($plantationName) . "';</script>";
     echo "<script>var plantationGeojson = " . json_encode($plantationGeojson) . ";</script>";
-    echo "<script>var plantationId = " . $plantationId . ";</script>";
 } else {
     echo "<script>var plantationName = null;</script>";
     echo "<script>var plantationName = null;</script>";
-    echo "<script>var plantationId = null;</script>";
 
 }
 ?>
@@ -42,7 +39,11 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
 </head>
 
 <body>
+<div id="loader">
+  <div>
 
+  </div>
+</div>
     <nav class="navbar navbar-expand navbar-light bg-white topbar  static-top shadow">
 
         <a class="no-underline" style="text-decoration: none;" href="/campa/admin/plantation/">
