@@ -14,7 +14,6 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
 } else {
     echo "<script>var plantationName = null;</script>";
     echo "<script>var plantationName = null;</script>";
-
 }
 ?>
 
@@ -29,7 +28,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
     <link rel="icon" href="../../public/images/icons/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="../../public/images/icons/apple-touch-icon.png" />
     <link rel="manifest" href="../../public/images/icons/manifest.webmanifest" />
-    <link href="../../public/css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- <link href="../../public/css/sb-admin-2.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.3.0/ol.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -39,11 +38,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
 </head>
 
 <body>
-<div id="loader">
-  <div>
 
-  </div>
-</div>
     <nav class="navbar navbar-expand navbar-light bg-white topbar  static-top shadow">
 
         <a class="no-underline" style="text-decoration: none;" href="/campa/admin/plantation/">
@@ -130,9 +125,20 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
 
         <div id="featureInfoDrawer" class="drawer">
             <div class="drawer-content">
-                <h5 class="mb-4">Feature Information</h5>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-4">Feature Information</h5>
+                    <button id="closeDrawer" class="btn btn-secondary mb-4">Close</button>
+                </div>
+                <div class="loader-container hideDiv" >
+                <div id="loader" class="lds-ellipsis" >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                </div>
                 <div id="featureInfoContent"></div>
-                <button id="closeDrawer" class="btn btn-secondary mt-4">Close</button>
+                
             </div>
         </div>
         <div class="map-overlay">
@@ -272,7 +278,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                     <!-- <div class="form-check">
 										<input class="form-check-input" type="checkbox" id="transport1">
 										<label class="form-check-label" for="transport1">Image-1</label>
-									</div> -->                                   
+									</div> -->
                                     <!-- <div class="form-check">
 										<input class="form-check-input" type="checkbox" id="transport3">
 										<label class="form-check-label" for="transport3">Image-3</label>
@@ -286,16 +292,24 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                         <label class="form-check-label" for="nature1">Plantation Analysis (Drone)</label>
                                     </div>
                                     <div class="form-check">
+                                        <input type="range" id="transparencySliderPlant" min="0" max="100" value="100" style="display: none">
+                                        <label class="form-check-label" for="transparencySliderPlant" style="display: none"><strong>Plantation Opacity</strong></label>
+                                    </div>
+                                    <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="transport5">
                                         <label class="form-check-label" for="nature2">Pits Analysis (Drone)</label>
-                                    </div>                                   
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="range" id="transparencySliderPit" min="0" max="100" value="100" style="display: none">
+                                        <label class="form-check-label" for="transparencySliderPit" style="display: none"><strong>Pit Opacity</strong></label>
+                                    </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="transport2">
                                         <label class="form-check-label" for="transport2">Ortho</label>
                                     </div>
                                     <div class="form-check">
                                         <input type="range" id="transparencySlider" min="0" max="100" value="100" style="display: none">
-                                        <label class="form-check-label" for="transparencySlider" style="display: none"><strong>Ortho Transparency</strong></label>
+                                        <label class="form-check-label" for="transparencySlider" style="display: none"><strong>Ortho Opacity</strong></label>
                                     </div>
                                 </div>
                             </div>
@@ -311,7 +325,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#layerAccordion">
                                 <div class="accordion-body">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="nature1" >
+                                        <input class="form-check-input" type="checkbox" id="nature1">
                                         <label class="form-check-label" for="nature1">Plantation</label>
                                     </div>
                                     <!-- <div class="form-check">
@@ -413,27 +427,6 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
             </div>
         </div>
     </div>
-
-
-
-    <!--  feature modal info  -->
-    <div class="modal fade" id="featureInfoModal" tabindex="-1" aria-labelledby="featureInfoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="featureInfoModalLabel">Feature Information</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p id="feature-info"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
 
 ?>
 
-    <div class="modal-body">
+     
         <div class="row">
             <!-- Left side with plantation details -->
             <div class="col-md">
@@ -125,7 +125,7 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <!-- Right side with map -->
-            
+
         </div>
         <div class="row mt-4">
             <div class="col-md-12">
@@ -251,7 +251,7 @@ if (isset($_GET['id'])) {
                                                     </div>
                                                     <div class="row mb-2">
                                                         <div class="col-sm-6 row-label">Survival Rate (%):</div>
-                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo (($data['no_of_seedling'] ?? 0)/($plantation['seedling_target'] ?? 0))*100  ?></span></div>
+                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo (($data['no_of_seedling'] ?? 0) / ($plantation['seedling_target'] ?? 0)) * 100  ?></span></div>
                                                     </div>
 
                                                 </div>
@@ -334,10 +334,10 @@ if (isset($_GET['id'])) {
                                 ['year' => '4yr (2nd Half)', 'scheduled_date' => '18-06-2028', 'status' => 'not done', 'status_class' => 'pending'],
                                 ['year' => '5yr (1st Half)', 'scheduled_date' => '11-12-2028', 'status' => 'not done', 'status_class' => 'pending'],
                                 ['year' => '5yr (2nd Half)', 'scheduled_date' => '11-06-2029', 'status' => 'not done', 'status_class' => 'pending'],
-                               
+
                             ],
                             3 => [
-                               // ['year' => 'Pre-plantation', 'scheduled_date' => '12-06-2024',, 'status' => 'done', 'status_class' => 'completed'],
+                                // ['year' => 'Pre-plantation', 'scheduled_date' => '12-06-2024',, 'status' => 'done', 'status_class' => 'completed'],
                                 ['year' => '1yr (1st Half)', 'scheduled_date' => '02-12-2024', 'status' => 'done', 'status_class' => 'completed'],
                                 ['year' => '1yr (2nd Half)', 'scheduled_date' => '11-06-2025', 'status' => 'not done', 'status_class' => 'pending'],
                                 ['year' => '2yr (1st Half)', 'scheduled_date' => '11-12-2025', 'status' => 'not done', 'status_class' => 'pending'],
@@ -345,15 +345,15 @@ if (isset($_GET['id'])) {
                                 ['year' => '3yr (1st Half)', 'scheduled_date' => '02-12-2026', 'status' => 'not done', 'status_class' => 'pending'],
                                 ['year' => '3yr (2nd Half)', 'scheduled_date' => '17-06-2027', 'status' => 'not done', 'status_class' => 'pending'],
                                 ['year' => '4yr (1st Half)', 'scheduled_date' => '11-12-2027', 'status' => 'not done', 'status_class' => 'pending'],
-                                ['year' => '4yr (2nd Half)', 'scheduled_date' => '18-06-2028','status' => 'not done', 'status_class' => 'pending'],
+                                ['year' => '4yr (2nd Half)', 'scheduled_date' => '18-06-2028', 'status' => 'not done', 'status_class' => 'pending'],
                                 ['year' => '5yr (1st Half)', 'scheduled_date' => '11-12-2028', 'status' => 'not done', 'status_class' => 'pending'],
                                 ['year' => '5yr (2nd Half)', 'scheduled_date' => '11-06-2029', 'status' => 'not done', 'status_class' => 'pending'],
                             ],
                             6 => [
-                            // ['year' => 'Pre-plantation', 'scheduled_date' => '12-06-2024', 'status' => 'done', 'status_class' => 'completed'],
-                            // ['year' => '1yr (1st Half)', 'scheduled_date' => '02-12-2024', 'status' => 'done', 'status_class' => 'completed'],
-                            // ['year' => '1yr (2nd Half)', 'scheduled_date' => '11-06-2025', 'status' => 'not done', 'status_class' => 'pending'],
-                           
+                                // ['year' => 'Pre-plantation', 'scheduled_date' => '12-06-2024', 'status' => 'done', 'status_class' => 'completed'],
+                                // ['year' => '1yr (1st Half)', 'scheduled_date' => '02-12-2024', 'status' => 'done', 'status_class' => 'completed'],
+                                // ['year' => '1yr (2nd Half)', 'scheduled_date' => '11-06-2025', 'status' => 'not done', 'status_class' => 'pending'],
+
                                 ['year' => '2yr (1st Half)', 'scheduled_date' => '11-12-2025', 'status' => 'done', 'status_class' => 'completed'],
                                 ['year' => '2yr (2nd Half)', 'scheduled_date' => '16-06-2026', 'status' => 'done', 'status_class' => 'completed'],
                                 ['year' => '3yr (1st Half)', 'scheduled_date' => '02-12-2026', 'status' => 'not done', 'status_class' => 'pending'],
@@ -401,7 +401,7 @@ if (isset($_GET['id'])) {
 
             </div>
         </div>
-    </div>
+     
 
 <?php
 } else {
