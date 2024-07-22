@@ -31,7 +31,7 @@ if ($requestedPath !== $plantationListingRoute && $requestedPath !== $loginRoute
 
 // Redirect non-existent routes to a 404 page if within the admin folder
 if (strpos($requestedPath, '/campa/admin/') === 0 && !file_exists(__DIR__ . '/../' . $requestedPath)) {
-    header("Location: /campa/404.php");
+    header("Location: /campa/404");
     exit();
 }
 ?>
