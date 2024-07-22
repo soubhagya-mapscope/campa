@@ -206,7 +206,7 @@ if (isset($_GET['id'])) {
                                     if (count($droneData['postPlantationData']) > 0) {
                                         foreach ($droneData['postPlantationData'] as $data) : ?>
 
-                                            <div class="col-lg-6">
+                                            <div class="col-lg">
                                                 <div class="card mt-2 mb-4 px-4 py-4">
 
                                                     <div class="row mb-2">

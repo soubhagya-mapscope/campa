@@ -134,13 +134,13 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                                                 <i class="fas fa-info-circle"></i> View Details
                                             </a>
 
-                                            <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>&name=<?php echo $plantation['name']; ?>">
+                                            <a class="dropdown-item" href="map?id=<?php echo $plantation['id']; ?>&name=<?php echo $plantation['name']; ?>" target="_blank">
                                                 <i class="fas fa-map-marker-alt"></i> View on Map
                                             </a>
-                                            <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>">
+                                            <a class="dropdown-item" href="map?id=<?php echo $plantation['id']; ?>">
                                                 <i class="fas fa-map-marker-alt"></i> Upload Drone Data
                                             </a>
-                                            <a class="dropdown-item" href="map.php?id=<?php echo $plantation['id']; ?>">
+                                            <a class="dropdown-item" href="map?id=<?php echo $plantation['id']; ?>">
                                                 <i class="fas fa-map-marker-alt"></i> Download Plantation KML
                                             </a>
 
