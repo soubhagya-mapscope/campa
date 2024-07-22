@@ -311,7 +311,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#layerAccordion">
                                 <div class="accordion-body">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="nature1" disabled>
+                                        <input class="form-check-input" type="checkbox" id="nature1" >
                                         <label class="form-check-label" for="nature1">Plantation</label>
                                     </div>
                                     <!-- <div class="form-check">
