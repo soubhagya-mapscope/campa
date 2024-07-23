@@ -209,7 +209,7 @@ document.addEventListener("fullscreenchange", function () {
 });
 
 //------------------------------Map work starts----------------------------------//
-
+const URL="https://geoserver.amnslis.in/geoserver/campa/wms";
 // Define the WMS layer with zoom levels
 var wmsLayerStateBoundary = new ol.layer.Image({
   source: new ol.source.ImageWMS({
@@ -241,7 +241,7 @@ var pltBndDataLayer;
 try {
   pltBndDataLayer = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      url: URL,
       params: {
         LAYERS: "campa:corected_drone_polygon",
         TILED: true,
@@ -277,7 +277,7 @@ var pltDataLayer1;
 try {
   pltDataLayer1 = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      url: URL,
       params: {
         LAYERS: "campa:plantation",
         TILED: true,
@@ -311,7 +311,7 @@ var aiMlDataLayer1;
 try {
   aiMlDataLayer1 = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      url: URL,
       params: {
         LAYERS: "campa:pits",
         TILED: true,
@@ -349,7 +349,7 @@ var geotiffSite1Layer;
 try {
   geotiffSite1Layer = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      url: URL,
       params: {
         LAYERS: "campa:geotiffSite1",
         TILED: true,
@@ -373,7 +373,7 @@ var orthomosaicLayer;
 try {
   orthomosaicLayer = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      url: URL,
       params: {
         LAYERS: "campa:3-orthomosaic",
         TILED: true,
@@ -397,7 +397,7 @@ var orthomosaicLayer1;
 try {
   orthomosaicLayer1 = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      url: URL,
       params: {
         LAYERS: "campa:1-orthomosaic_cog",
         VERSION: "1.1.0",
@@ -455,7 +455,7 @@ var vectorLayer;
 try {
   aiMlDataLayer3 = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      url: URL,
       params: {
         LAYERS: "campa:plantation_data",
         TILED: true,
@@ -640,7 +640,7 @@ var fbDataLayer;
 try {
   fbDataLayer = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      url: URL,
       params: {
         LAYERS: "campa:jv boundary",
         TILED: true,
@@ -673,7 +673,7 @@ var divDataLayer;
 try {
   divDataLayer = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      url: URL,
       params: {
         LAYERS: "campa:dhenkanal_division_bnd",
         TILED: true,
@@ -711,7 +711,7 @@ var rngDataLayer;
 try {
   rngDataLayer = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      url: URL,
       params: {
         LAYERS: "campa:range",
         TILED: true,
@@ -744,7 +744,7 @@ var secDataLayer;
 try {
   secDataLayer = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      url: URL,
       params: {
         LAYERS: "campa:section_boundary",
         TILED: true,
@@ -777,7 +777,7 @@ var beatDataLayer;
 try {
   beatDataLayer = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      url: URL,
       params: {
         LAYERS: "campa:beat_boundary",
         TILED: true,
@@ -814,7 +814,7 @@ var orthomosaicLayer;
 try {
   orthomosaicLayer = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      url: URL,
       params: {
         LAYERS: "campa:geotiffSite1",
         TILED: true,
@@ -838,7 +838,7 @@ var pltDataLayer;
 try {
   pltDataLayer = new ol.layer.Image({
     source: new ol.source.ImageWMS({
-      url: "https://geoserver.amnslis.in/geoserver/campa/wms",
+      url: URL,
       params: {
         LAYERS: "campa:plantation",
         TILED: true,
