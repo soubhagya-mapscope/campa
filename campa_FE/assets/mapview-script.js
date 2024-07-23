@@ -259,7 +259,7 @@ try {
     }),
     visible: false, // Set layer initial visibility to false
   });
-  pltBndDataLayer.setZIndex(99);
+  pltBndDataLayer.setZIndex(4);
   map.addLayer(pltBndDataLayer);
 } catch (error) {
   console.log("pltBndDataLayer: " + error);
@@ -295,7 +295,7 @@ try {
     }),
     visible: false, // Set layer initial visibility to false
   });
-  pltDataLayer1.setZIndex(99);
+  pltDataLayer1.setZIndex(3);
   map.addLayer(pltDataLayer1);
 } catch (error) {
   console.log("pltDataLayer1: " + error);
@@ -335,7 +335,7 @@ try {
     }),
     visible: false, // Set layer initial visibility to false
   });
-  aiMlDataLayer1.setZIndex(99);
+  aiMlDataLayer1.setZIndex(5);
   map.addLayer(aiMlDataLayer1);
 } catch (error) {
   console.log("aiMlDataLayer1: " + error);
@@ -380,7 +380,7 @@ try {
     }),
     visible: false,
   });
-  // geotiffSite1Layer.setZIndex(99);
+   //geotiffSite1Layer.setZIndex(5);
   map.addLayer(geotiffSite1Layer);
 } catch (error) {
   console.log("geotiffSite1Layer: " + error);
@@ -404,7 +404,7 @@ try {
     }),
     visible: false,
   });
-  //orthomosaicLayer.setZIndex(99);
+  //geotiffSite1Layer.setZIndex(6);
   map.addLayer(orthomosaicLayer);
 } catch (error) {
   console.log("orthomosaicLayer: " + error);
@@ -427,7 +427,7 @@ try {
     }),
     visible: false,  // Set to true to make the layer visible
   });
-  //orthomosaicLayer1.setZIndex(99);
+  //geotiffSite1Layer.setZIndex(6);
   map.addLayer(orthomosaicLayer1);
 } catch (error) {
   console.log("orthomosaicLayer1 error: " + error);
@@ -453,6 +453,8 @@ document.getElementById("transport2").addEventListener("change", function (event
     geotiffSite1Layer.setVisible(false);
     orthomosaicLayer.setVisible(false);
     orthomosaicLayer1.setVisible(false);
+    transparencySlider.style.display = "none";
+    transparencyLabel.style.display = "none";
   }
 });
 // Add event listener to the transparency slider
@@ -501,7 +503,7 @@ try {
     }),
     visible: false, // Set layer initial visibility to false
   });
-  aiMlDataLayer3.setZIndex(99);
+  aiMlDataLayer3.setZIndex(2);
   map.addLayer(aiMlDataLayer3);
 } catch (error) {
   console.log("aiMlDataLayer3: " + error);
@@ -844,51 +846,51 @@ document.getElementById("beatBnd").addEventListener("change", function (event) {
 //-----------------------------------Swipe layer work--------------------------------//
 
 // Define the base layer (always visible)
-var orthomosaicLayer;
-try {
-  orthomosaicLayer = new ol.layer.Image({
-    source: new ol.source.ImageWMS({
-      url: URL,
-      params: {
-        LAYERS: "campa:geotiffSite1",
-        TILED: true,
-        VERSION: "1.1.0",
-        FORMAT: "image/png",
-        SRS: "EPSG:4326",
-      },
-      serverType: "geoserver",
-      crossOrigin: "anonymous",
-    }),
-    visible: false, // Base layer is always visible
-  });
-  orthomosaicLayer.setZIndex(98);
-  map.addLayer(orthomosaicLayer);
-} catch (error) {
-  console.log("orthomosaicLayer: " + error);
-}
+// var orthomosaicLayer;
+// try {
+//   orthomosaicLayer = new ol.layer.Image({
+//     source: new ol.source.ImageWMS({
+//       url: URL,
+//       params: {
+//         LAYERS: "campa:geotiffSite1",
+//         TILED: true,
+//         VERSION: "1.1.0",
+//         FORMAT: "image/png",
+//         SRS: "EPSG:4326",
+//       },
+//       serverType: "geoserver",
+//       crossOrigin: "anonymous",
+//     }),
+//     visible: false, // Base layer is always visible
+//   });
+//   //orthomosaicLayer.setZIndex(5);
+//   map.addLayer(orthomosaicLayer);
+// } catch (error) {
+//   console.log("orthomosaicLayer: " + error);
+// }
 
 // Swipe Layer (toggled visibility)
-var pltDataLayer;
-try {
-  pltDataLayer = new ol.layer.Image({
-    source: new ol.source.ImageWMS({
-      url: URL,
-      params: {
-        LAYERS: "campa:plantation",
-        TILED: true,
-        VERSION: "1.1.0",
-        FORMAT: "image/png",
-      },
-      serverType: "geoserver",
-      crossOrigin: "anonymous",
-    }),
-    visible: false, // Set layer initial visibility to false
-  });
-  pltDataLayer.setZIndex(99);
-  map.addLayer(pltDataLayer);
-} catch (error) {
-  console.log("pltDataLayer: " + error);
-}
+// var pltDataLayer;
+// try {
+//   pltDataLayer = new ol.layer.Image({
+//     source: new ol.source.ImageWMS({
+//       url: URL,
+//       params: {
+//         LAYERS: "campa:plantation",
+//         TILED: true,
+//         VERSION: "1.1.0",
+//         FORMAT: "image/png",
+//       },
+//       serverType: "geoserver",
+//       crossOrigin: "anonymous",
+//     }),
+//     visible: false, // Set layer initial visibility to false
+//   });
+//   //pltDataLayer.setZIndex(99);
+//   map.addLayer(pltDataLayer);
+// } catch (error) {
+//   console.log("pltDataLayer: " + error);
+// }
 
 // Add event listener to the checkbox for layer toggle and swipe functionality
 document.getElementById("urban1").addEventListener("change", function (event) {
