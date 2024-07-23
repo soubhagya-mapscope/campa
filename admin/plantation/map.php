@@ -351,7 +351,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                 <div class="accordion-body">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="urban1">
-                                        <label class="form-check-label" for="urban1">layer-1</label>
+                                        <label class="form-check-label" for="urban1">Active Swipe Layer</label>
                                     </div>
                                     <input type="range" class="form-range" id="swiplayerID" style="display: none" />
                                     <!-- <div class="form-check">
