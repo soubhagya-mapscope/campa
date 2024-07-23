@@ -31,7 +31,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
         <!-- <h1 class="h3 mb-2 text-gray-800">Plantation</h1> -->
         <legend class="tag-header-list">Plantation</legend>
         <!-- Filters -->
-        <form method="GET" action="">
+        <form id="search-form" method="GET" action="">
             <div class="row mb-4 align-items-md-end">
                 <div class="col-md-2">
                     <label class="label">Select Circle</label>
@@ -137,11 +137,11 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
                                             <a class="dropdown-item" href="map?id=<?php echo $plantation['id']; ?>&name=<?php echo $plantation['name']; ?>" target="_blank">
                                                 <i class="fas fa-map-marker-alt"></i> View on Map
                                             </a>
-                                            <a class="dropdown-item" href="map?id=<?php echo $plantation['id']; ?>">
-                                                <i class="fas fa-map-marker-alt"></i> Upload Drone Data
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-upload"></i> Upload Drone Data
                                             </a>
-                                            <a class="dropdown-item" href="map?id=<?php echo $plantation['id']; ?>">
-                                                <i class="fas fa-map-marker-alt"></i> Download Plantation KML
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-download"></i> Download Plantation KML
                                             </a>
 
                                         </div>
@@ -160,7 +160,7 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="detailsModalLabel">Plantation Details</h5>
+                    <h5 class="modal-title" >Plantation Details</h5> 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -186,6 +186,14 @@ $uniqueSchemes = $plantationService->getUniqueSchemes();
             plantationGeojson = JSON.parse(plantationGeojson); // Parse the JSON string
 
             var modal = $(this); // Get the modal
+            modal.find('.modal-body').html(` <div class="loader-container hideDiv" >
+                <div id="loader" class="lds-ellipsis" >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                </div>`);
             // Perform AJAX request to fetch details.php content
             $.ajax({
                 url: 'details.php', // URL to fetch the details
