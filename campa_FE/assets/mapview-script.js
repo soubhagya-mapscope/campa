@@ -365,11 +365,11 @@ document
 // Layer 1
 var geotiffSite1Layer;
 try {
-  geotiffSite1Layer = new ol.layer.Image({
+  geotiffSite1Layer = new ol.layer.Image({  
     source: new ol.source.ImageWMS({
       url: URL,
       params: {
-        LAYERS: "campa:geotiffSite1",
+        LAYERS: "ampa:geotiffSite-Rec_comp",
         TILED: true,
         VERSION: "1.1.0",
         FORMAT: "image/png",
@@ -393,7 +393,7 @@ try {
     source: new ol.source.ImageWMS({
       url: URL,
       params: {
-        LAYERS: "campa:3-orthomosaic",
+        LAYERS: "campa:3-orthomosaic_Rec_comp",
         TILED: true,
         VERSION: "1.1.0",
         FORMAT: "image/png",
@@ -417,7 +417,7 @@ try {
     source: new ol.source.ImageWMS({
       url: URL,
       params: {
-        LAYERS: "campa:1-orthomosaic_cog",
+        LAYERS: "campa:1-orthomosaic-RecF_comp",
         VERSION: "1.1.0",
         FORMAT: "image/png",
         SRS: "EPSG:4326",
@@ -671,7 +671,7 @@ document
     event.stopPropagation();
   });
 
-//-------------------Forest Boundary-------------------
+//-------------------Forest Boundary------------------- 
 var fbDataLayer;
 try {
   fbDataLayer = new ol.layer.Image({
