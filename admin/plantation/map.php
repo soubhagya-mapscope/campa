@@ -129,16 +129,16 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                     <h5 class="mb-4">Feature Information</h5>
                     <button id="closeDrawer" class="btn btn-secondary mb-4">Close</button>
                 </div>
-                <div class="loader-container hideDiv" >
-                <div id="loader" class="lds-ellipsis" >
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
+                <div class="loader-container hideDiv">
+                    <div id="loader" class="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
                 <div id="featureInfoContent"></div>
-                
+
             </div>
         </div>
         <div class="map-overlay">
@@ -151,13 +151,17 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                 <button id="zoom-in" class="ol-zoom-in" title="Zoom in">+</button>
                 <button id="zoom-out" class="ol-zoom-out" title="Zoom out">−</button>
             </div>
-            <div id="layer-select" class="ol-unselectable">
+            <!-- <div id="layer-select" class="ol-unselectable">
                 <button id="layers-modal-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#layerSelectModal">
                     <span><i class="fas fa-layer-group"></i></span>
                 </button>
+            </div> -->
+
+            <div id="layer-select" class="ol-unselectable">
+                <button id="layers-modal-btn" class="btn btn-primary">
+                    <span><i class="fas fa-layer-group"></i></span>
+                </button>
             </div>
-
-
             <div id="filter" class="ol-unselectable">
                 <button id="filter-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filterLayerModal">
                     <span><i class="fas fa-filter"></i></span>
@@ -216,23 +220,22 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
     </div>
 
     <!-- Layer Select Modal -->
-    <div class="modal fade" id="layerSelectModal" tabindex="-1" aria-labelledby="layerSelectModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xs modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <p class="modal-title" id="layerSelectModalLabel">Layers</p>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="accordion" id="layerAccordion">
-                        <!-- Accordion Item 1 -->
+
+    <div id="layerSelectDiv">
+        <div class="header">
+            <p>Layers</p>
+            <button type="button" id="closeLayerSelect" class="btn-close"></button>
+        </div>
+        <div class="bodymap">
+           
+        <div class="accordion" id="accordionPanelsStayOpenExample">
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    <i class="fas fa-map-marker-alt me-2"></i> Forest Layers
+                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                   OFMS Layer
                                 </button>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#layerAccordion">
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                                 <div class="accordion-body">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="divBnd">
@@ -265,15 +268,13 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Accordion Item 2 -->
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <i class="fas fa-road me-1"></i> Drone Image Analysis
+                            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                    Drone Survey
                                 </button>
                             </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#layerAccordion">
+                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                                 <div class="accordion-body">
                                     <!-- <div class="form-check">
 										<input class="form-check-input" type="checkbox" id="transport1">
@@ -314,15 +315,13 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Accordion Item 3 -->
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    <i class="fas fa-tree me-2"></i> Plantation site
+                            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                   Base Map
                                 </button>
                             </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#layerAccordion">
+                            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
                                 <div class="accordion-body">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="nature1">
@@ -340,15 +339,14 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                             </div>
                         </div>
 
-                        <!-- Accordion Item 4 -->
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    <i class="fas fa-building me-2"></i> Swipe layers
+                            <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                                    Swipe layers
                                 </button>
                             </h2>
-                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#layerAccordion">
-                                <div class="accordion-body">
+                            <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+                            <div class="accordion-body">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="urban1">
                                         <label class="form-check-label" for="urban1">Active Swipe Layer</label>
@@ -370,8 +368,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+
         </div>
     </div>
 
@@ -434,6 +431,16 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
     <script src="https://unpkg.com/ol-layerswitcher@4.1.1"></script>
     <!-- <script src="assets/mapview-script.js"></script> -->
     <script src="../../campa_FE/assets/mapview-script.js"></script>
+
+    <script>
+        document.getElementById('layers-modal-btn').addEventListener('click', function() {
+            document.getElementById('layerSelectDiv').style.display = 'block';
+        });
+
+        document.getElementById('closeLayerSelect').addEventListener('click', function() {
+            document.getElementById('layerSelectDiv').style.display = 'none';
+        });
+    </script>
 
 
 </body>
