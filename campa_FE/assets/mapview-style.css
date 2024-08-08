@@ -179,7 +179,7 @@ html {
 } */
 
 .card-img-top {
-  height: 100px;
+  height: 40px;
   object-fit: cover;
 }
 
@@ -750,7 +750,7 @@ font-size: 12px;
 
 .accordion-button:not(.collapsed) {
   color: var(--bs-accordion-active-color);
-  background-color: #5eaf8f;
+  background-color: #82d4b4;
   box-shadow: inset 0 calc(-1* var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
 }
 
@@ -759,7 +759,7 @@ font-size: 12px;
 *::-webkit-scrollbar-track
  {
    /* border: 1px solid #f3e7fa; */
-   background-color: #dcf3ea!important;
+   background-color: rgba(255, 255, 255, 0.2)!important;
    /* border-radius: 5%; */
  }
  
@@ -792,5 +792,5 @@ font-size: 12px;
 }
 
 .form-range{
-  width: 10% !important;
+  width: 30% !important;
 }

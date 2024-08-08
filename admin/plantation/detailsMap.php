@@ -251,7 +251,7 @@ if (isset($_GET['id'])) {
                                                     </div>
                                                     <div class="row mb-2">
                                                         <div class="col-sm-6 row-label">Survival Rate (%):</div>
-                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo (($data['no_of_seedling'] ?? 0) / ($plantation['seedling_target'] ?? 0)) * 100  ?></span></div>
+                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php  echo number_format((($data['no_of_seedling'] ?? 0) / ($plantation['seedling_target'] ?? 0)) * 100, 2);  ?></span></div>
                                                     </div>
 
                                                 </div>
