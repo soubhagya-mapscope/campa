@@ -68,7 +68,6 @@ const fullscreenControl = new ol.control.FullScreen({
   labelActive: "",
 });
 
-// Initialize OpenLayers map
 const map = new ol.Map({
   target: "map",
   layers: [],
@@ -76,8 +75,11 @@ const map = new ol.Map({
     center: ol.proj.fromLonLat([0, 0]),
     zoom: 2,
   }),
-  controls: [], // This disables all default controls, including zoom buttons
+  controls: [
+    new ol.control.ZoomSlider(), // Add only the zoom slider control
+  ],
 });
+
 
 map.addControl(scaleControl);
 //map.addControl(fullscreenControl);
@@ -897,8 +899,11 @@ document.getElementById("urban1").addEventListener("change", function (event) {
   const swipe = document.getElementById("swiplayerID");
 
   if (event.target.checked) {
-    pltDataLayer1.setVisible(true);
-    aiMlDataLayer1.setVisible(true);
+    geotiffSite1Layer.setVisible(true);
+    orthomosaicLayer.setVisible(true);
+    orthomosaicLayer1.setVisible(true);
+    //pltDataLayer1.setVisible(true);
+    //aiMlDataLayer1.setVisible(true);
     swipe.style.display = "block";
 
     const layer_prerender = function (event) {
@@ -914,24 +919,47 @@ document.getElementById("urban1").addEventListener("change", function (event) {
       const ctx = event.context;
       ctx.restore();
     };
+    geotiffSite1Layer.on("prerender", layer_prerender);
+    geotiffSite1Layer.on("postrender", layer_postrender);
 
-    pltDataLayer1.on("prerender", layer_prerender);
-    pltDataLayer1.on("postrender", layer_postrender);
+    orthomosaicLayer.on("prerender", layer_prerender);
+    orthomosaicLayer.on("postrender", layer_postrender);
 
-    aiMlDataLayer1.on("prerender", layer_prerender);
-    aiMlDataLayer1.on("postrender", layer_postrender);
+    orthomosaicLayer1.on("prerender", layer_prerender);
+    orthomosaicLayer1.on("postrender", layer_postrender);
+
+    //pltDataLayer1.on("prerender", layer_prerender);
+    //pltDataLayer1.on("postrender", layer_postrender);
+
+    //aiMlDataLayer1.on("prerender", layer_prerender);
+   // aiMlDataLayer1.on("postrender", layer_postrender);
 
     swipe.addEventListener("input", function () {
       map.render();
     });
 
   } else {
-    pltDataLayer1.setVisible(false);
-    aiMlDataLayer1.setVisible(false);
     swipe.style.display = "none";
-    pltDataLayer1.un("prerender", layer_prerender);
-    pltDataLayer1.un("postrender", layer_postrender);
-    aiMlDataLayer1.un("prerender", layer_prerender);
-    aiMlDataLayer1.un("postrender", layer_postrender);
+
+    geotiffSite1Layer.setVisible(false);
+    orthomosaicLayer.setVisible(false);
+    orthomosaicLayer1.setVisible(false);
+    //pltDataLayer1.setVisible(false);
+    //aiMlDataLayer1.setVisible(false);
+
+    geotiffSite1Layer.on("prerender", layer_prerender);
+    geotiffSite1Layer.on("postrender", layer_postrender);
+
+    orthomosaicLayer.on("prerender", layer_prerender);
+    orthomosaicLayer.on("postrender", layer_postrender);
+
+    orthomosaicLayer1.on("prerender", layer_prerender);
+    orthomosaicLayer1.on("postrender", layer_postrender);
+
+    //pltDataLayer1.un("prerender", layer_prerender);
+    //pltDataLayer1.un("postrender", layer_postrender);
+
+    //aiMlDataLayer1.un("prerender", layer_prerender);
+    //aiMlDataLayer1.un("postrender", layer_postrender);
   }
 });
