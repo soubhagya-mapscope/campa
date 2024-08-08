@@ -232,7 +232,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                   OFMS Layer
+                                   <strong>OFMS Layer</strong>
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
@@ -271,7 +271,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                    Drone Survey
+                                <strong>Drone Survey</strong>
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
@@ -318,7 +318,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingThree">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                   Base Map
+                                <strong>Base Map</strong>
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
@@ -351,7 +351,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                         <input class="form-check-input" type="checkbox" id="urban1">
                                         <label class="form-check-label" for="urban1">Active Swipe Layer</label>
                                     </div>
-                                    <input type="range" class="form-range" id="swiplayerID" style="display: none" />
+                                  
                                     <!-- <div class="form-check">
 										<input class="form-check-input" type="checkbox" id="urban2">
 										<label class="form-check-label" for="urban2">Neighborhoods</label>
@@ -371,6 +371,10 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
 
         </div>
     </div>
+<div class="swip-set">
+<input type="range" class="form-range w-20" id="swiplayerID" style="display: none" />
+</div>
+    
 
     <!-- Filter Layer  Modal -->
 

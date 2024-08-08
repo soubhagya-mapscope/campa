@@ -779,3 +779,18 @@ font-size: 12px;
   border-right: 1px solid #d3bbe2 ; */
   border-radius: 5%;
 }
+
+
+.swip-set{
+  position: absolute;
+ display: flex;
+  bottom: 10;
+  right: 2;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-range{
+  width: 10% !important;
+}
