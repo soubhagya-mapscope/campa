@@ -179,7 +179,7 @@ html {
 } */
 
 .card-img-top {
-  height: 100px;
+  height: 40px;
   object-fit: cover;
 }
 
@@ -759,7 +759,7 @@ font-size: 12px;
 *::-webkit-scrollbar-track
  {
    /* border: 1px solid #f3e7fa; */
-   background-color: #dcf3ea!important;
+   background-color: rgba(255, 255, 255, 0.2)!important;
    /* border-radius: 5%; */
  }
  
@@ -792,5 +792,5 @@ font-size: 12px;
 }
 
 .form-range{
-  width: 10% !important;
+  width: 30% !important;
 }

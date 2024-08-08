@@ -176,7 +176,7 @@ if (isset($_GET['id'])) {
                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo ($droneData['prePlantationData']['no_of_pits'] ?? 0) - ($plantation['pit_target'] ?? 0); ?></span></div>
                                     </div>
                                     <div class="row mb-2">
-                                        <div class="col-sm-6 row-label">Area Identified from Ortho (Ha):</div>
+                                        <div class="col-sm-6 row-label">Plantation Area as per Ortho (Ha):</div>
                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData']['area_identified'] ?? "NA"; ?></span></div>
                                     </div>
                                     <div class="row mb-2">
@@ -184,7 +184,7 @@ if (isset($_GET['id'])) {
                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['area_target'] ?? "NA"; ?></span></div>
                                     </div>
                                     <div class="row mb-2">
-                                        <div class="col-sm-6 row-label">Deviation for Area (Ha):</div>
+                                        <div class="col-sm-6 row-label">Deviation Area (Ha):</div>
                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo ($droneData['prePlantationData']['area_identified'] ?? 0) - ($plantation['area_target'] ?? 0); ?></span></div>
                                     </div>
                                     <!-- <div class="row mb-2">
@@ -233,19 +233,16 @@ if (isset($_GET['id'])) {
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo ($data['no_of_pits'] ?? 0) - ($plantation['pit_target'] ?? 0); ?></span></div>
                                                     </div> -->
                                                     <div class="row mb-2">
-                                                        <div class="col-sm-6 row-label">No of Plantation Identified (Nos):</div>
+                                                        <div class="col-sm-6 row-label">No of Plants Identified (Nos):</div>
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $data['no_of_seedling'] ?? "NA"; ?></span></div>
                                                     </div>
                                                     <div class="row mb-2">
                                                         <div class="col-sm-6 row-label">Plantation Target (Nos):</div>
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['seedling_target'] ?? "NA"; ?></span></div>
                                                     </div>
+                                    
                                                     <div class="row mb-2">
-                                                        <div class="col-sm-6 row-label">Deviation Plantation Target (Nos):</div>
-                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo ($data['no_of_seedling'] ?? 0) -  ($plantation['seedling_target'] ?? 0); ?></span></div>
-                                                    </div>
-                                                    <div class="row mb-2">
-                                                        <div class="col-sm-6 row-label">Area Identified from Ortho (Ha):</div>
+                                                        <div class="col-sm-6 row-label">Plantation Area as per Ortho (Ha):</div>
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $data['area_identified'] ?? "NA"; ?></span></div>
                                                     </div>
                                                     <div class="row mb-2">
@@ -253,12 +250,16 @@ if (isset($_GET['id'])) {
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['area_target'] ?? "NA"; ?></span></div>
                                                     </div>
                                                     <div class="row mb-2">
-                                                        <div class="col-sm-6 row-label">Deviation for Area:</div>
+                                                        <div class="col-sm-6 row-label">Deviation Area:</div>
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo ($data['area_identified'] ?? 0) - ($plantation['area_target'] ?? 0); ?></span></div>
                                                     </div>
                                                     <div class="row mb-2">
                                                         <div class="col-sm-6 row-label">Survival Rate (%):</div>
-                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo (($data['no_of_seedling'] ?? 0)/($plantation['seedling_target'] ?? 0))*100  ?></span></div>
+                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php  echo number_format((($data['no_of_seedling'] ?? 0) / ($plantation['seedling_target'] ?? 0)) * 100, 2);  ?></span></div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-sm-6 row-label">Plantation Target Deviation   (Nos):</div>
+                                                        <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo ($data['no_of_seedling'] ?? 0) -  ($plantation['seedling_target'] ?? 0); ?></span></div>
                                                     </div>
 
                                                 </div>

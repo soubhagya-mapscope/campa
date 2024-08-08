@@ -43,8 +43,10 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
         }
 
         .ol-zoomslider {
-            right: 10px !important; /* Position 10px from the right */
-            left: auto !important;  /* Override default left position */
+            right: 10px !important;
+            /* Position 10px from the right */
+            left: auto !important;
+            /* Override default left position */
         }
     </style>
 </head>
@@ -235,41 +237,41 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
 
     <div id="layerSelectDiv">
         <div class="header">
-            <p>Layers</p>
+            <h6>Layers</h6>
             <button type="button" id="closeLayerSelect" class="btn-close"></button>
         </div>
         <div class="bodymap">
-           
-        <div class="accordion" id="accordionPanelsStayOpenExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                   <strong>OFMS Layer</strong>
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                                <div class="accordion-body">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="divBnd">
-                                        <label class="form-check-label" for="divBnd">Division Boundary</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="rngBnd">
-                                        <label class="form-check-label" for="rngBnd">Range Boundary</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="secBnd">
-                                        <label class="form-check-label" for="secBnd">Section Boundary</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="beatBnd">
-                                        <label class="form-check-label" for="beatBnd">Beat Boundary</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="fbBnd">
-                                        <label class="form-check-label" for="fbBnd">FB Boundary</label>
-                                    </div>
-                                    <!-- <div class="form-check">
+
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                            <strong>OFMS Layer</strong>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                        <div class="accordion-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="divBnd">
+                                <label class="form-check-label" for="divBnd">Division Boundary</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rngBnd">
+                                <label class="form-check-label" for="rngBnd">Range Boundary</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="secBnd">
+                                <label class="form-check-label" for="secBnd">Section Boundary</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="beatBnd">
+                                <label class="form-check-label" for="beatBnd">Beat Boundary</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="fbBnd">
+                                <label class="form-check-label" for="fbBnd">FB Boundary</label>
+                            </div>
+                            <!-- <div class="form-check">
 										<input class="form-check-input" type="checkbox" id="poi3">
 										<label class="form-check-label" for="poi3">Attractions</label>
 									</div>
@@ -277,94 +279,120 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
 										<input class="form-check-input" type="checkbox" id="poi4">
 										<label class="form-check-label" for="poi4">Shopping</label>
 									</div> -->
-                                </div>
-                            </div>
                         </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                <strong>Drone Survey</strong>
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                                <div class="accordion-body">
-                                    <!-- <div class="form-check">
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                            <strong>Drone Survey</strong>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                        <div class="accordion-body">
+                            <!-- <div class="form-check">
 										<input class="form-check-input" type="checkbox" id="transport1">
 										<label class="form-check-label" for="transport1">Image-1</label>
 									</div> -->
-                                    <!-- <div class="form-check">
+                            <!-- <div class="form-check">
 										<input class="form-check-input" type="checkbox" id="transport3">
 										<label class="form-check-label" for="transport3">Image-3</label>
 									</div> -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="transport6">
-                                        <label class="form-check-label" for="nature2">Plantation Boundary (Drone)</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="nature1">
+                                <label class="form-check-label" for="nature1">Plantation</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="transport6">
+                                <label class="form-check-label" for="nature2">Plantation Boundary (Drone)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="transport4">
+                                <label class="form-check-label" for="nature1">Plantation Analysis (Drone)</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="range" id="transparencySliderPlant" min="0" max="100" value="100" style="display: none">
+                                <label class="form-check-label" for="transparencySliderPlant" style="display: none"><strong>Plantation Opacity</strong></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="transport5">
+                                <label class="form-check-label" for="nature2">Pits Analysis (Drone)</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="range" id="transparencySliderPit" min="0" max="100" value="100" style="display: none">
+                                <label class="form-check-label" for="transparencySliderPit" style="display: none"><strong>Pit Opacity</strong></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="transport2">
+                                <label class="form-check-label" for="transport2">Ortho</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="range" id="transparencySlider" min="0" max="100" value="100" style="display: none">
+                                <label class="form-check-label" for="transparencySlider" style="display: none"><strong>Ortho Opacity</strong></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                            <strong>Base Map</strong>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                        <div class="accordion-body">
+                            <div class="container">
+                            <div class="row">
+                                <div class="col p-0 mx-1">
+                                    <div class="card" data-layer="openstreetmap">
+                                        <img src="../../campa_FE/assets/images/osm.jpg" class="card-img-top" alt="OpenStreetMap">
+                                            <!-- <p class="card-title">Open Street Map</p> -->
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="transport4">
-                                        <label class="form-check-label" for="nature1">Plantation Analysis (Drone)</label>
+                                </div>
+                                <div class="col p-0 mx-1">
+                                    <div class="card" data-layer="google street">
+                                        <img src="../../campa_FE/assets/images/street.png" class="card-img-top" alt="GoogleStreetMap">
+                                        <!-- <div class="card-body">
+                                            <p class="card-title">Google Street</p>
+                                        </div> -->
                                     </div>
-                                    <div class="form-check">
-                                        <input type="range" id="transparencySliderPlant" min="0" max="100" value="100" style="display: none">
-                                        <label class="form-check-label" for="transparencySliderPlant" style="display: none"><strong>Plantation Opacity</strong></label>
+                                </div>
+                                <div class="col p-0 mx-1">
+                                    <div class="card" data-layer="satellite">
+                                        <img src="../../campa_FE/assets/images/satellite.png" class="card-img-top" alt="Satellite">
+                                        <!-- <div class="card-body">
+                                            <p class="card-title">Satellite</p>
+                                        </div> -->
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="transport5">
-                                        <label class="form-check-label" for="nature2">Pits Analysis (Drone)</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="range" id="transparencySliderPit" min="0" max="100" value="100" style="display: none">
-                                        <label class="form-check-label" for="transparencySliderPit" style="display: none"><strong>Pit Opacity</strong></label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="transport2">
-                                        <label class="form-check-label" for="transport2">Ortho</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="range" id="transparencySlider" min="0" max="100" value="100" style="display: none">
-                                        <label class="form-check-label" for="transparencySlider" style="display: none"><strong>Ortho Opacity</strong></label>
+                                </div>
+                                <div class="col p-0 mx-1">
+                                    <div class="card" data-layer="terrain">
+                                        <img src="../../campa_FE/assets/images/terrain.png" class="card-img-top" alt="Terrain">
+                                        <!-- <div class="card-body">
+                                            <p class="card-title">Terrain</p>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                <strong>Base Map</strong>
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                                <div class="accordion-body">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="nature1">
-                                        <label class="form-check-label" for="nature1">Plantation</label>
-                                    </div>
-                                    <!-- <div class="form-check">
-										<input class="form-check-input" type="checkbox" id="nature3">
-										<label class="form-check-label" for="nature3">Forests</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="nature4">
-										<label class="form-check-label" for="nature4">Mountains</label>
-									</div> -->
-                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
-                                    Swipe layers
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
-                            <div class="accordion-body">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="urban1">
-                                        <label class="form-check-label" for="urban1">Active Swipe Layer</label>
-                                    </div>
-                                  
-                                    <!-- <div class="form-check">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                            <strong>Swipe layers</strong>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+                        <div class="accordion-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="urban1">
+                                <label class="form-check-label" for="urban1">Active Swipe Layer</label>
+                            </div>
+
+                            <!-- <div class="form-check">
 										<input class="form-check-input" type="checkbox" id="urban2">
 										<label class="form-check-label" for="urban2">Neighborhoods</label>
 									</div>
@@ -376,17 +404,17 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
 										<input class="form-check-input" type="checkbox" id="urban4">
 										<label class="form-check-label" for="urban4">Land Use</label>
 									</div> -->
-                                </div>
-                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
         </div>
     </div>
-<div class="swip-set">
-<input type="range" class="form-range w-20" id="swiplayerID" style="display: none" />
-</div>
-    
+    <div class="swip-set">
+        <input type="range" class="form-range w-20" id="swiplayerID" style="display: none" />
+    </div>
+
 
     <!-- Filter Layer  Modal -->
 
