@@ -35,6 +35,18 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
     <link rel="stylesheet" href="https://unpkg.com/ol-layerswitcher@4.1.1/dist/ol-layerswitcher.css">
     <!-- <link rel="stylesheet" href="assets/mapview-style.css"> -->
     <link rel="stylesheet" href="../../campa_FE/assets/mapview-style.css">
+    <style>
+        .map {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        .ol-zoomslider {
+            right: 10px !important; /* Position 10px from the right */
+            left: auto !important;  /* Override default left position */
+        }
+    </style>
 </head>
 
 <body>
