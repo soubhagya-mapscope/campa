@@ -801,3 +801,9 @@ font-size: 12px;
 .form-range{
   width: 30% !important;
 }
+
+.map-title{
+  text-align: center;
+  padding-top: 4px;
+  font-size: 8px !important;
+}

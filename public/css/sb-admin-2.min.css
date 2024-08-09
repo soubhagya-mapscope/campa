@@ -12929,3 +12929,7 @@ body.sidebar-toggled footer.sticky-footer {
   }
   
 /* loader css end */
+
+.row-label{
+font-size: 13px !important;
+}

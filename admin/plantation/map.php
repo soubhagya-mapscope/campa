@@ -343,36 +343,37 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                         <div class="accordion-body">
                             <div class="container">
                                 <div class="row">
+                                    
                                     <div class="col p-0 mx-1">
                                         <div class="card" data-layer="openstreetmap">
                                             <img src="../../campa_FE/assets/images/osm.jpg" class="card-img-top" alt="OpenStreetMap">
-                                            <!-- <p class="card-title">Open Street Map</p> -->
                                         </div>
+                                        <p class="map-title">Open Street Map</p>
                                     </div>
+                                    
                                     <div class="col p-0 mx-1">
                                         <div class="card" data-layer="google street">
                                             <img src="../../campa_FE/assets/images/street.png" class="card-img-top" alt="GoogleStreetMap">
-                                            <!-- <div class="card-body">
-                                            <p class="card-title">Google Street</p>
-                                        </div> -->
-                                        </div>
+                                        </div> 
+                                        <p class="map-title">Google Street</p> 
+                                        
                                     </div>
+                                    
                                     <div class="col p-0 mx-1">
                                         <div class="card" data-layer="satellite">
                                             <img src="../../campa_FE/assets/images/satellite.png" class="card-img-top" alt="Satellite">
-                                            <!-- <div class="card-body">
-                                            <p class="card-title">Satellite</p>
-                                        </div> -->
                                         </div>
+                                        <p class="map-title">Satellite</p>
                                     </div>
+
+                                    
                                     <div class="col p-0 mx-1">
                                         <div class="card" data-layer="terrain">
                                             <img src="../../campa_FE/assets/images/terrain.png" class="card-img-top" alt="Terrain">
-                                            <!-- <div class="card-body">
-                                            <p class="card-title">Terrain</p>
-                                        </div> -->
                                         </div>
+                                        <p class="map-title">Terrain</p>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

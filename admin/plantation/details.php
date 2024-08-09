@@ -60,19 +60,19 @@ if (isset($_GET['id'])) {
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['name']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Plantation Area (Ha):</div>
+                            <div class="col-sm-6 row-label">Plantation Area as per OFMS (Ha):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['area_gps']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Target Area (Ha):</div>
+                            <div class="col-sm-6 row-label">Target Area as per OFMS (Ha):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['area_target']; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">Area Deviation (Ha):</div>
+                            <div class="col-sm-6 row-label">Deviation Area (Ha):</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $area_deviation; ?></span></div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6 row-label">stage Name:</div>
+                            <div class="col-sm-6 row-label">Stage Name:</div>
                             <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['stage_details']['name'] ?? 'NA'; ?></span></div>
                         </div>
                         <?php if ($droneData['stage_details']['id'] == 1) { ?>
@@ -172,7 +172,7 @@ if (isset($_GET['id'])) {
                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['pit_target'] ?? "NA"; ?></span></div>
                                     </div>
                                     <div class="row mb-2">
-                                        <div class="col-sm-6 row-label">Deviation for Pits:</div>
+                                        <div class="col-sm-6 row-label">Pit Target Deviation:</div>
                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo ($droneData['prePlantationData']['no_of_pits'] ?? 0) - ($plantation['pit_target'] ?? 0); ?></span></div>
                                     </div>
                                     <div class="row mb-2">
@@ -180,7 +180,7 @@ if (isset($_GET['id'])) {
                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $droneData['prePlantationData']['area_identified'] ?? "NA"; ?></span></div>
                                     </div>
                                     <div class="row mb-2">
-                                        <div class="col-sm-6 row-label">Target Area (Ha):</div>
+                                        <div class="col-sm-6 row-label">Target Area as per OFMS (Ha):</div>
                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['area_target'] ?? "NA"; ?></span></div>
                                     </div>
                                     <div class="row mb-2">
@@ -250,7 +250,7 @@ if (isset($_GET['id'])) {
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo $plantation['area_target'] ?? "NA"; ?></span></div>
                                                     </div>
                                                     <div class="row mb-2">
-                                                        <div class="col-sm-6 row-label">Deviation Area:</div>
+                                                        <div class="col-sm-6 row-label">Deviation Area (Ha):</div>
                                                         <div class="col-sm-6 badge-box-back"><span class="badge-box"><?php echo ($data['area_identified'] ?? 0) - ($plantation['area_target'] ?? 0); ?></span></div>
                                                     </div>
                                                     <div class="row mb-2">
