@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-const fullscreenBtn = document.getElementById("fullscreen-btn");
+const fullscreenBtn = document.getElementById("fullscreen-btn");  
 
 fullscreenBtn.addEventListener("click", function () {
   // Toggle fullscreen using the browser's Fullscreen API
@@ -560,9 +560,9 @@ function zoomToGeoJSON() {
   vectorLayer = new ol.layer.Vector({
     source: vectorSource,
     style: new ol.style.Style({
-      fill: new ol.style.Fill({
-        color: 'rgba(0, 128, 0, 0.5)' // Green inside
-      }),
+      // fill: new ol.style.Fill({
+      //   color: 'rgba(0, 128, 0, 0.5)' // Green inside
+      // }),
       stroke: new ol.style.Stroke({
         color: 'orange', // Orange boundary
         width: 2
