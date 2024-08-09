@@ -157,7 +157,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
         </div>
         <div class="map-overlay">
             <div id="layer-switcher" class="ol-unselectable ol-control">
-                <button id="layer-switcher-btn" class="btn btn-primary"  sty data-bs-toggle="modal" data-bs-target="#layerModal">
+                <button id="layer-switcher-btn" class="btn btn-primary" sty data-bs-toggle="modal" data-bs-target="#layerModal">
                     Select Layer
                 </button>
             </div>
@@ -288,7 +288,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                             <strong>Drone Survey</strong>
                         </button>
                     </h2>
-                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
                         <div class="accordion-body">
                             <!-- <div class="form-check">
 										<input class="form-check-input" type="checkbox" id="transport1">
@@ -310,7 +310,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                 <input class="form-check-input" type="checkbox" id="transport4">
                                 <label class="form-check-label" for="nature1">Plantation Analysis (Drone)</label>
                             </div>
-                            <div class="form-check">
+                            <div class="form-check" id="transparencyPlantFormCheck" style="display: none">
                                 <input type="range" id="transparencySliderPlant" min="0" max="100" value="100" style="display: none">
                                 <label class="form-check-label" for="transparencySliderPlant" style="display: none"><strong>Plantation Opacity</strong></label>
                             </div>
@@ -318,7 +318,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                 <input class="form-check-input" type="checkbox" id="transport5">
                                 <label class="form-check-label" for="nature2">Pits Analysis (Drone)</label>
                             </div>
-                            <div class="form-check">
+                            <div class="form-check" id="transparencyPitFormCheck" style="display: none">
                                 <input type="range" id="transparencySliderPit" min="0" max="100" value="100" style="display: none">
                                 <label class="form-check-label" for="transparencySliderPit" style="display: none"><strong>Pit Opacity</strong></label>
                             </div>
@@ -326,7 +326,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                                 <input class="form-check-input" type="checkbox" id="transport2">
                                 <label class="form-check-label" for="transport2">Ortho</label>
                             </div>
-                            <div class="form-check">
+                            <div class="form-check" id="transparencyOrthoFormCheck" style="display: none">
                                 <input type="range" id="transparencySlider" min="0" max="100" value="100" style="display: none">
                                 <label class="form-check-label" for="transparencySlider" style="display: none"><strong>Ortho Opacity</strong></label>
                             </div>
@@ -339,41 +339,41 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                             <strong>Base Map</strong>
                         </button>
                     </h2>
-                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
                         <div class="accordion-body">
                             <div class="container">
-                            <div class="row">
-                                <div class="col p-0 mx-1">
-                                    <div class="card" data-layer="openstreetmap">
-                                        <img src="../../campa_FE/assets/images/osm.jpg" class="card-img-top" alt="OpenStreetMap">
+                                <div class="row">
+                                    <div class="col p-0 mx-1">
+                                        <div class="card" data-layer="openstreetmap">
+                                            <img src="../../campa_FE/assets/images/osm.jpg" class="card-img-top" alt="OpenStreetMap">
                                             <!-- <p class="card-title">Open Street Map</p> -->
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col p-0 mx-1">
-                                    <div class="card" data-layer="google street">
-                                        <img src="../../campa_FE/assets/images/street.png" class="card-img-top" alt="GoogleStreetMap">
-                                        <!-- <div class="card-body">
+                                    <div class="col p-0 mx-1">
+                                        <div class="card" data-layer="google street">
+                                            <img src="../../campa_FE/assets/images/street.png" class="card-img-top" alt="GoogleStreetMap">
+                                            <!-- <div class="card-body">
                                             <p class="card-title">Google Street</p>
                                         </div> -->
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col p-0 mx-1">
-                                    <div class="card" data-layer="satellite">
-                                        <img src="../../campa_FE/assets/images/satellite.png" class="card-img-top" alt="Satellite">
-                                        <!-- <div class="card-body">
+                                    <div class="col p-0 mx-1">
+                                        <div class="card" data-layer="satellite">
+                                            <img src="../../campa_FE/assets/images/satellite.png" class="card-img-top" alt="Satellite">
+                                            <!-- <div class="card-body">
                                             <p class="card-title">Satellite</p>
                                         </div> -->
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col p-0 mx-1">
-                                    <div class="card" data-layer="terrain">
-                                        <img src="../../campa_FE/assets/images/terrain.png" class="card-img-top" alt="Terrain">
-                                        <!-- <div class="card-body">
+                                    <div class="col p-0 mx-1">
+                                        <div class="card" data-layer="terrain">
+                                            <img src="../../campa_FE/assets/images/terrain.png" class="card-img-top" alt="Terrain">
+                                            <!-- <div class="card-body">
                                             <p class="card-title">Terrain</p>
                                         </div> -->
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             </div>
                         </div>
                     </div>
@@ -385,7 +385,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                             <strong>Swipe layers</strong>
                         </button>
                     </h2>
-                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFour">
                         <div class="accordion-body">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="urban1">

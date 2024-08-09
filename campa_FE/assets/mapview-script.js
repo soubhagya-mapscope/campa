@@ -304,9 +304,12 @@ try {
 }
 document.getElementById("transport4").addEventListener("change", function (event) {
   const transparencySliderPlant = document.getElementById("transparencySliderPlant");
+  const transparencyPlantFormCheck = document.getElementById("transparencyPlantFormCheck");
+  
   const transparencyLabelPlant = document.querySelector("label[for='transparencySliderPlant']");
   if (event.target.checked) {
     pltDataLayer1.setVisible(true);
+    transparencyPlantFormCheck.style.display = "block";
     transparencySliderPlant.style.display = "block";
     transparencyLabelPlant.style.display = "block";
     // Zoom to the extent of both layers combined
@@ -315,6 +318,7 @@ document.getElementById("transport4").addEventListener("change", function (event
     // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
   } else {
     pltDataLayer1.setVisible(false);
+    transparencyPlantFormCheck.style.display = "none"; 
     transparencySliderPlant.style.display = "none";
     transparencyLabelPlant.style.display = "none";
   }
@@ -346,11 +350,13 @@ try {
 document
   .getElementById("transport5")
   .addEventListener("change", function (event) {
-    //alert(36)
+    
+    const transparencyPitFormCheck = document.getElementById("transparencyPitFormCheck");
     const transparencySliderPit = document.getElementById("transparencySliderPit");
     const transparencyLabelPit = document.querySelector("label[for='transparencySliderPit']");
     if (event.target.checked) {
       aiMlDataLayer1.setVisible(true);
+      transparencyPitFormCheck.style.display = "block";
       transparencySliderPit.style.display = "block";
       transparencyLabelPit.style.display = "block";
       // var extent = ol.extent.createEmpty();
@@ -358,6 +364,7 @@ document
       // map.getView().fit(ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'), { duration: 1000 });
     } else {
       aiMlDataLayer1.setVisible(false);
+      transparencyPitFormCheck.style.display = "none";
       transparencySliderPit.style.display = "none";
       transparencyLabelPit.style.display = "none";
     }
@@ -437,9 +444,12 @@ try {
 
 // Add event listener to the checkbox
 document.getElementById("transport2").addEventListener("change", function (event) {
+  
+  const transparencyOrthoFormCheck = document.getElementById("transparencyOrthoFormCheck");
   const transparencySlider = document.getElementById("transparencySlider");
   const transparencyLabel = document.querySelector("label[for='transparencySlider']");
   if (event.target.checked) {
+    transparencyOrthoFormCheck.style.display = "block";
     transparencySlider.style.display = "block";
     transparencyLabel.style.display = "block";
     geotiffSite1Layer.setVisible(true);
@@ -455,6 +465,8 @@ document.getElementById("transport2").addEventListener("change", function (event
     geotiffSite1Layer.setVisible(false);
     orthomosaicLayer.setVisible(false);
     orthomosaicLayer1.setVisible(false);
+    transparencyOrthoFormCheck.style.display = "none";
+
     transparencySlider.style.display = "none";
     transparencyLabel.style.display = "none";
   }
