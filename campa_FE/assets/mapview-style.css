@@ -10,7 +10,7 @@ html {
 }
 
 .map-container {
-  height: 90vh;
+  height: 91vh;
   position: relative;
   overflow: none;
 }
@@ -151,6 +151,7 @@ html {
   width: fit-content;
   color: #fff;
   font-weight: 400;
+  display: none;
 }
 
 #layer-select {
@@ -790,7 +791,7 @@ font-size: 12px;
 .swip-set{
   position: absolute;
  display: flex;
-  bottom: 10;
+  bottom: 20;
   right: 2;
   width: 100%;
   justify-content: center;

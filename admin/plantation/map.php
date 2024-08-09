@@ -157,7 +157,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
         </div>
         <div class="map-overlay">
             <div id="layer-switcher" class="ol-unselectable ol-control">
-                <button id="layer-switcher-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#layerModal">
+                <button id="layer-switcher-btn" class="btn btn-primary"  sty data-bs-toggle="modal" data-bs-target="#layerModal">
                     Select Layer
                 </button>
             </div>
@@ -284,7 +284,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                 </div>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        <button class="accordion-button panel-collapse collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
                             <strong>Drone Survey</strong>
                         </button>
                     </h2>
