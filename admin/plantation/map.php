@@ -176,11 +176,11 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                     <span><i class="fas fa-layer-group"></i></span>
                 </button>
             </div>
-            <div id="filter" class="ol-unselectable">
+            <!-- <div id="filter" class="ol-unselectable">
                 <button id="filter-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filterLayerModal">
                     <span><i class="fas fa-filter"></i></span>
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
 
