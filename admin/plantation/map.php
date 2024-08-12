@@ -368,7 +368,7 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
 
                                     
                                     <div class="col p-0 mx-1">
-                                        <div class="card" data-layer="terrain">
+                                        <div class="card" data-layer="terrain" id="IdBlnkMap">
                                             <img src="../../campa_FE/assets/images/terrain.png" class="card-img-top" alt="Terrain">
                                         </div>
                                         <p class="map-title">Terrain</p>
