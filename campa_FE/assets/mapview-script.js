@@ -16,6 +16,18 @@ function hide_loader() {
   //event.preventDefault();
 }
 
+
+
+document.getElementById("IdBlnkMap").onclick = function () {
+  // alert(9)
+  //osmLayer.setVisible(false);
+  //satelliteLayer.setVisible(false);
+  terrainLayer.setVisible(false);
+  //googleStreetLayer.setVisible(false);
+  map.removeLayer(terrainLayer);
+};
+
+
 const osmLayer = new ol.layer.Tile({
   source: new ol.source.OSM(),
   title: "OpenStreetMap",
