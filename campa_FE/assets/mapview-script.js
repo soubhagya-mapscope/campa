@@ -351,7 +351,8 @@ document
   .getElementById("transport5")
   .addEventListener("change", function (event) {
     
-    const transparencyPitFormCheck = document.getElementById("transparencyPitFormCheck");
+    const transparencyPitFormCheck = document.getElementById("transparencyPitFormCheck
+      ");
     const transparencySliderPit = document.getElementById("transparencySliderPit");
     const transparencyLabelPit = document.querySelector("label[for='transparencySliderPit']");
     if (event.target.checked) {

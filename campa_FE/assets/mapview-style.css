@@ -739,7 +739,7 @@ font-size: 12px;
 
 .bodymap{
   min-height: 100px;
-  max-height: 480px;
+  max-height: 70vh;
   overflow-y: auto;
 }
  .btn-close {
