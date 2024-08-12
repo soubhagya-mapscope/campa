@@ -16,6 +16,15 @@ function hide_loader() {
   //event.preventDefault();
 }
 
+//Base layer set to blank
+document.getElementById("IdBlnkMap").onclick = function () {
+  osmLayer.setVisible(false);
+  satelliteLayer.setVisible(false);
+  terrainLayer.setVisible(false);
+  googleStreetLayer.setVisible(false);
+};
+
+
 const osmLayer = new ol.layer.Tile({
   source: new ol.source.OSM(),
   title: "OpenStreetMap",

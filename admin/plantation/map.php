@@ -195,6 +195,13 @@ if (isset($_GET['name']) || isset($_GET['id'])) {
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-3 mb-3">
+                                <div class="card" >
+                                    <div class="card-body" id="IdBlnkMap">
+                                        <p class="card-title">blank</p>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="col-md-3 mb-3">
                             <div class="card" data-layer="openstreetmap">
                                 <img src="../../campa_FE/assets/images/osm.jpg" class="card-img-top" alt="OpenStreetMap">
 
